@@ -10,4 +10,12 @@ class CustomerTransaction extends Model
 {
     use HasFactory;
     use UsesUUID;
+
+    public function customer() {
+        return $this->hasMany(Customer::class);
+    }
+
+    public function item() {
+        return $this->hasMany(Item::class);
+    }
 }

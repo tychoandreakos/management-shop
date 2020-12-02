@@ -14,4 +14,8 @@ class Item extends Model
     public function item_transaction() {
         return $this->belongsTo(ItemTransaction::class);
     }
+
+    public function customer_transaction() {
+        return $this->belongsTo(CustomerTransaction::class);
+    }
 }

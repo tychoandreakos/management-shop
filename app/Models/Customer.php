@@ -10,4 +10,8 @@ class Customer extends Model
 {
     use HasFactory;
     use UsesUuid;
+
+    public function customer_transaction() {
+        return $this->belongsTo(CustomerTransaction::class);
+    }
 }
