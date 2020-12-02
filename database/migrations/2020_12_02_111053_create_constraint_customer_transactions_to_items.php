@@ -10,6 +10,7 @@ class CreateConstraintCustomerTransactionsToItems extends Migration
      * Run the migrations.
      *
      * @return void
+     * @author Puji Rahayu
      */
     public function up()
     {
