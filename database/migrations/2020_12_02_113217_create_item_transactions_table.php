@@ -14,7 +14,7 @@ class CreateItemTransactionsTable extends Migration
     public function up()
     {
         Schema::create('item_transactions', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->timestamps();
         });
     }

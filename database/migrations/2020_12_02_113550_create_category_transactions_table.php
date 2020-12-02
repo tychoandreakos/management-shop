@@ -14,7 +14,7 @@ class CreateCategoryTransactionsTable extends Migration
     public function up()
     {
         Schema::create('category_transactions', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->unsignedBigInteger('category_id');
             $table->string('property');
 
