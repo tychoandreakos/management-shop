@@ -12,6 +12,10 @@ class SpesificationItem extends Model
 
     public function item_transaction()
     {
-        return $this->belongsTo(ItemTransaction::class);
+        return $this->hasOne(ItemTransaction::class);
+    }
+
+    public function category_transaction() {
+        return $this->hasMany(CategoryTransaction::class);
     }
 }

@@ -12,10 +12,14 @@ class Item extends Model
     use UsesUUID;
 
     public function item_transaction() {
-        return $this->belongsTo(ItemTransaction::class);
+        return $this->hasMany(ItemTransaction::class);
+    }
+
+    public function item_image() {
+        return $this->hasMany(ItemImage::class);
     }
 
     public function customer_transaction() {
-        return $this->belongsTo(CustomerTransaction::class);
+        return $this->hasMany(CustomerTransaction::class);
     }
 }

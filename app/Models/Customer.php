@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
-use App\Http\Traits\UsesUuid;
+
+use App\Http\Traits\UsesUUID;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
     use HasFactory;
-    use UsesUuid;
+    use UsesUUID;
 
     public function customer_transaction() {
-        return $this->belongsTo(CustomerTransaction::class);
+        return $this->hasMany(CustomerTransaction::class);
     }
 }

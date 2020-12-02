@@ -10,7 +10,7 @@ class Brand extends Model
     use HasFactory;
 
     public function item_transaction() {
-        return $this->belongsTo(ItemTransaction::class);
+        return $this->hasMany(ItemTransaction::class);
     }
 
 }

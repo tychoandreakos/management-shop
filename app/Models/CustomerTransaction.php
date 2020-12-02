@@ -12,10 +12,10 @@ class CustomerTransaction extends Model
     use UsesUUID;
 
     public function customer() {
-        return $this->hasMany(Customer::class);
+        return $this->belongsTo(Customer::class);
     }
 
     public function item() {
-        return $this->hasMany(Item::class);
+        return $this->belongsTo(Item::class);
     }
 }

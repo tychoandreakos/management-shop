@@ -4,23 +4,21 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateItemsTable extends Migration
+class CreateItemImagesTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
-     * @author Puji Rahayu
      */
     public function up()
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('item_images', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
-            $table->integer('quantity');
-            $table->string('price');
-            $table->text('description')->nullable();
-            $table->integer('sold');
+            $table->uuid('item_id');
+            $table->string('image');
+
+            $table->foreign('item_id')->references('id')->on('items');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreateItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('item_images');
     }
 }

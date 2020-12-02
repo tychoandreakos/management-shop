@@ -6,25 +6,14 @@ use App\Http\Traits\UsesUUID;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ItemTransaction extends Model
+class ItemImage extends Model
 {
-    use HasFactory;
     use UsesUUID;
-
-    public function brand()
-    {
-        return $this->belongsTo(Brand::class);
-    }
+    use HasFactory;
 
     public function item()
     {
         return $this->belongsTo(Item::class);
     }
-
-    public function spesification_item()
-    {
-        return $this->hasOne(SpesificationItem::class);
-    }
-
 
 }

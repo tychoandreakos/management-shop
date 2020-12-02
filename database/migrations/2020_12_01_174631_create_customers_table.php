@@ -18,8 +18,8 @@ class CreateCustomersTable extends Migration
             $table->uuid('id')->primary();
             $table->string('name', 150);
             $table->string('email')->nullable();
-            $table->string('no_telp')->nullable();
-            $table->string('masukan')->nullable();
+            $table->string('num_telp')->nullable();
+            $table->text('suggestion')->nullable();
             $table->timestamps();
         });
     }
