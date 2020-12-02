@@ -11,15 +11,15 @@ class Item extends Model
     use HasFactory;
     use UsesUUID;
 
-    public function item_transaction() {
+    public function itemTransaction() {
         return $this->hasMany(ItemTransaction::class);
     }
 
-    public function item_image() {
+    public function itemImage() {
         return $this->hasMany(ItemImage::class);
     }
 
-    public function customer_transaction() {
+    public function customerTransaction() {
         return $this->hasMany(CustomerTransaction::class);
     }
 }

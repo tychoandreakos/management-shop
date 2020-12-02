@@ -10,12 +10,12 @@ class SpesificationItem extends Model
     use HasFactory;
 
 
-    public function item_transaction()
+    public function itemTransaction()
     {
         return $this->hasOne(ItemTransaction::class);
     }
 
-    public function category_transaction() {
+    public function categoryTransaction() {
         return $this->hasMany(CategoryTransaction::class);
     }
 }

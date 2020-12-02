@@ -21,9 +21,9 @@ class ItemTransaction extends Model
         return $this->belongsTo(Item::class);
     }
 
-    public function spesification_item()
+    public function spesificationItem()
     {
-        return $this->hasOne(SpesificationItem::class);
+        return $this->belongsTo(SpesificationItem::class);
     }
 
 

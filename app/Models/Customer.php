@@ -18,7 +18,7 @@ class Customer extends Model
      * @var mixed
      */
 
-    public function customer_transaction() {
+    public function customerTransaction() {
         return $this->hasMany(CustomerTransaction::class);
     }
 }
