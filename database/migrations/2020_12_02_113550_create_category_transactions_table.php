@@ -16,9 +16,11 @@ class CreateCategoryTransactionsTable extends Migration
         Schema::create('category_transactions', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->unsignedBigInteger('category_id');
-            $table->string('property');
+            $table->unsignedBigInteger('spesification_item_id');
 
             $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('spesification_item_id')->references('id')->on('spesification_items');
+
             $table->timestamps();
         });
     }

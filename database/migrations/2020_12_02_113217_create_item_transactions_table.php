@@ -18,7 +18,7 @@ class CreateItemTransactionsTable extends Migration
             $table->uuid('item_id');
             $table->unsignedBigInteger('brand_id');
 
-            $table->foreign('item_id')->references('id')->on(items);
+            $table->foreign('item_id')->references('id')->on('items');
             $table->foreign('brand_id')->references('id')->on('brands');
             $table->timestamps();
         });

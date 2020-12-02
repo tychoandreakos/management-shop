@@ -14,7 +14,9 @@ class CreateConstaintItemTransactionsToSpesificationItems extends Migration
     public function up()
     {
         Schema::table('item_transactions', function (Blueprint $table) {
-            //
+            $table->unsignedBigInteger('spesification_item_id')->after('brand_id');
+
+            $table->foreign('spesification_item_id')->references('id')->on('spesification_items');
         });
     }
 
