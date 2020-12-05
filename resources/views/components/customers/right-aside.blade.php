@@ -32,10 +32,14 @@
                     <td>{{$customer->email}}</td>
                     <td>{{$customer->num_telp}}</td>
                     <td>
-                        <button type="button"
-                                class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn"
-                                data-toggle="tooltip" data-original-title="Delete"><i
-                                class="ti-close" aria-hidden="true"></i></button>
+                        <form action="{{ route('customers.delete', $customer->id) }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button type="submit"
+                                    class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn"
+                                    data-toggle="tooltip" data-original-title="Delete"><i
+                                    class="ti-close" aria-hidden="true"></i></button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

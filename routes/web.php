@@ -24,6 +24,7 @@ Route::prefix(CUSTOMERS)->group(function () {
     Route::name(CUSTOMERS)->group(function () {
         Route::get('/', [CustomerController::class, 'index'])->name('.home');
         Route::post('/save', [CustomerController::class, 'store'])->name('.store');
+        Route::delete('/delete/{id}', [CustomerController::class, 'destroy'])->name('.delete');
     });
 });
 
