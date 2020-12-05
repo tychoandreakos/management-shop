@@ -3,5 +3,5 @@
 <!-- ============================================================== -->
 <div id="main-wrapper">
     @include('components.topbar')
-{{--    @include('components.left-sidebar')--}}
+    @include('components.left-sidebar')
 </div>
