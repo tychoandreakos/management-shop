@@ -14,11 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+define("CUSTOMERS", "customers");
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('customers')->group(function () {
-    Route::get('/', [CustomerController::class, 'index'])->name('customers.home');
+Route::prefix(CUSTOMERS)->group(function () {
+    Route::name(CUSTOMERS)->group(function () {
+        Route::get('/', [CustomerController::class, 'index'])->name('home');
+    });
 });
 
