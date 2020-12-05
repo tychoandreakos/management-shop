@@ -26,7 +26,7 @@
                 <tr>
                     <td>{{ $loop->iteration  }}</td>
                     <td>
-                        <a href="app-contact-detail.html">
+                        <a href="{{ route('customers.detail', $customer->id)  }}">
                             {{$customer->name}}</a>
                     </td>
                     <td>{{$customer->email}}</td>

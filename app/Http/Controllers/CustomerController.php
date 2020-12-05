@@ -41,6 +41,18 @@ class CustomerController extends Controller
         return response()->json($success);
     }
 
+    public function update(Request $request, $id)
+    {
+
+        try {
+            $customer = Customer::find($id);
+            $customer->update($request->all());
+            return redirect()->route('customers.home');
+        } catch (ModelNotFoundException $e) {
+
+        }
+    }
+
     public function detail($id)
     {
         $data = [
