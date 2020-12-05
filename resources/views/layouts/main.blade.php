@@ -14,7 +14,8 @@
     <title>{{ "Shop Management"  }}</title>
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <!-- chartist CSS -->
+@stack('css')
+<!-- chartist CSS -->
     <link href="{{ asset('assets/plugins/chartist-js/dist/chartist.min.css')  }}" rel="stylesheet">
     <link href="{{ asset('assets/plugins/chartist-js/dist/chartist-init.css')  }}" rel="stylesheet">
     <link href="{{ asset('assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css')  }}"
@@ -23,7 +24,7 @@
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="{{asset(('assets/css/colors/blue.css'))}}" id="theme" rel="stylesheet">
-    @stack('css')
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
