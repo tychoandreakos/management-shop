@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
 @section('content')
-{{--    @include('components.spinner')--}}
-    @include('components.main-wrapper')
+    {{--    @include('components.spinner')--}}
+   @include('customer.index')
 @endsection

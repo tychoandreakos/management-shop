@@ -4,4 +4,7 @@
 <div id="main-wrapper">
     @include('components.topbar')
     @include('components.left-sidebar')
+    <div class="page-wrapper">
+       @yield('main')
+    </div>
 </div>
