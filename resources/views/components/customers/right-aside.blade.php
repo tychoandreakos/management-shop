@@ -1,4 +1,3 @@
-<!-- /.left-aside-column-->
 <div class="right-aside ">
     <div class="right-page-header">
         <div class="d-flex">
