@@ -55,7 +55,7 @@ class Customer extends Model
      */
     protected function getNumTelpAttribute($value): string
     {
-        return "+62 ${value}";
+        return "(+62) ${value}";
     }
 
 }

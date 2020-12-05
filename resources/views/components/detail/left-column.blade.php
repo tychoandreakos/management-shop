@@ -5,7 +5,7 @@
             <div class="align-self-center"><img src="{{ asset('assets/images/users/1.jpg')  }}"
                                                 class="img-circle"
                                                 width="100">
-                <h4 class="card-title mt-2">{{ $customer->name  }}n</h4>
+                <h4 class="card-title mt-2">{{ $customer->name  }}</h4>
                 <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
                     eiusmod tempor incididunt </p>
             </div>

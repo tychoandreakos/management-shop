@@ -13,7 +13,11 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
             <li class="breadcrumb-item">Apps</li>
-            <li class="breadcrumb-item active">Customers</li>
+            @if(isset($breadCrumbs))
+                <li class="breadcrumb-item active">{{ $breadCrumbs  }}</li>
+            @else
+                <li class="breadcrumb-item active">Default</li>
+            @endif
         </ol>
     </div>
     <div class="">
