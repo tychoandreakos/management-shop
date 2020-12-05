@@ -12,7 +12,11 @@ class CustomerController extends Controller
 {
     public function index(Customer $customers)
     {
-        return view('customer.home')->with('customers', $customers->take(10)->latest()->get());
+        $data = [
+            'customers' => $customers->take(10)->latest()->get(),
+            'breadCrumbs' => "Customers"
+        ];
+        return view('customer.home', $data);
     }
 
     public function store(Request $request): JsonResponse
@@ -36,6 +40,16 @@ class CustomerController extends Controller
         ];
         return response()->json($success);
     }
+
+    public function detail($id)
+    {
+        $data = [
+            'customer' => Customer::find($id),
+            'breadCrumbs' => 'Customer Detail'
+        ];
+        return view('customer.detail', $data);
+    }
+
 
     public function destroy($id): RedirectResponse
     {

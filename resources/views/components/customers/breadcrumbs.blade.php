@@ -3,7 +3,11 @@
 <!-- ============================================================== -->
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">Customers</h3>
+        @if(isset($breadCrumbs))
+            <h3 class="text-themecolor">{{ $breadCrumbs  }}</h3>
+        @else
+            <h3 class="text-themecolor">Default</h3>
+        @endif
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
