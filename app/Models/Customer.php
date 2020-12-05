@@ -17,10 +17,45 @@ class Customer extends Model
 
     /**
      * @return HasMany
-     * @var mixed
      */
-
-    public function customerTransaction() {
+    public function customerTransaction(): HasMany
+    {
         return $this->hasMany(CustomerTransaction::class);
     }
+
+
+    /**
+     * @param $value
+     * @return string
+     */
+    protected function getNameAttribute($value): string
+    {
+        return ucwords($value);
+    }
+
+    /**
+     * @param $value
+     */
+    protected function setNameAttribute($value)
+    {
+        $this->attributes['name'] = strtolower($value);
+    }
+
+    /**
+     * @param $value
+     */
+    protected function setEmailAttribute($value)
+    {
+        $this->attributes['email'] = strtolower($value);
+    }
+
+    /**
+     * @param $value
+     * @return string
+     */
+    protected function getNumTelpAttribute($value): string
+    {
+        return "+62 ${value}";
+    }
+
 }
