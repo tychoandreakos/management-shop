@@ -13,6 +13,8 @@ class Customer extends Model
     use HasFactory;
     use UsesUUID;
 
+    protected $guarded = ['id'];
+
     /**
      * @return HasMany
      * @var mixed
