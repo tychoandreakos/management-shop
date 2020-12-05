@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class CustomerController extends Controller
 {
@@ -43,14 +44,23 @@ class CustomerController extends Controller
 
     public function update(Request $request, $id)
     {
-
         try {
+            $this->updateValidate($request, $id);
             $customer = Customer::find($id);
             $customer->update($request->all());
             return redirect()->route('customers.home');
         } catch (ModelNotFoundException $e) {
 
         }
+    }
+
+    private function updateValidate($request, $id)
+    {
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255',
+            'num_telp' => 'required|numeric|max:20',
+        ]);
     }
 
     public function detail($id)

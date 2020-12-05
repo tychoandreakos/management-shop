@@ -1,5 +1,6 @@
 <div class="tab-pane" id="settings" role="tabpanel">
     <div class="card-body">
+        @include('components.detail.error')
         <form action="{{ route('customers.update', $customer->id)  }}" class="form-horizontal form-material"
               method="post">
             @csrf
