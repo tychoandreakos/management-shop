@@ -45,7 +45,7 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $this->updateValidate($request, $id);
+            $this->validateResponse($request);
             $customer = Customer::find($id);
             $customer->update($request->all());
             return redirect()->route('customers.home');
@@ -54,7 +54,7 @@ class CustomerController extends Controller
         }
     }
 
-    private function updateValidate($request, $id)
+    private function validateResponse($request)
     {
         $request->validate([
             'name' => 'required|max:255',
