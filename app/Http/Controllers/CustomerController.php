@@ -81,7 +81,7 @@ class CustomerController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|email|max:255',
-            'num_telp' => 'required|numeric|max:20',
+            'num_telp' => 'required|max:18',
         ]);
     }
 

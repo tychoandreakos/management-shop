@@ -49,6 +49,12 @@ class Customer extends Model
         $this->attributes['email'] = strtolower($value);
     }
 
+    protected function setNumTelpAttribute($value)
+    {
+        $this->attributes['num_telp'] = explode(" ", $value)[1];
+    }
+
+
     /**
      * @param $value
      * @return string

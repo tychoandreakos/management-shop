@@ -9,7 +9,7 @@
                 <input type="hidden">
                 <label class="col-md-12">Full Name</label>
                 <div class="col-md-12">
-                    <input type="text" placeholder="Insert customer name" value="{{ $customer->name  }}"
+                    <input type="text" name="name" placeholder="Insert customer name" value="{{ $customer->name  }}"
                            class="form-control form-control-line">
                 </div>
             </div>
