@@ -4,8 +4,9 @@
             <div class="align-self-center">
                 <h4 class="card-title m-t-10">Customers List </h4></div>
             <div class="ml-auto">
-                <input type="text" id="demo-input-search2" placeholder="search customers"
-                       class="form-control"></div>
+                <input type="text" id="demo-input-search2" placeholder="Search customers"
+                       class="form-control">
+            </div>
         </div>
     </div>
     <div class="table-responsive">

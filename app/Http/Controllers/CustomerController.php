@@ -11,6 +11,7 @@ use Illuminate\Validation\ValidationException;
 
 class CustomerController extends Controller
 {
+
     public function index(Customer $customers)
     {
         $data = [
@@ -50,6 +51,26 @@ class CustomerController extends Controller
             $customer = Customer::find($id);
             $customer->update($request->all());
             return redirect()->route('customers.home');
+        } catch (ModelNotFoundException $e) {
+
+        }
+    }
+
+    public function search(Customer $customers, Request $request)
+    {
+        try {
+            $search = $request->get('search');
+            $data = [
+                'customers' => $customers
+                    ->where(function ($query) use ($search) {
+                        $query->where('name', $search)
+                            ->orWhere('email', $search)
+                            ->orWhere('num_telp', $search);
+                    })
+                    ->get(),
+                'breadCrumbs' => "Customers"
+            ];
+            return view('customer.home', $data);
         } catch (ModelNotFoundException $e) {
 
         }

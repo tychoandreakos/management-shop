@@ -27,6 +27,7 @@ Route::prefix(CUSTOMERS)->group(function () {
         Route::delete('/delete/{id}', [CustomerController::class, 'destroy'])->name('.delete');
         Route::get('/detail/{id}', [CustomerController::class, 'detail'])->name('.detail');
         Route::patch('/update/{id}', [CustomerController::class, 'update'])->name('.update');
+        Route::post('search', [CustomerController::class, 'search'])->name(".search");
     });
 });
 
