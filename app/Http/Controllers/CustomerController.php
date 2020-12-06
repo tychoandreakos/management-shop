@@ -23,6 +23,7 @@ class CustomerController extends Controller
     public function store(Request $request): JsonResponse
     {
         try {
+            $this->validateResponse($request);
             Customer::create($request->all());
         } catch (ModelNotFoundException $e) {
             $error = [
