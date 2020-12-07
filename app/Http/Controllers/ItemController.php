@@ -65,4 +65,47 @@ class ItemController extends Controller
 
         }
     }
+
+    public function edit($id)
+    {
+        try {
+            $data = Item::find(id);
+            return view()->with($data);
+        } catch (ModelNotFoundException $e) {
+
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            $flashMsg = [
+                'success' => true,
+                'title' => 'Successfully updated!',
+                'message' => 'Congratulation your item has been created!'
+            ];
+            $this->validateHandler($request);
+            $item = Item::find($id);
+            $item->update($request->all());
+            return redirect()->route('items.home')->with($flashMsg);
+        } catch (ModelNotFoundException $e) {
+
+        }
+    }
+
+    public function destroy($id)
+    {
+        $flashMsg = [
+            'success' => true,
+            'title' => 'Successfully deleted!',
+            'message' => 'Congratulation your item has been deleted!'
+        ];
+        try {
+            $item = Item::find($id);
+            $item->delete();
+            return redirect()->route('items.home')->with($flashMsg);
+        } catch (ModelNotFoundException $e) {
+
+        }
+    }
 }

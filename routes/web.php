@@ -39,6 +39,9 @@ Route::prefix(ITEMS)->group(function () {
         Route::get('/create', [ItemController::class, 'create'])->name('.create');
         Route::post('/save', [ItemController::class, 'store'])->name('.store');
         Route::get('/list', [ItemController::class, 'indexList'])->name('.home_list');
+        Route::delete('/delete/{id}', [ItemController::class, 'destroy'])->name('.delete');
+        Route::get('/edit/{id}', [ItemController::class, 'edit'])->name('.edit');
+        Route::patch('/update/{id}', [ItemController::class, 'update'])->name('.update');
     });
 });
 

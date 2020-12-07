@@ -32,11 +32,18 @@
                             <td>{{$item->quantity}}</td>
                             <td>{{$item->price}}</td>
                             <td>{{$item->sold}}</td>
-                            <td class="text-nowrap">
-                                <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i
-                                        class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                <a href="#" data-toggle="tooltip" data-original-title="Close"> <i
-                                        class="fa fa-close text-danger"></i> </a>
+                            <td class="text-nowrap align-items-center">
+                                <form action="{{route('items.delete', $item->id)}}" class="d-flex justify-content-center" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <a class="justify-content-center" href="{{ route('items.update', $item->id)  }}"
+                                       data-toggle="tooltip"
+                                       data-original-title="Edit"> <i
+                                            class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                    <button class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn"
+                                            data-toggle="tooltip" data-original-title="Close" type="submit"><i
+                                            class="ti-close" aria-hidden="true"></i></button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
@@ -46,7 +53,6 @@
         </div>
     </div>
 </div>
-
 
 @push('scripts')
     <!-- This is data table -->
