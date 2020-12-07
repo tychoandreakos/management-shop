@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 define("CUSTOMERS", "customers");
+define("ITEMS", "items");
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,6 +30,12 @@ Route::prefix(CUSTOMERS)->group(function () {
         Route::get('/detail/{id}', [CustomerController::class, 'detail'])->name('.detail');
         Route::patch('/update/{id}', [CustomerController::class, 'update'])->name('.update');
         Route::post('search', [CustomerController::class, 'search'])->name(".search");
+    });
+});
+
+Route::prefix(ITEMS)->group(function () {
+    Route::name(ITEMS)->group(function () {
+        Route::get('/', [ItemController::class, 'index'])->name('.home');
     });
 });
 
