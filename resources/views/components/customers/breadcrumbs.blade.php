@@ -12,12 +12,15 @@
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard')  }}">Home</a></li>
-            <li class="breadcrumb-item">Apps</li>
+            @unless($breadCrumbs === "Dashboard")
+                <li class="breadcrumb-item">Apps Management</li>
+            @endunless
             @if(isset($breadCrumbs))
                 <li class="breadcrumb-item active">{{ $breadCrumbs  }}</li>
             @else
                 <li class="breadcrumb-item active">Default</li>
             @endif
+
         </ol>
     </div>
     <div class="">
