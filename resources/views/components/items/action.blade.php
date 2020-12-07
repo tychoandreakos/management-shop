@@ -4,5 +4,4 @@
         <button type="button" class="btn btn-info"><i class="fa fa-th"></i></button>
         <button type="button" class="btn btn-info"><i class="fa fa-list"></i></button>
     </div>
-
 </div>
