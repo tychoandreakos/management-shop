@@ -69,8 +69,13 @@ class ItemController extends Controller
     public function edit($id)
     {
         try {
-            $data = Item::find(id);
-            return view()->with($data);
+            $data = [
+                'breadCrumbs' => 'Update item',
+                'title' => 'Please fill the input form below',
+                'titleSecond' => "Item Info",
+                'item' => Item::find($id)
+            ];
+            return view('item.edit')->with($data);
         } catch (ModelNotFoundException $e) {
 
         }

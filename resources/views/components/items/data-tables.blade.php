@@ -36,7 +36,7 @@
                                 <form action="{{route('items.delete', $item->id)}}" class="d-flex justify-content-center" method="post">
                                     @csrf
                                     @method('delete')
-                                    <a class="justify-content-center" href="{{ route('items.update', $item->id)  }}"
+                                    <a class="justify-content-center" href="{{ route('items.edit', $item->id)  }}"
                                        data-toggle="tooltip"
                                        data-original-title="Edit"> <i
                                             class="fa fa-pencil text-inverse m-r-10"></i> </a>
