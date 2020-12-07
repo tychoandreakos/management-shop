@@ -53,6 +53,7 @@ Route::prefix(BRANDS)->group(function () {
         Route::get('/create', [BrandController::class, 'create'])->name('.create');
         Route::delete('/delete/{id}', [BrandController::class, 'destroy'])->name('.delete');
         Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('.edit');
+        Route::post('/save', [BrandController::class, 'store'])->name('.store');
     });
 });
 

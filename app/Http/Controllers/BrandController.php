@@ -19,6 +19,35 @@ class BrandController extends Controller
 
     public function create()
     {
+        $data = [
+            'breadCrumbs' => 'Create Brand',
+            'title' => 'Please fill the input form below',
+            'titleSecond' => "Brand Info"
+        ];
+        return view('brand.create')->with($data);
+    }
+
+    protected function validateHandler($request)
+    {
+        $request->validate([
+            'name' => 'required',
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        try {
+            $flashMsg = [
+                'success' => true,
+                'title' => 'Successfully saved!',
+                'message' => 'Congratulation your item has been created!'
+            ];
+            $this->validateHandler($request);
+            Brand::create($request->all());
+            return redirect()->route('brand.home')->with($flashMsg);
+        } catch (ModelNotFoundException $e) {
+
+        }
     }
 
     public function destroy()
