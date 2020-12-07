@@ -4,6 +4,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\SpesificationItemController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,7 @@ define("CUSTOMERS", "customers");
 define("ITEMS", "items");
 define("BRANDS", "brands");
 define("SPECIFICATIONITEM", "specifications");
+define("CATEGORIES", "categories");
 
 Route::get('/', function () {
     return view('welcome');
@@ -68,6 +70,18 @@ Route::prefix(SPECIFICATIONITEM)->group(function () {
         Route::get('/edit/{id}', [SpesificationItemController::class, 'edit'])->name('.edit');
         Route::post('/save', [SpesificationItemController::class, 'store'])->name('.store');
         Route::patch('/update/{id}', [SpesificationItemController::class, 'update'])->name('.update');
+    });
+});
+
+
+Route::prefix(CATEGORIES)->group(function () {
+    Route::name(CATEGORIES)->group(function () {
+        Route::get('/', [CategoryController::class, 'index'])->name('.home');
+        Route::get('/create', [CategoryController::class, 'create'])->name('.create');
+        Route::delete('/delete/{id}', [CategoryController::class, 'destroy'])->name('.delete');
+        Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('.edit');
+        Route::post('/save', [CategoryController::class, 'store'])->name('.store');
+        Route::patch('/update/{id}', [CategoryController::class, 'update'])->name('.update');
     });
 });
 
