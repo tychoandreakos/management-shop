@@ -48,6 +48,10 @@
             </tbody>
             <tfoot>
             <tr>
+                <td>
+                    <h3>23</h3>
+                    {{$customers->links('pagination::bootstrap-4')}}
+                </td>
                 <td colspan="2">
                     <button type="button" class="btn btn-info btn-rounded" data-toggle="modal"
                             data-target="#add-contact">Add New Customer
