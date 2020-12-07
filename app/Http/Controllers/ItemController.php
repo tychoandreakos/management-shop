@@ -14,9 +14,19 @@ class ItemController extends Controller
         $data = [
             'breadCrumbs' => 'Item Lists',
             'title' => 'Items Gallery',
-            'items' => $item->latest()->paginate(20)
+            'items' => $item->latest()->paginate(20),
         ];
         return view('item.home')->with($data);
+    }
+
+    public function indexList(Item $item)
+    {
+        $data = [
+            'breadCrumbs' => 'Item Lists',
+            'titleList' => 'Items List',
+            'list' => true
+        ];
+        return redirect()->route('items.home')->with($data);
     }
 
     public function create()

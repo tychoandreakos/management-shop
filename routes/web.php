@@ -38,6 +38,7 @@ Route::prefix(ITEMS)->group(function () {
         Route::get('/', [ItemController::class, 'index'])->name('.home');
         Route::get('/create', [ItemController::class, 'create'])->name('.create');
         Route::post('/save', [ItemController::class, 'store'])->name('.store');
+        Route::get('/list', [ItemController::class, 'indexList'])->name('.home_list');
     });
 });
 

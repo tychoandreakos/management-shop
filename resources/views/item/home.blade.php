@@ -4,6 +4,10 @@
     @include('components.customers.breadcrumbs')
     @include('components.succes-message')
     <div class="container-fluid">
-        @include('components.items.list-page')
+        @if(session('list'))
+            @include('components.items.list-page')
+        @else
+            @endif
+            @include('components.items.gallery-page')
     </div>
 @endsection
