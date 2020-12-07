@@ -29,18 +29,14 @@ class ItemController extends Controller
         return view('item.create')->with($data);
     }
 
-    protected function validateHandler($request): array
+    protected function validateHandler($request)
     {
-        $validator = $request->validate([
+        $request->validate([
             'name' => 'required',
             'quantity' => 'required|numeric',
             'price' => 'required',
             'sold' => 'numeric'
         ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
     }
 
 
@@ -49,11 +45,12 @@ class ItemController extends Controller
         try {
             $flashMsg = [
                 'success' => true,
-                'message' => 'Sucessfully saved!'
+                'title' => 'Successfully saved!',
+                'message' => 'Congratulation your item has been created!'
             ];
             $this->validateHandler($request);
             Item::create($request->all());
-            return view('items.home')->with($flashMsg);
+            return redirect()->route('items.home')->with($flashMsg);
         } catch (ModelNotFoundException $e) {
 
         }

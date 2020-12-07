@@ -11,6 +11,8 @@ class Item extends Model
     use HasFactory;
     use UsesUUID;
 
+    protected $guarded = ['id'];
+
     public function itemTransaction() {
         return $this->hasMany(ItemTransaction::class);
     }
