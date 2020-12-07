@@ -1,1 +1,1 @@
-@include('customer.home')
+@extends('dashboard.home')

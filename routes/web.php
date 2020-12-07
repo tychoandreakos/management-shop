@@ -25,7 +25,7 @@ define("SPECIFICATIONITEM", "specifications");
 define("CATEGORIES", "categories");
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::prefix(CUSTOMERS)->group(function () {
