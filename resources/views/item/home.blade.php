@@ -7,7 +7,7 @@
         @if(session('list'))
             @include('components.items.list-page')
         @else
-            @endif
             @include('components.items.gallery-page')
+        @endif
     </div>
 @endsection
