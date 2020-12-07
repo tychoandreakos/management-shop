@@ -5,6 +5,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\SpesificationItemController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,9 +25,7 @@ define("BRANDS", "brands");
 define("SPECIFICATIONITEM", "specifications");
 define("CATEGORIES", "categories");
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::prefix(CUSTOMERS)->group(function () {
     Route::name(CUSTOMERS)->group(function () {
