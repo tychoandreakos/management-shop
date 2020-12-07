@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\BrandController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 define("CUSTOMERS", "customers");
 define("ITEMS", "items");
+define("BRANDS", "brands");
 
 Route::get('/', function () {
     return view('welcome');
@@ -42,6 +44,15 @@ Route::prefix(ITEMS)->group(function () {
         Route::delete('/delete/{id}', [ItemController::class, 'destroy'])->name('.delete');
         Route::get('/edit/{id}', [ItemController::class, 'edit'])->name('.edit');
         Route::patch('/update/{id}', [ItemController::class, 'update'])->name('.update');
+    });
+});
+
+Route::prefix(BRANDS)->group(function () {
+    Route::name(BRANDS)->group(function () {
+        Route::get('/', [BrandController::class, 'index'])->name('.home');
+        Route::get('/create', [BrandController::class, 'create'])->name('.create');
+        Route::delete('/delete/{id}', [BrandController::class, 'destroy'])->name('.delete');
+        Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('.edit');
     });
 });
 
