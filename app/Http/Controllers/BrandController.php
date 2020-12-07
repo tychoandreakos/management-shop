@@ -44,14 +44,26 @@ class BrandController extends Controller
             ];
             $this->validateHandler($request);
             Brand::create($request->all());
-            return redirect()->route('brand.home')->with($flashMsg);
+            return redirect()->route('brands.home')->with($flashMsg);
         } catch (ModelNotFoundException $e) {
 
         }
     }
 
-    public function destroy()
+    public function destroy($id)
     {
+        $flashMsg = [
+            'success' => true,
+            'title' => 'Successfully deleted!',
+            'message' => 'Congratulation your item has been deleted!'
+        ];
+        try {
+            $item = Brand::find($id);
+            $item->delete();
+            return redirect()->route('brands.home')->with($flashMsg);
+        } catch (ModelNotFoundException $e) {
+
+        }
     }
 
     public function edit()

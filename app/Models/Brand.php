@@ -9,6 +9,8 @@ class Brand extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function itemTransaction() {
         return $this->hasMany(ItemTransaction::class);
     }
