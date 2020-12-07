@@ -42,7 +42,7 @@
             <ul id="sidebarnav">
                 <li class="nav-devider"></li>
                 <li class="nav-small-cap">PERSONAL</li>
-                <li><a class="" href="#" aria-expanded="false"><i
+                <li><a class="" href="{{route('dashboard')}}" aria-expanded="false"><i
                             class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard <span
                                 class="label label-rouded label-themecolor pull-right">4</span></span></a>
                 </li>
