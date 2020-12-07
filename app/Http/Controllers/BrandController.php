@@ -66,7 +66,34 @@ class BrandController extends Controller
         }
     }
 
-    public function edit()
+    public function edit($id)
     {
+        try {
+            $data = [
+                'breadCrumbs' => 'Update item',
+                'title' => 'Please fill the input form below',
+                'titleSecond' => "Item Info",
+                'brand' => Brand::find($id)
+            ];
+            return view('brand.edit')->with($data);
+        } catch (ModelNotFoundException $e) {
+
+        }
+    }
+
+    public function update(Request $request, $id) {
+        try {
+            $flashMsg = [
+                'success' => true,
+                'title' => 'Successfully updated!',
+                'message' => 'Congratulation your item has been created!'
+            ];
+            $this->validateHandler($request);
+            $item = Brand::find($id);
+            $item->update($request->all());
+            return redirect()->route('brands.home')->with($flashMsg);
+        } catch (ModelNotFoundException $e) {
+
+        }
     }
 }

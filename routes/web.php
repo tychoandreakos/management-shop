@@ -54,6 +54,7 @@ Route::prefix(BRANDS)->group(function () {
         Route::delete('/delete/{id}', [BrandController::class, 'destroy'])->name('.delete');
         Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('.edit');
         Route::post('/save', [BrandController::class, 'store'])->name('.store');
+        Route::patch('/update/{id}', [BrandController::class, 'update'])->name('.update');
     });
 });
 
