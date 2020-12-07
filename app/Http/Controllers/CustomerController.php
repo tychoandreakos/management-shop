@@ -15,7 +15,7 @@ class CustomerController extends Controller
     public function index(Customer $customers)
     {
         $data = [
-            'customers' => $customers->latest()->paginate(3),
+            'customers' => $customers->latest()->paginate(10),
             'breadCrumbs' => "Customers"
         ];
         return view('customer.home', $data);

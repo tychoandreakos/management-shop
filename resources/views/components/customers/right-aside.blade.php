@@ -48,14 +48,21 @@
             </tbody>
             <tfoot>
             <tr>
-                <td>
-                    <h3>23</h3>
-                    {{$customers->links('pagination::bootstrap-4')}}
-                </td>
-                <td colspan="2">
-                    <button type="button" class="btn btn-info btn-rounded" data-toggle="modal"
-                            data-target="#add-contact">Add New Customer
-                    </button>
+                <td colspan="12">
+                    <div class="row align-items-center">
+                        <div class="col-6">
+                            <button type="button" class="btn btn-info btn-rounded"
+                                    data-toggle="modal"
+                                    data-target="#add-contact">Add New Customer
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <div class="pull-right">
+                                {{$customers->links('pagination::bootstrap-4')}}
+                            </div>
+                        </div>
+                    </div>
+
                 </td>
                 @include('components.customers.add-customer')
                 <td colspan="7">
