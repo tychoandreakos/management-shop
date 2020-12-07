@@ -4,6 +4,6 @@
     @include('components.customers.breadcrumbs')
     @include('components.succes-message')
     <div class="container-fluid">
-        @include('components.items.gallery-page')
+        @include('components.items.list-page')
     </div>
 @endsection
