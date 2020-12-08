@@ -19,8 +19,8 @@ class CreateItemTransactionsTable extends Migration
             $table->uuid('item_id');
             $table->unsignedBigInteger('brand_id');
 
-            $table->foreign('item_id')->references('id')->on('items');
-            $table->foreign('brand_id')->references('id')->on('brands');
+            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
+            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->timestamps();
         });
     }

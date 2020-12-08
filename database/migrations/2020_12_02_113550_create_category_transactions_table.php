@@ -19,8 +19,8 @@ class CreateCategoryTransactionsTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('spesification_item_id');
 
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('spesification_item_id')->references('id')->on('spesification_items');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('spesification_item_id')->references('id')->on('spesification_items')->onDelete('cascade');
 
             $table->timestamps();
         });

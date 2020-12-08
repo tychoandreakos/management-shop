@@ -17,7 +17,7 @@ class CreateConstraintCustomerTransactionsToItems extends Migration
         Schema::table('customer_transactions', function (Blueprint $table) {
             $table->uuid('item_id')->after('customer_id');
 
-            $table->foreign('item_id')->references('id')->on('items');
+            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
         });
     }
 

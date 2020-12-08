@@ -20,7 +20,7 @@ class CreateShipProviderTransactionsTable extends Migration
             $table->string('sending_status');
 
 
-            $table->foreign('ship_provider_id')->references('id')->on('ship_providers');
+            $table->foreign('ship_provider_id')->references('id')->on('ship_providers')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@ class CreateCustomerLabelTransactionsTable extends Migration
             $table->unsignedBigInteger('customer_label_id');
 
             $table->foreign('customer_id')->references('id')->on('customers');
-            $table->foreign('customer_label_id')->references('id')->on('customer_labels');
+            $table->foreign('customer_label_id')->references('id')->on('customer_labels')->onDelete('cascade');
             $table->timestamps();
         });
     }
