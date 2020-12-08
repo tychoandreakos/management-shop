@@ -7,7 +7,7 @@
                 <h4 class="m-b-0 text-white">{{ $title  }}</h4>
             </div>
             <div class="card-body">
-                <form action="{{ route('brands.store')  }}" method="post">
+                <form action="{{ route('brands.store')  }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-body">
                         @include('components.item_transactions.form')
