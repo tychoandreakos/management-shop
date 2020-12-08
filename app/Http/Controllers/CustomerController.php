@@ -19,7 +19,8 @@ class CustomerController extends Controller
         $data = [
             'customers' => $customers->latest()->paginate(10),
             "customerLabels" => CustomerLabel::withCount('customerLabelTransaction')->get(),
-            'breadCrumbs' => "Customers"
+            'breadCrumbs' => "Customers",
+            "allCustomers" => $customers->get()->count()
         ];
         return view('customer.home', $data);
 //        return response()->json($data['customerLabels']);

@@ -1,6 +1,6 @@
 <div class="left-aside bg-light-part">
     <ul class="list-style-none">
-        <li class="box-label"><a href="javascript:void(0)">All Customers <span>123</span></a>
+        <li class="box-label"><a href="javascript:void(0)">All Customers <span>{{ $allCustomers  }}</span></a>
         </li>
         <li class="divider"></li>
         @foreach($customerLabels as $customerLabel)
