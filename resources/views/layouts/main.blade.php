@@ -13,5 +13,4 @@
 <!-- End Wrapper -->
 @include('assets/javascript')
 </body>
-
 </html>
