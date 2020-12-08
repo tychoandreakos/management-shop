@@ -1,3 +1,4 @@
+@include('components.item_transactions.typeahead')
 <!-- Row -->
 <div class="row">
     <div class="col-lg-12">

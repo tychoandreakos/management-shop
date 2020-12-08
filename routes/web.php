@@ -56,7 +56,7 @@ Route::prefix(MASTER)->group(function () {
             Route::delete('/delete/{id}', [ItemController::class, 'destroy'])->name('.delete');
             Route::get('/edit/{id}', [ItemController::class, 'edit'])->name('.edit');
             Route::patch('/update/{id}', [ItemController::class, 'update'])->name('.update');
-            Route::get('/autocomplete', [ItemController::class, 'autocomplete'])->name('.automplete');
+            Route::get('/autocomplete', [ItemController::class, 'autocomplete'])->name('.autocomplete');
         });
     });
 
