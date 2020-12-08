@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12 ">
         <div class="form-group @if($errors->has('spec')) has-danger @endif">
-            <label>Specification Item</label>
+            <label>Specification Item*</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="spec">
                 {{ old('spec')  }}
             </textarea>

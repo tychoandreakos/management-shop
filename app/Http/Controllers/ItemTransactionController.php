@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\Category;
+use App\Models\CategoryTransaction;
+use App\Models\Item;
+use App\Models\ItemTransaction;
+use App\Models\SpesificationItem;
 use Illuminate\Http\Request;
 
 class ItemTransactionController extends Controller
@@ -20,6 +25,31 @@ class ItemTransactionController extends Controller
 
     public function store(Request $request)
     {
+        try {
+            $item = Item::find($request->get('id_items'));
+            $brand = Brand::find($request->get('id_brands'));
 
+            if (!is_null($item) && !is_null($brand)) {
+                $sp = SpesificationItem::create([
+                    'property' => $request->get('spec')
+                ]);
+
+                ItemTransaction::create([
+                    'item_id' => $request->get('id_items'),
+                    'brand_id' => $request->get('id_brands'),
+                    'spesification_item_id' => $sp->id
+                ]);
+
+                foreach ($request->get('category') as $ct) {
+                    CategoryTransaction::create([
+                        'category_id' => $ct,
+                        'spesification_item_id' => $sp->id
+                    ]);
+                }
+            }
+            return response()->json(['success' => true]);
+        } catch (\ErrorException $e) {
+            return response()->json(['success' => false, 'message' => $e]);
+        }
     }
 }

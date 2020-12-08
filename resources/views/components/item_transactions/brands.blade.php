@@ -33,7 +33,7 @@
     </div>
 </div>
 
-<input type="text" hidden class="id_brands" value="{{old('id_brands')}}">
+<input type="text" name="id_brands" hidden class="id_brands" value="{{old('id_brands')}}">
 
 @push('scripts')
     <script>
@@ -87,6 +87,12 @@
                     name: 'states',
                     source: substringMatcher(nameCt)
                 });
+
+            $('input.nmb').blur(function () {
+                if ($(this).val() === "") {
+                    $('.id_brands').val("")
+                }
+            })
         })()
     </script>
 @endpush

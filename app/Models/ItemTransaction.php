@@ -11,6 +11,8 @@ class ItemTransaction extends Model
     use HasFactory;
     use UsesUUID;
 
+    protected $guarded = ['id'];
+
     public function brand()
     {
         return $this->belongsTo(Brand::class);

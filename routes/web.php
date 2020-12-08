@@ -119,9 +119,10 @@ Route::prefix(MASTER)->group(function () {
     });
 });
 
-Route::prefix(ITEMTRANSACTION)->group(function() {
-   Route::name(ITEMTRANSACTION)->group(function() {
-       Route::get('/create', [ItemTransactionController::class, 'create'])->name('.create');
-   });
+Route::prefix(ITEMTRANSACTION)->group(function () {
+    Route::name(ITEMTRANSACTION)->group(function () {
+        Route::get('/create', [ItemTransactionController::class, 'create'])->name('.create');
+        Route::post('/save', [ItemTransactionController::class, 'store'])->name('.store');
+    });
 });
 

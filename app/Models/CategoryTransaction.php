@@ -11,6 +11,8 @@ class CategoryTransaction extends Model
     use UsesUUID;
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function category() {
         return $this->belongsTo(Category::class);
     }
