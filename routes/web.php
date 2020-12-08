@@ -53,6 +53,7 @@ Route::prefix(MASTER)->group(function () {
             Route::delete('/delete/{id}', [ItemController::class, 'destroy'])->name('.delete');
             Route::get('/edit/{id}', [ItemController::class, 'edit'])->name('.edit');
             Route::patch('/update/{id}', [ItemController::class, 'update'])->name('.update');
+            Route::get('/autocomplete', [ItemController::class, 'autocomplete'])->name('.automplete');
         });
     });
 
@@ -64,6 +65,7 @@ Route::prefix(MASTER)->group(function () {
             Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('.edit');
             Route::post('/save', [BrandController::class, 'store'])->name('.store');
             Route::patch('/update/{id}', [BrandController::class, 'update'])->name('.update');
+            Route::get('/autocomplete', [BrandController::class, 'autocomplete'])->name('.automplete');
         });
     });
 
