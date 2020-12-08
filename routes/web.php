@@ -113,8 +113,5 @@ Route::prefix(MASTER)->group(function () {
         });
     });
 });
-Route::group(function() {
-
-});
 
 
