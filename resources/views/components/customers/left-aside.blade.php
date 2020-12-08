@@ -4,10 +4,10 @@
         </li>
         <li class="divider"></li>
         @foreach($customerLabels as $customerLabel)
-            <li><a href="javascript:void(0)">{{ $customerLabel->name  }} <span>{{ $customerLabel->customerTransaction[0]->customer_count  }}</span></a></li>
+            <li><a href="javascript:void(0)">{{ $customerLabel->name  }} <span>{{ $customerLabel->customer_label_transaction_count  }}</span></a></li>
         @endforeach
 
-        <li class="box-label"><a href="javascript:void(0)" data-toggle="modal"
+        <li class="box-label mt-3"><a href="javascript:void(0)" data-toggle="modal"
                                  data-target="#myModal" class="btn btn-info text-white">+ Create
                 New Label</a></li>
         <div id="myModal" class="modal fade in" tabindex="-1" role="dialog"

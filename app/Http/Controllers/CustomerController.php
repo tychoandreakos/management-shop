@@ -18,10 +18,11 @@ class CustomerController extends Controller
     {
         $data = [
             'customers' => $customers->latest()->paginate(10),
-            "customerLabels" => CustomerLabel::with('customerTransaction')->get(),
+            "customerLabels" => CustomerLabel::withCount('customerLabelTransaction')->get(),
             'breadCrumbs' => "Customers"
         ];
         return view('customer.home', $data);
+//        return response()->json($data['customerLabels']);
     }
 
     public function store(Request $request): JsonResponse
