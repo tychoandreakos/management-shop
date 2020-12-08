@@ -54,6 +54,7 @@
                         <li><a href="{{ route('brands.home')  }}">Brands</a></li>
                         <li><a href="{{ route('specifications.home')  }}">Specification Items</a></li>
                         <li><a href="{{ route('categories.home')  }}">Categories</a></li>
+                        <li><a href="{{ route('shipping-providers.home')  }}">Shipping Provider</a></li>
                     </ul>
                 </li>
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
