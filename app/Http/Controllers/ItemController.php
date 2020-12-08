@@ -116,7 +116,7 @@ class ItemController extends Controller
 
     public function autocomplete(Request $request)
     {
-        $data = Item::where("name", "LIKE", "%{$request->input('query')}%")->get();
+        $data = Item::all();
         return response()->json($data);
     }
 }

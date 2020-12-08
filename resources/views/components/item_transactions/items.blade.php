@@ -2,7 +2,7 @@
     <div class="col-md-12 ">
         <div class="form-group @if($errors->has('name')) has-danger @endif">
             <label>Name*</label>
-            <input value="{{ old('name')  }}" name="name" type="text" class="nm form-control">
+            <input value="{{ old('name')  }}" name="name" type="text" class="nm typeahead form-control">
             @if($errors->has('name'))
                 <small class="form-control-feedback"> This field has error. </small>
             @endif
@@ -57,31 +57,62 @@
     </div>
 </div>
 
+<input type="text" hidden class="id_items" value="{{old('id_items')}}">
+
 
 @push('scripts')
-    <script type="text/javascript">
-        (function () {
+    <script>
+        (async function () {
             const path = "{{ route('items.autocomplete') }}";
-            $('input.nm').typeahead({
-                source: function (query, process) {
-                    return $.get(path, {query: query}, function (data) {
-                        $('.qty').val(data[0].quantity)
-                        $('.price').val(data[0].price)
-                        $('.sold').val(data[0].sold)
-                        $('.description').val(data[0].description)
-                        return process(data);
-                    });
+            const asyncExample = async () => {
+                let data;
+                try {
+                    data = await fetch(path);
+                } catch (err) {
+                    console.log(err);
                 }
-            });
+                return await data.json();
+            };
 
-            $('input.nm').blur(function () {
-                if ($(this).val() === "") {
-                    $('.qty').val("")
-                    $('.price').val("")
-                    $('.sold').val("")
-                    $('.description').val("")
-                }
-            })
+            const globalData = await asyncExample();
+            const nameCt = globalData.map(item => `${item.name}.${item.id}.${item.quantity}.${item.price}.${item.sold}`)
+
+            const substringMatcher = function (strs) {
+                return function findMatches(q, cb) {
+                    let matches;
+
+                    // an array that will be populated with substring matches
+                    matches = [];
+
+                    // regex used to determine if a string contains the substring `q`
+                    substrRegex = new RegExp(q, 'i');
+
+                    // iterate through the pool of strings and for any string that
+                    // contains the substring `q`, add it to the `matches` array
+                    $.each(strs, function (i, str) {
+                        if (substrRegex.test(str)) {
+                            matches.push(str);
+                        }
+                    });
+
+                    const [name, id, qty, price, sold] = matches[0].split('.');
+                    $('.qty').val(qty)
+                    $('.price').val(price)
+                    $('.sold').val(sold)
+                    $('.id_items').val(id)
+                    cb([name]);
+                };
+            };
+
+            $('input.nm').typeahead({
+                    hint: true,
+                    highlight: true,
+                    minLength: 1
+                },
+                {
+                    name: 'states',
+                    source: substringMatcher(nameCt)
+                });
         })()
     </script>
 @endpush
