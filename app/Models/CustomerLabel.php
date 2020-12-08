@@ -11,7 +11,7 @@ class CustomerLabel extends Model
 
     protected $guarded = ['id'];
 
-    public function customerTransaction() {
-        return $this->hasMany(CustomerTransaction::class);
+    public function customerLabelTransaction() {
+        return $this->hasOne(CustomerLabelTransaction::class);
     }
 }

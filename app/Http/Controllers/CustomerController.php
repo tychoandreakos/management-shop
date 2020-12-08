@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\CustomerLabel;
+use App\Models\CustomerTransaction;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -12,10 +14,11 @@ use Illuminate\Validation\ValidationException;
 class CustomerController extends Controller
 {
 
-    public function index(Customer $customers)
+    public function index(Customer $customers, CustomerLabel $customerLabel)
     {
         $data = [
             'customers' => $customers->latest()->paginate(10),
+            "customerLabels" => CustomerLabel::with('customerTransaction')->get(),
             'breadCrumbs' => "Customers"
         ];
         return view('customer.home', $data);

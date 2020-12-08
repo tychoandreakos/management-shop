@@ -3,10 +3,10 @@
         <li class="box-label"><a href="javascript:void(0)">All Customers <span>123</span></a>
         </li>
         <li class="divider"></li>
-        <li><a href="javascript:void(0)">Work <span>103</span></a></li>
-        <li><a href="javascript:void(0)">Family <span>19</span></a></li>
-        <li><a href="javascript:void(0)">Friends <span>623</span></a></li>
-        <li><a href="javascript:void(0)">Private <span>53</span></a></li>
+        @foreach($customerLabels as $customerLabel)
+            <li><a href="javascript:void(0)">{{ $customerLabel->name  }} <span>{{ $customerLabel->customerTransaction[0]->customer_count  }}</span></a></li>
+        @endforeach
+
         <li class="box-label"><a href="javascript:void(0)" data-toggle="modal"
                                  data-target="#myModal" class="btn btn-info text-white">+ Create
                 New Label</a></li>

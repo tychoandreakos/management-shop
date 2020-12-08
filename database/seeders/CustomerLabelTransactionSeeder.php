@@ -4,11 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\Customer;
 use App\Models\CustomerLabel;
-use App\Models\CustomerTransaction;
-use App\Models\Item;
+use App\Models\CustomerLabelTransaction;
 use Illuminate\Database\Seeder;
 
-class CustomerTransactionSeeder extends Seeder
+class CustomerLabelTransactionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,9 +16,9 @@ class CustomerTransactionSeeder extends Seeder
      */
     public function run()
     {
-        CustomerTransaction::factory()
+        CustomerLabelTransaction::factory()
             ->has(Customer::factory())
-            ->has(Item::factory())
+            ->has(CustomerLabel::factory())
             ->create();
     }
 }

@@ -23,6 +23,11 @@ class Customer extends Model
         return $this->hasMany(CustomerTransaction::class);
     }
 
+    public function customerLabelTransaction()
+    {
+        return $this->hasOne(CustomerLabel::class);
+    }
+
 
     /**
      * @param $value
@@ -53,7 +58,7 @@ class Customer extends Model
     {
         $transform_value = explode(" ", $value);
         if (isset($transform_value[1])) {
-            $this->attributes['num_telp'] =$transform_value[1];
+            $this->attributes['num_telp'] = $transform_value[1];
         }
     }
 

@@ -6,16 +6,18 @@ use App\Http\Traits\UsesUUID;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CustomerTransaction extends Model
+class CustomerLabelTransaction extends Model
 {
     use HasFactory;
     use UsesUUID;
+
+    protected $guarded = ['id'];
 
     public function customer() {
         return $this->belongsTo(Customer::class);
     }
 
-    public function item() {
-        return $this->belongsTo(Item::class);
+    public function customerLabel() {
+        return $this->belongsTo(CustomerLabel::class);
     }
 }
