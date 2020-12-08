@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ShipProviderController;
 use App\Http\Controllers\CustomerLabelController;
+use App\Http\Controllers\ItemTransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,8 @@ define("CATEGORIES", "categories");
 define('SHIPPINGPROVIDERS', "shipping-providers");
 define('CUSTOMERLABEL', "customer-labels");
 define('MASTER', "master");
+
+define('ITEMTRANSACTION', 'item');
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -116,4 +119,9 @@ Route::prefix(MASTER)->group(function () {
     });
 });
 
+Route::prefix(ITEMTRANSACTION)->group(function() {
+   Route::name(ITEMTRANSACTION)->group(function() {
+       Route::get('/create', [ItemTransactionController::class, 'create'])->name('.create');
+   });
+});
 
