@@ -19,7 +19,7 @@ class CreateShipProviderTransactionsTable extends Migration
             $table->string('ordering_number', 100);
             $table->string('sending_status');
 
-            
+
             $table->foreign('ship_provider_id')->references('id')->on('ship_providers');
             $table->timestamps();
         });
