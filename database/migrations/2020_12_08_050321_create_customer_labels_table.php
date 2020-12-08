@@ -15,6 +15,7 @@ class CreateCustomerLabelsTable extends Migration
     {
         Schema::create('customer_labels', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->timestamps();
         });
     }
