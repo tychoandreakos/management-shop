@@ -1,5 +1,5 @@
 <div class="pull-right">
-    <button type="button" id="_link" class="btn btn-primary mr-1"><i class="fa fa-check"></i> Add Brands</button>
+    <button type="button" id="_link" class="btn btn-primary mr-1"><i class="fa fa-check"></i> Add Product</button>
     <input type="text" readonly id="_create" hidden value="{{ route('item.create') }}">
 </div>
 

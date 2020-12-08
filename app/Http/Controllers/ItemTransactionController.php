@@ -16,8 +16,8 @@ class ItemTransactionController extends Controller
     public function index()
     {
         $data = [
-            'breadCrumbs' => 'Brand Lists',
-            'title' => 'Brand Lists',
+            'breadCrumbs' => 'Product Lists',
+            'title' => 'Product Lists',
             'itemTransactions' => ItemTransaction::with(['item', 'brand', 'spesificationItem'])->get(),
         ];
 
@@ -27,9 +27,9 @@ class ItemTransactionController extends Controller
     public function create()
     {
         $data = [
-            'breadCrumbs' => 'Create Item',
+            'breadCrumbs' => 'Create Product',
             'title' => 'Please fill the input form below',
-            'titleSecond' => "Item Info",
+            'titleSecond' => "Product Info",
             'categories' => Category::all(),
         ];
         return view('item_transaction.create')->with($data);

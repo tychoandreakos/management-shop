@@ -46,8 +46,11 @@
                             class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard <span
                                 class="label label-rouded label-themecolor pull-right">4</span></span></a>
                 </li>
+                <li><a class="" href="{{route('item.home')}}" aria-expanded="false"><i
+                            class="mdi mdi-food-apple"></i><span class="hide-menu">Products </span></a>
+                </li>
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
-                            class="mdi mdi-bullseye"></i><span class="hide-menu">Master Management</span></a>
+                            class="mdi mdi-folder-multiple"></i><span class="hide-menu">Master Management</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{route('customers.home')}}">Customers</a></li>
                         <li><a href="{{ route('items.home')  }}">Items</a></li>
