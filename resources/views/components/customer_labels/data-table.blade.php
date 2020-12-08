@@ -19,17 +19,17 @@
                     </tr>
                     </tfoot>
                     <tbody>
-                    @foreach($shippingProviders as $shippingProvider)
+                    @foreach($customerLabels as $customerLabel)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{ $shippingProvider->name  }}</td>
+                            <td>{{ $customerLabel->name  }}</td>
                             <td class="text-nowrap align-items-center">
-                                <form action="{{route('shipping-providers.delete', $shippingProvider->id)}}"
+                                <form action="{{route('customer-labels.delete', $customerLabel->id)}}"
                                       class="d-flex justify-content-center" method="post">
                                     @csrf
                                     @method('delete')
                                     <a class="justify-content-center"
-                                       href="{{ route('shipping-providers.edit', $shippingProvider->id)  }}"
+                                       href="{{ route('customer-labels.edit', $customerLabel->id)  }}"
                                        data-toggle="tooltip"
                                        data-original-title="Edit"> <i
                                             class="fa fa-pencil text-inverse m-r-10"></i> </a>

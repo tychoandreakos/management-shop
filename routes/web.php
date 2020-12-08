@@ -7,6 +7,7 @@ use App\Http\Controllers\SpesificationItemController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ShipProviderController;
+use App\Http\Controllers\CustomerLabelController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,7 @@ define("BRANDS", "brands");
 define("SPECIFICATIONITEM", "specifications");
 define("CATEGORIES", "categories");
 define('SHIPPINGPROVIDERS', "shipping-providers");
+define('CUSTOMERLABEL', "customer-labels");
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -94,6 +96,18 @@ Route::prefix(SHIPPINGPROVIDERS)->group(function () {
         Route::get('/edit/{id}', [ShipProviderController::class, 'edit'])->name('.edit');
         Route::post('/save', [ShipProviderController::class, 'store'])->name('.store');
         Route::patch('/update/{id}', [ShipProviderController::class, 'update'])->name('.update');
+    });
+});
+
+
+Route::prefix(CUSTOMERLABEL)->group(function () {
+    Route::name(CUSTOMERLABEL)->group(function () {
+        Route::get('/', [CustomerLabelController::class, 'index'])->name('.home');
+        Route::get('/create', [CustomerLabelController::class, 'create'])->name('.create');
+        Route::delete('/delete/{id}', [CustomerLabelController::class, 'destroy'])->name('.delete');
+        Route::get('/edit/{id}', [CustomerLabelController::class, 'edit'])->name('.edit');
+        Route::post('/save', [CustomerLabelController::class, 'store'])->name('.store');
+        Route::patch('/update/{id}', [CustomerLabelController::class, 'update'])->name('.update');
     });
 });
 
