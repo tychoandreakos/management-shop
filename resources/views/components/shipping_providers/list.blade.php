@@ -5,9 +5,9 @@
                 <h4 class="card-title">{{ $title  }}</h4>
                 <h6 class="card-subtitle m-b-20 text-muted">you can make gallery like this</h6></div>
             <div class="col-md-6">
-                @include('components.brands.action')
+                @include('components.shipping_providers.action')
             </div>
         </div>
     </div>
     <!-- column -->
-@include('components.brands.data-table')
+@include('components.shipping_providers.data-table')

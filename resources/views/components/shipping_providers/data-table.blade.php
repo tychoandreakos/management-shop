@@ -8,8 +8,7 @@
                     <tr>
                         <th>No</th>
                         <th>Name</th>
-                        <th>Location</th>
-                        <th>Founded</th>
+                        >
                         <th class="text-nowrap">Action</th>
                     </tr>
                     </thead>
@@ -17,24 +16,21 @@
                     <tr>
                         <th>No</th>
                         <th>Name</th>
-                        <th>Location</th>
-                        <th>Founded</th>
                         <th class="text-nowrap">Action</th>
                     </tr>
                     </tfoot>
                     <tbody>
-                    @foreach($brands as $brand)
+                    @foreach($shippingProviders as $shippingProvider)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{ $brand->name  }}</td>
-                            <td>{{$brand->location}}</td>
-                            <td>{{$brand->founded}}</td>
+                            <td>{{ $shippingProvider->name  }}</td>
                             <td class="text-nowrap align-items-center">
-                                <form action="{{route('brands.delete', $brand->id)}}"
+                                <form action="{{route('shipping_providers.delete', $shippingProvider->id)}}"
                                       class="d-flex justify-content-center" method="post">
                                     @csrf
                                     @method('delete')
-                                    <a class="justify-content-center" href="{{ route('brands.edit', $brand->id)  }}"
+                                    <a class="justify-content-center"
+                                       href="{{ route('shipping_providers.edit', $shippingProvider->id)  }}"
                                        data-toggle="tooltip"
                                        data-original-title="Edit"> <i
                                             class="fa fa-pencil text-inverse m-r-10"></i> </a>
