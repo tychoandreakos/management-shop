@@ -6,6 +6,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\SpesificationItemController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ShipProviderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,7 @@ define("ITEMS", "items");
 define("BRANDS", "brands");
 define("SPECIFICATIONITEM", "specifications");
 define("CATEGORIES", "categories");
+define('SHIPPINGPROVIDERS', "shipping-providers");
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -81,6 +83,17 @@ Route::prefix(CATEGORIES)->group(function () {
         Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('.edit');
         Route::post('/save', [CategoryController::class, 'store'])->name('.store');
         Route::patch('/update/{id}', [CategoryController::class, 'update'])->name('.update');
+    });
+});
+
+Route::prefix(SHIPPINGPROVIDERS)->group(function () {
+    Route::name(SHIPPINGPROVIDERS)->group(function () {
+        Route::get('/', [ShipProviderController::class, 'index'])->name('.home');
+        Route::get('/create', [ShipProviderController::class, 'create'])->name('.create');
+        Route::delete('/delete/{id}', [ShipProviderController::class, 'destroy'])->name('.delete');
+        Route::get('/edit/{id}', [ShipProviderController::class, 'edit'])->name('.edit');
+        Route::post('/save', [ShipProviderController::class, 'store'])->name('.store');
+        Route::patch('/update/{id}', [ShipProviderController::class, 'update'])->name('.update');
     });
 });
 
