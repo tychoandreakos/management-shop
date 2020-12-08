@@ -18,4 +18,8 @@ class CustomerTransaction extends Model
     public function item() {
         return $this->belongsTo(Item::class);
     }
+
+    public function customerLabel() {
+        return $this->belongsTo(CustomerLabel::class);
+    }
 }

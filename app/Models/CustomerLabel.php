@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class CustomerLabel extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    public function customerTransaction() {
+        return $this->hasMany(CustomerTransaction::class);
+    }
 }

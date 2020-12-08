@@ -51,7 +51,10 @@ class Customer extends Model
 
     protected function setNumTelpAttribute($value)
     {
-        $this->attributes['num_telp'] = explode(" ", $value)[1];
+        $transform_value = explode(" ", $value);
+        if (isset($transform_value[1])) {
+            $this->attributes['num_telp'] =$transform_value[1];
+        }
     }
 
 
