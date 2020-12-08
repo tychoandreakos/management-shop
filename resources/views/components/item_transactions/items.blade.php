@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12 ">
         <div class="form-group @if($errors->has('name')) has-danger @endif">
-            <label>Name</label>
+            <label>Name*</label>
             <input value="{{ old('name')  }}" name="name" type="text" class="nm form-control">
             @if($errors->has('name'))
                 <small class="form-control-feedback"> This field has error. </small>
@@ -12,7 +12,7 @@
 <div class="row">
     <div class="col-md-4">
         <div class="form-group @if($errors->has('quantity')) has-danger @endif">
-            <label>Quantity</label>
+            <label>Quantity*</label>
             <input value="{{ old('quantity') }}" name="quantity" type="text"
                    class="qty form-control">
             @if($errors->has('quantity'))
@@ -23,7 +23,7 @@
     <!--/span-->
     <div class="col-md-4">
         <div class="form-group @if($errors->has('price')) has-danger @endif">
-            <label>Price</label>
+            <label>Price*</label>
             <input value="{{ old('price')  }}" name="price" type="text" class="price form-control">
             @if($errors->has('price'))
                 <small class="form-control-feedback"> This field has error. </small>
@@ -33,7 +33,7 @@
     <!--/span-->
     <div class="col-md-4">
         <div class="form-group @if($errors->has('sold')) has-danger @endif">
-            <label>Sold</label>
+            <label>Sold*</label>
             <input name="sold" value="{{ old('sold')  }}" type="text" class="sold form-control">
             @if($errors->has('sold'))
                 <small class="form-control-feedback"> This field has error. </small>
@@ -65,7 +65,6 @@
             $('input.nm').typeahead({
                 source: function (query, process) {
                     return $.get(path, {query: query}, function (data) {
-                        console.log(data)
                         $('.qty').val(data[0].quantity)
                         $('.price').val(data[0].price)
                         $('.sold').val(data[0].sold)

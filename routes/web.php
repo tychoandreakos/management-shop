@@ -68,7 +68,7 @@ Route::prefix(MASTER)->group(function () {
             Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('.edit');
             Route::post('/save', [BrandController::class, 'store'])->name('.store');
             Route::patch('/update/{id}', [BrandController::class, 'update'])->name('.update');
-            Route::get('/autocomplete', [BrandController::class, 'autocomplete'])->name('.automplete');
+            Route::get('/autocomplete', [BrandController::class, 'autocomplete'])->name('.autocomplete');
         });
     });
 
