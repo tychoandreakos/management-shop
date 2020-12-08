@@ -12,6 +12,18 @@ use Illuminate\Http\Request;
 
 class ItemTransactionController extends Controller
 {
+
+    public function index()
+    {
+        $data = [
+            'breadCrumbs' => 'Brand Lists',
+            'title' => 'Brand Lists',
+            'itemTransactions' => ItemTransaction::with(['item', 'brand', 'spesificationItem'])->get(),
+        ];
+
+        return view('item_transaction.home')->with($data);
+    }
+
     public function create()
     {
         $data = [
@@ -51,5 +63,19 @@ class ItemTransactionController extends Controller
         } catch (\ErrorException $e) {
             return response()->json(['success' => false, 'message' => $e]);
         }
+    }
+
+    public function update()
+    {
+
+    }
+
+    public function edit()
+    {
+
+    }
+
+    public function destroy()
+    {
     }
 }

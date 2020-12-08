@@ -121,8 +121,12 @@ Route::prefix(MASTER)->group(function () {
 
 Route::prefix(ITEMTRANSACTION)->group(function () {
     Route::name(ITEMTRANSACTION)->group(function () {
+        Route::get('/', [ItemTransactionController::class, 'index'])->name('.home');
         Route::get('/create', [ItemTransactionController::class, 'create'])->name('.create');
         Route::post('/save', [ItemTransactionController::class, 'store'])->name('.store');
+        Route::delete('/delete/{id}', [BrandController::class, 'destroy'])->name('.delete');
+        Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('.edit');
+        Route::patch('/update/{id}', [BrandController::class, 'update'])->name('.update');
     });
 });
 
