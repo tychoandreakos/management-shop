@@ -1,4 +1,4 @@
-<input type="text" id="_backLink" hidden value="{{ route('shipping_providers.home')  }}" readonly>
+<input type="text" id="_backLink" hidden value="{{ route('shipping-providers.home')  }}" readonly>
 
 @push('scripts')
     <script>

@@ -6,7 +6,7 @@
                 <h4 class="m-b-0 text-white">{{ $title  }}</h4>
             </div>
             <div class="card-body">
-                <form action="{{ route('shipping_providers.store')  }}" method="post">
+                <form action="{{ route('shipping-providers.store')  }}" method="post">
                     @csrf
                     <div class="form-body">
                         <h3 class="card-title">{{ $titleSecond }}</h3>

@@ -25,12 +25,12 @@
                             <td>{{$loop->iteration}}</td>
                             <td>{{ $shippingProvider->name  }}</td>
                             <td class="text-nowrap align-items-center">
-                                <form action="{{route('shipping_providers.delete', $shippingProvider->id)}}"
+                                <form action="{{route('shipping-providers.delete', $shippingProvider->id)}}"
                                       class="d-flex justify-content-center" method="post">
                                     @csrf
                                     @method('delete')
                                     <a class="justify-content-center"
-                                       href="{{ route('shipping_providers.edit', $shippingProvider->id)  }}"
+                                       href="{{ route('shipping-providers.edit', $shippingProvider->id)  }}"
                                        data-toggle="tooltip"
                                        data-original-title="Edit"> <i
                                             class="fa fa-pencil text-inverse m-r-10"></i> </a>

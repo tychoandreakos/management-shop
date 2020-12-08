@@ -1,6 +1,6 @@
 <div class="pull-right">
     <button type="button" id="_link" class="btn btn-primary mr-1"><i class="fa fa-check"></i> Add Shipping Providers</button>
-    <input type="text" readonly id="_create" hidden value="{{ route('shipping_providers.create') }}">
+    <input type="text" readonly id="_create" hidden value="{{ route('shipping-providers.create') }}">
 </div>
 
 @push('scripts')
