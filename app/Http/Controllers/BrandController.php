@@ -99,7 +99,7 @@ class BrandController extends Controller
 
     public function autocomplete(Request $request)
     {
-        $data = Brand::where("name", "LIKE", "%{$request->input('query')}%")->get();
+        $data = Brand::all();
         return response()->json($data);
     }
 }

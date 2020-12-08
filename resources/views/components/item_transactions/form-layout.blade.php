@@ -25,3 +25,11 @@
 
 
 @include('components.item_transactions.back')
+
+@push('scripts')
+    <script>
+        $('form input').on('keypress', function (e) {
+            return e.which !== 13;
+        });
+    </script>
+@endpush
