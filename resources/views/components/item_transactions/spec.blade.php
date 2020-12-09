@@ -12,5 +12,5 @@
 </div>
 
 @isset($itemTransaction)
-    <input type="text" hidden value="{{$itemTransaction->spesificationItem->id}}">
+    <input type="text" name="id_specs" hidden value="{{$itemTransaction->spesificationItem->id}}">
 @endisset

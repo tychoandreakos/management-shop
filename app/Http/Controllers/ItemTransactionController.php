@@ -72,9 +72,56 @@ class ItemTransactionController extends Controller
         }
     }
 
-    public function update()
+    public function update(Request $request, $id)
     {
+        try {
+            $flashMsg = [
+                'success' => true,
+                'title' => 'Successfully updated!',
+                'message' => 'Congratulation your item has been created!'
+            ];
 
+            $itemTransaction = ItemTransaction::find($id);
+            $item = Item::find($request->get('id_items'));
+            $brand = Brand::find($request->get('id_brands'));
+            $sp = SpesificationItem::find($request->get('id_specs'));
+            $sp_id = "";
+
+            if (!is_null($item) && !is_null($brand)) {
+                if (is_null($sp)) {
+                    $sp_id = SpesificationItem::create([
+                        'property' => $request->get('spec')
+                    ])->id;
+                } else {
+                    $sp->update([
+                        'property' => $request->get('spec')
+                    ]);
+                }
+
+                $sp_checker_id = strlen($sp_id) > 0 ? $sp_id : $sp->id;
+
+                $itemTransaction->update([
+                    'item_id' => $request->get('id_items'),
+                    'brand_id' => $request->get('id_brands'),
+                    'spesification_item_id' => $sp_checker_id,
+                ]);
+
+
+                //first delete all category transacion
+                $sp->categoryTransaction()->delete();
+
+                // insert category transaction
+                foreach ($request->get('category') as $ct) {
+                    CategoryTransaction::create([
+                        'category_id' => $ct,
+                        'spesification_item_id' => $sp_checker_id
+                    ]);
+                }
+            }
+
+            return redirect()->route('products.home')->with($flashMsg);
+        } catch (ModelNotFoundException $e) {
+        }
     }
 
     public function edit($id)
