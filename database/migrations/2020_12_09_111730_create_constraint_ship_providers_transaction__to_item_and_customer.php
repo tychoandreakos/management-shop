@@ -17,8 +17,8 @@ class CreateConstraintShipProvidersTransactionToItemAndCustomer extends Migratio
             $table->uuid('customer_id')->after('ship_provider_id');
             $table->uuid('item_id')->after('ship_provider_id');
 
-            $table->foreign('customer_id')->references('id')->on('customers');
-            $table->foreign('item_id')->references('id')->on('items');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
         });
     }
 

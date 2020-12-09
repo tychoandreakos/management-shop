@@ -32,6 +32,7 @@ define('CUSTOMERLABEL', "customer-labels");
 define('MASTER', "master");
 
 define('ITEMTRANSACTION', 'products');
+define('CUSTOMERTRANSACTION', 'orderings');
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -127,6 +128,17 @@ Route::prefix(ITEMTRANSACTION)->group(function () {
         Route::delete('/delete/{id}', [ItemTransactionController::class, 'destroy'])->name('.delete');
         Route::get('/edit/{id}', [ItemTransactionController::class, 'edit'])->name('.edit');
         Route::patch('/update/{id}', [ItemTransactionController::class, 'update'])->name('.update');
+    });
+});
+
+Route::prefix(CUSTOMERTRANSACTION)->group(function () {
+    Route::name(CUSTOMERTRANSACTION)->group(function () {
+        Route::get('/', [CustomerLabelController::class, 'index'])->name('.home');
+        Route::get('/create', [CustomerLabelController::class, 'create'])->name('.create');
+        Route::post('/save', [CustomerLabelController::class, 'store'])->name('.store');
+        Route::delete('/delete/{id}', [CustomerLabelController::class, 'destroy'])->name('.delete');
+        Route::get('/edit/{id}', [CustomerLabelController::class, 'edit'])->name('.edit');
+        Route::patch('/update/{id}', [CustomerLabelController::class, 'update'])->name('.update');
     });
 });
 

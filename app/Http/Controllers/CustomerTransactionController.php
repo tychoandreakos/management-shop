@@ -67,4 +67,29 @@ class CustomerTransactionController extends Controller
 
         }
     }
+
+    public function update()
+    {
+    }
+
+    public function edit($id)
+    {
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $flashMsg = [
+                'success' => true,
+                'title' => 'Successfully deleted!',
+                'message' => 'Congratulation your item has been deleted!'
+            ];
+
+            $customerTransaction = CustomerTransaction::find($id);
+            $customerTransaction->delete();
+
+            return redirect()->route('orderings.home')->with($flashMsg);
+        } catch (ModelNotFoundException $e) {
+        }
+    }
 }
