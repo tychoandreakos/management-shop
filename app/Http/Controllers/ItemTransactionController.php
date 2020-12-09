@@ -77,9 +77,21 @@ class ItemTransactionController extends Controller
 
     }
 
-    public function edit()
+    public function edit($id)
     {
+        try {
+            $data = [
+                'breadCrumbs' => 'Update Product',
+                'title' => 'Please fill the input form below',
+                'titleSecond' => "Product Info",
+                'itemTransaction' => ItemTransaction::with(['item', 'brand', 'spesificationItem'])->where('id', '=', $id)->get()[0],
+                'categories' => Category::all()
+            ];
+//            return response()->json($data['itemTransaction']);
+            return view('item_transaction.edit')->with($data);
+        } catch (ModelNotFoundException $e) {
 
+        }
     }
 
     public function destroy($id)

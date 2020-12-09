@@ -2,7 +2,9 @@
     <div class="col-md-12 ">
         <div class="form-group @if($errors->has('name')) has-danger @endif">
             <label>Name*</label>
-            <input value="{{ old('name')  }}" name="name" type="text" class="nm typeahead form-control">
+            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->name : old('name')  }}" name="name"
+                   type="text"
+                   class="nm typeahead form-control">
             @if($errors->has('name'))
                 <small class="form-control-feedback"> This field has error. </small>
             @endif
@@ -13,7 +15,8 @@
     <div class="col-md-4">
         <div class="form-group @if($errors->has('quantity')) has-danger @endif">
             <label>Quantity*</label>
-            <input value="{{ old('quantity') }}" name="quantity" type="text"
+            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->quantity : old('quantity') }}"
+                   name="quantity" type="text"
                    class="qty form-control">
             @if($errors->has('quantity'))
                 <small class="form-control-feedback"> This field has error. </small>
@@ -24,7 +27,8 @@
     <div class="col-md-4">
         <div class="form-group @if($errors->has('price')) has-danger @endif">
             <label>Price*</label>
-            <input value="{{ old('price')  }}" name="price" type="text" class="price form-control">
+            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->price : old('price')  }}" name="price"
+                   type="text" class="price form-control">
             @if($errors->has('price'))
                 <small class="form-control-feedback"> This field has error. </small>
             @endif
@@ -34,7 +38,8 @@
     <div class="col-md-4">
         <div class="form-group @if($errors->has('sold')) has-danger @endif">
             <label>Sold*</label>
-            <input name="sold" value="{{ old('sold')  }}" type="text" class="sold form-control">
+            <input name="sold" value="{{ isset($itemTransaction) ? $itemTransaction->item->sold : old('sold')  }}"
+                   type="text" class="sold form-control">
             @if($errors->has('sold'))
                 <small class="form-control-feedback"> This field has error. </small>
             @endif
@@ -49,7 +54,7 @@
         <div class="form-group @if($errors->has('description')) has-danger @endif">
             <label>Description Item</label>
             <textarea name="description" class="description form-control" id="exampleFormControlTextarea1"
-                      rows="3">{{ old('description')  }}</textarea>
+                      rows="3">{{ isset($itemTransaction) ? $itemTransaction->item->description : old('description')  }}</textarea>
             @if($errors->has('description'))
                 <small class="form-control-feedback"> This field has error. </small>
             @endif
@@ -57,7 +62,8 @@
     </div>
 </div>
 
-<input type="text" name="id_items" hidden class="id_items" value="{{old('id_items')}}">
+<input type="text" name="id_items" hidden class="id_items"
+       value="{{isset($itemTransaction) ? $itemTransaction->item->id : old('id_items')}}">
 
 
 @push('scripts')

@@ -2,7 +2,7 @@
     <div class="col-md-12 ">
         <div class="form-group @if($errors->has('bname')) has-danger @endif">
             <label>Brand Name*</label>
-            <input value="{{ old('bname')  }}" name="bname" type="text" class="nmb form-control">
+            <input value="{{ isset($itemTransaction) ? $itemTransaction->brand->name : old('bname')  }}" name="bname" type="text" class="nmb form-control">
             @if($errors->has('bname'))
                 <small class="form-control-feedback"> This field has error. </small>
             @endif
@@ -13,7 +13,7 @@
     <div class="col-md-6">
         <div class="form-group @if($errors->has('location')) has-danger @endif">
             <label>Brand Location</label>
-            <input value="{{ old('location') }}" name="location" type="text"
+            <input value="{{ isset($itemTransaction) ? $itemTransaction->brand->location : old('location') }}" name="location" type="text"
                    class="lc form-control">
             @if($errors->has('location'))
                 <small class="form-control-feedback"> This field has error. </small>
@@ -24,7 +24,7 @@
     <div class="col-md-6">
         <div class="form-group @if($errors->has('founded')) has-danger @endif">
             <label>Brand Founded</label>
-            <input value="{{ old('founded')  }}" name="founded" type="text"
+            <input value="{{ isset($itemTransaction) ? $itemTransaction->brand->founded :  old('founded')  }}" name="founded" type="text"
                    class="fd form-control">
             @if($errors->has('founded'))
                 <small class="form-control-feedback"> This field has error. </small>
@@ -33,7 +33,7 @@
     </div>
 </div>
 
-<input type="text" name="id_brands" hidden class="id_brands" value="{{old('id_brands')}}">
+<input type="text" name="id_brands" hidden class="id_brands" value="{{isset($itemTransaction) ? $itemTransaction->brand->id :  old('id_brands')}}">
 
 @push('scripts')
     <script>

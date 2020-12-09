@@ -22,7 +22,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            const data = [];
+            @if(isset($itemTransaction))
+            @foreach($itemTransaction->spesificationItem->categoryTransaction as $ct)
+            data.push({{$ct->category_id}})
+            @endforEach
+            $('select').val(data);
+            $('select').selectpicker('refresh');
+            @else
             $('select').selectpicker();
+            @endif
         });
     </script>
 @endpush

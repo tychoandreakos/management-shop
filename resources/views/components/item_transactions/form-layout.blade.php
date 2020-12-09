@@ -10,11 +10,7 @@
                     @csrf
                     <div class="form-body">
                         @include('components.item_transactions.form')
-                        <div class="form-actions">
-                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Save
-                            </button>
-                            <button id="_back" type="button" class="btn btn-inverse">Cancel</button>
-                        </div>
+                        @include('components.item_transactions.form-action')
                     </div>
                 </form>
             </div>
