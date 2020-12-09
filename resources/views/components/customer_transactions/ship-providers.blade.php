@@ -1,130 +1,72 @@
 <div class="row">
     <div class="col-md-12 ">
-        <div class="form-group @if($errors->has('cname')) has-danger @endif">
-            <label>Name*</label>
-            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->name : old('cname')  }}" name="cname"
-                   type="text"
-                   class="cnm typeahead form-control">
-            @if($errors->has('cname'))
+        <div class="form-group @if($errors->has('ship_provider_id')) has-danger @endif">
+            <label>Shipping Providers</label>
+            <select class=" selectpicker" multiple data-live-search="true" name="ship_provider_id" []">
+            @foreach($shipProviders as $shipProvider)
+                <option value="{{ $shipProvider->id  }}">{{ $shipProvider->name }}</option>
+                @endforeach
+                </select>
+                @if($errors->has('ship_provider_id'))
+                    <small class="form-control-feedback"> This field has error. </small>
+                @endif
+        </div>
+    </div>
+</div>
+
+<div class="row">
+        <div class="col-md-6">
+        <div class="form-group @if($errors->has('ordering_number')) has-danger @endif">
+            <label>Ordering Number*</label>
+            <input class="form-control" type="text" name="ordering_number" required value="{{ old('ordering_number')  }}">
+            @if($errors->has('ordering_number'))
+                <small class="form-control-feedback"> This field has error. </small>
+            @endif
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group @if($errors->has('service_type')) has-danger @endif">
+            <label>Service Type*</label>
+            <input class="form-control" class="form-control" type="text" name="service_type" required value="{{ old('service_type')  }}">
+            @if($errors->has('service_type'))
                 <small class="form-control-feedback"> This field has error. </small>
             @endif
         </div>
     </div>
 </div>
+
 <div class="row">
-    <div class="col-md-4">
-        <div class="form-group @if($errors->has('quantity')) has-danger @endif">
-            <label>Quantity*</label>
-            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->quantity : old('quantity') }}"
-                   name="quantity" type="text"
-                   class="qty form-control">
-            @if($errors->has('quantity'))
-                <small class="form-control-feedback"> This field has error. </small>
-            @endif
-        </div>
-    </div>
-    <!--/span-->
-    <div class="col-md-4">
-        <div class="form-group @if($errors->has('price')) has-danger @endif">
-            <label>Price*</label>
-            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->price : old('price')  }}" name="price"
-                   type="text" class="price form-control">
-            @if($errors->has('price'))
-                <small class="form-control-feedback"> This field has error. </small>
-            @endif
-        </div>
-    </div>
-    <!--/span-->
-    <div class="col-md-4">
-        <div class="form-group @if($errors->has('sold')) has-danger @endif">
-            <label>Sold*</label>
-            <input name="sold" value="{{ isset($itemTransaction) ? $itemTransaction->item->sold : old('sold')  }}"
-                   type="text" class="sold form-control">
-            @if($errors->has('sold'))
-                <small class="form-control-feedback"> This field has error. </small>
-            @endif
-        </div>
-    </div>
-    <!--/span-->
-</div>
-<!--/row-->
-<div class="row">
-    <!--/span-->
     <div class="col-md-12">
-        <div class="form-group @if($errors->has('description')) has-danger @endif">
-            <label>Description Item</label>
-            <textarea name="description" class="description form-control" id="exampleFormControlTextarea1"
-                      rows="3">{{ isset($itemTransaction) ? $itemTransaction->item->description : old('description')  }}</textarea>
-            @if($errors->has('description'))
+        <div class="form-group @if($errors->has('sending_status')) has-danger @endif">
+            <label>Sending Status*</label>
+
+            @if($errors->has('sending_status'))
                 <small class="form-control-feedback"> This field has error. </small>
             @endif
         </div>
     </div>
 </div>
 
-<input type="text" name="item_id" hidden class="id_items"
-       value="{{isset($itemTransaction) ? $itemTransaction->item->id : old('id_items')}}">
+<input type="text" hidden value="{{ old('ship_provider_transaction_id')  }}" name="ship_provider_transaction_id">
 
-
+@push('css')
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
+@endpush
 @push('scripts')
-    <script>
-        (async function () {
-            const path = "{{ route('items.autocomplete') }}";
-            const asyncExample = async () => {
-                let data;
-                try {
-                    data = await fetch(path);
-                } catch (err) {
-                    console.log(err);
-                }
-                return await data.json();
-            };
-
-            const globalData = await asyncExample();
-            const nameCt = globalData.map(item => `${item.name}.${item.id}.${item.quantity}.${item.price}.${item.sold}`)
-
-            const substringMatcher = function (strs) {
-                return function findMatches(q, cb) {
-                    let matches;
-
-                    // an array that will be populated with substring matches
-                    matches = [];
-
-                    // regex used to determine if a string contains the substring `q`
-                    substrRegex = new RegExp(q, 'i');
-
-                    // iterate through the pool of strings and for any string that
-                    // contains the substring `q`, add it to the `matches` array
-                    $.each(strs, function (i, str) {
-                        if (substrRegex.test(str)) {
-                            matches.push(str);
-                        }
-                    });
-
-                    const [name, id, qty, price, sold] = matches[0].split('.');
-                    $('.qty').val(qty)
-                    $('.price').val(price)
-                    $('.sold').val(sold)
-                    $('.id_items').val(id)
-                    cb([name]);
-                };
-            };
-
-            $('input.cnm').typeahead({
-                    hint: true,
-                    highlight: true,
-                    minLength: 1
-                },
-                {
-                    name: 'states',
-                    source: substringMatcher(nameCt)
-                });
-
-            $('input.cnm').blur(function () {
-                if ($(this).val() === "") {
-                    $('.id_items').val("")
-                }
-            })
-        })()
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            const data = [];
+            @if(isset($shipProvider))
+{{--            @foreach($shipProvider->spesificationItem->categoryTransaction as $ct)--}}
+{{--            data.push({{$ct->category_id}})--}}
+{{--            @endforEach--}}
+            $('select').val(data);
+            $('select').selectpicker('refresh');
+            @else
+            $('select').selectpicker();
+            @endif
+        });
     </script>
 @endpush

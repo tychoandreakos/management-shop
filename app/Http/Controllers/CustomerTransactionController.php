@@ -31,7 +31,7 @@ class CustomerTransactionController extends Controller
             'breadCrumbs' => 'Create Ordering',
             'title' => 'Please fill the input form below',
             'titleSecond' => "Ordering Info",
-            'categories' => Category::all(),
+            "shipProviders" => ShipProvider::all()
         ];
         return view('customer_transaction.create')->with($data);
     }

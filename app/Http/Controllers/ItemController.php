@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\ShipProvider;
 use Dotenv\Exception\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -34,7 +35,7 @@ class ItemController extends Controller
         $data = [
             'breadCrumbs' => 'Create item',
             'title' => 'Please fill the input form below',
-            'titleSecond' => "Item Info"
+            'titleSecond' => "Item Info",
         ];
         return view('item.create')->with($data);
     }
