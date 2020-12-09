@@ -14,6 +14,25 @@ use Illuminate\Http\Request;
 class ItemTransactionController extends Controller
 {
 
+    private $item_rule = [
+        'name' => 'required',
+        'quantity' => 'required|numeric',
+        'price' => 'required',
+        'sold' => 'required|numeric',
+    ];
+
+    private $brand_rule = [
+        'bname' => 'required',
+    ];
+
+    private $category_rules = [
+        'category' => 'required'
+    ];
+
+    private $spec_rules = [
+        'spec' => 'required'
+    ];
+
     public function index()
     {
         $data = [
@@ -36,6 +55,12 @@ class ItemTransactionController extends Controller
         return view('item_transaction.create')->with($data);
     }
 
+    public function validateHandler($request)
+    {
+        $request->validate(array_merge($this->item_rule, $this->brand_rule, $this->category_rules, $this->spec_rules));
+    }
+
+
     public function store(Request $request)
     {
         try {
@@ -45,6 +70,7 @@ class ItemTransactionController extends Controller
                 'message' => 'Congratulation your item has been created!'
             ];
 
+            $this->validateHandler($request);
             $item = Item::find($request->get('id_items'));
             $brand = Brand::find($request->get('id_brands'));
 
@@ -67,7 +93,7 @@ class ItemTransactionController extends Controller
                 }
             }
             return redirect()->route('products.home')->with($flashMsg);
-        } catch (\ErrorException $e) {
+        } catch (ModelNotFoundException $e) {
             return response()->json(['success' => false, 'message' => $e]);
         }
     }
@@ -81,6 +107,7 @@ class ItemTransactionController extends Controller
                 'message' => 'Congratulation your item has been created!'
             ];
 
+            $this->validateHandler($request);
             $itemTransaction = ItemTransaction::find($id);
             $item = Item::find($request->get('id_items'));
             $brand = Brand::find($request->get('id_brands'));
