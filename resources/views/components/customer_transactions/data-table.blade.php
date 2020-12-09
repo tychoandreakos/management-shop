@@ -1,3 +1,4 @@
+
 <div class="col-12">
     <div class="card">
         <div class="card-body">
@@ -8,13 +9,11 @@
                     <tr>
                         <th>No</th>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Number Telephone</th>
-                        <th>Qty Buy</th>
-                        <th>Item Name</th>
-                        <th>Ordering Number</th>
-                        <th>Ship Provider</th>
-                        <th>Type of Service</th>
+                        <th>Brand Name</th>
+                        <th>Category(ies)</th>
+                        <th>Qty</th>
+                        <th>Sold</th>
+                        <th>Price</th>
                         <th class="text-nowrap">Action</th>
                     </tr>
                     </thead>
@@ -22,13 +21,11 @@
                     <tr>
                         <th>No</th>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Number Telephone</th>
-                        <th>Qty Buy</th>
-                        <th>Item Name</th>
-                        <th>Ordering Number</th>
-                        <th>Ship Provider</th>
-                        <th>Type of Service</th>
+                        <th>Brand Name</th>
+                        <th>Category(ies)</th>
+                        <th>Qty</th>
+                        <th>Sold</th>
+                        <th>Price</th>
                         <th class="text-nowrap">Action</th>
                     </tr>
                     </tfoot>

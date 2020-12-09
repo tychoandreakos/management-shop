@@ -10,4 +10,4 @@
         </div>
     </div>
     <!-- column -->
-@include('components.item_transactions.data-table')
+@include('components.customer_transactions.data-table')

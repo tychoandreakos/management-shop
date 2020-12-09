@@ -18,6 +18,6 @@ class CustomerTransaction extends Model
     }
 
     public function item() {
-        return $this->belongsTo(Item::class)->with(['shipProviderTransaction']);
+        return $this->belongsTo(Item::class)->with(['shipProviderTransaction.shipProvider']);
     }
 }

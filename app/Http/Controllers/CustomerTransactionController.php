@@ -18,10 +18,10 @@ class CustomerTransactionController extends Controller
         $data = [
             'breadCrumbs' => 'Ordering Lists',
             'title' => 'Ordering Lists',
-            'customerTransaction' => CustomerTransaction::with('customer', 'item')->get(),
+            'customerTransactions' => CustomerTransaction::with('customer', 'item')->get(),
         ];
 
-        return response()->json($data);
+//        return response()->json($data);
         return view('customer_transaction.home')->with($data);
     }
 

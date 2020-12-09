@@ -8,49 +8,40 @@
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Name</th>
-                        <th>Brand Name</th>
-                        <th>Category(ies)</th>
-                        <th>Qty</th>
-                        <th>Sold</th>
+                        <th>Customer</th>
+                        <th>Item Name</th>
                         <th>Price</th>
+                        <th>Quantity Buy</th>
+                        <th>Ordering Number</th>
+                        <th>Shipping Provider</th>
+                        <th>Sending Status</th>
                         <th class="text-nowrap">Action</th>
                     </tr>
                     </thead>
                     <tfoot>
                     <tr>
                         <th>No</th>
-                        <th>Name</th>
-                        <th>Brand Name</th>
-                        <th>Category(ies)</th>
-                        <th>Qty</th>
-                        <th>Sold</th>
+                        <th>Customer</th>
+                        <th>Item Name</th>
                         <th>Price</th>
+                        <th>Quantity Buy</th>
+                        <th>Ordering Number</th>
+                        <th>Shipping Provider</th>
+                        <th>Sending Status</th>
                         <th class="text-nowrap">Action</th>
                     </tr>
                     </tfoot>
                     <tbody>
-                    @foreach($itemTransactions as $itemTransaction)
+                    @foreach($customerTransactions as $customerTransaction)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{ $itemTransaction->item->name  }}</td>
-                            <td>{{ $itemTransaction->brand->name  }}</td>
-                            <td>
-                                <ul>
-                                    @foreach($itemTransaction->spesificationItem->categoryTransaction as $ct)
-                                        <li>{{ $ct->category->name  }}</li>
-                                    @endforeach
-                                </ul>
-                            </td>
-                            <td>{{ $itemTransaction->item->quantity}}</td>
-                            <td>{{ $itemTransaction->item->sold}}</td>
-                            <td>{{ $itemTransaction->item->price}}</td>
+                            <td>{{ $itemTransaction->customer->name  }}</td>
                             <td class="text-nowrap align-items-center">
-                                <form action="{{route('products.delete', $itemTransaction->id)}}"
+                                <form action="{{route('orderings.delete', $customerTransaction->id)}}"
                                       class="d-flex justify-content-center" method="post">
                                     @csrf
                                     @method('delete')
-                                    <a class="justify-content-center" href="{{ route('products.edit', $itemTransaction->id)  }}"
+                                    <a class="justify-content-center" href="{{ route('products.edit', $customerTransaction->id)  }}"
                                        data-toggle="tooltip"
                                        data-original-title="Edit"> <i
                                             class="fa fa-pencil text-inverse m-r-10"></i> </a>
