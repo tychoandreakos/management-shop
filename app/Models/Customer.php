@@ -28,6 +28,11 @@ class Customer extends Model
         return $this->hasOne(CustomerLabel::class);
     }
 
+    public function ShipProviderTransaction()
+    {
+        return $this->hasMany(ShipProviderTransaction::class);
+    }
+
 
     /**
      * @param $value

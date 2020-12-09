@@ -13,7 +13,18 @@ class ShipProviderTransaction extends Model
 
     protected $guarded = ['id'];
 
-    public function shipProvider() {
+    public function shipProvider()
+    {
         return $this->belongsTo(ShipProvider::class);
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::cllass);
+    }
+
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
     }
 }
