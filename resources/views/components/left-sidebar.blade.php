@@ -46,7 +46,7 @@
                             class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard <span
                                 class="label label-rouded label-themecolor pull-right">4</span></span></a>
                 </li>
-                <li><a class="" href="{{route('item.home')}}" aria-expanded="false"><i
+                <li><a class="" href="{{route('products.home')}}" aria-expanded="false"><i
                             class="mdi mdi-food-apple"></i><span class="hide-menu">Products </span></a>
                 </li>
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i

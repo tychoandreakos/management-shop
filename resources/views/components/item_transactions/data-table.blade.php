@@ -45,11 +45,11 @@
                             <td>{{ $itemTransaction->item->sold}}</td>
                             <td>{{ $itemTransaction->item->price}}</td>
                             <td class="text-nowrap align-items-center">
-                                <form action="{{route('item.delete', $itemTransaction->id)}}"
+                                <form action="{{route('products.delete', $itemTransaction->id)}}"
                                       class="d-flex justify-content-center" method="post">
                                     @csrf
                                     @method('delete')
-                                    <a class="justify-content-center" href="{{ route('item.edit', $itemTransaction->id)  }}"
+                                    <a class="justify-content-center" href="{{ route('products.edit', $itemTransaction->id)  }}"
                                        data-toggle="tooltip"
                                        data-original-title="Edit"> <i
                                             class="fa fa-pencil text-inverse m-r-10"></i> </a>

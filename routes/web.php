@@ -31,7 +31,7 @@ define('SHIPPINGPROVIDERS', "shipping-providers");
 define('CUSTOMERLABEL', "customer-labels");
 define('MASTER', "master");
 
-define('ITEMTRANSACTION', 'item');
+define('ITEMTRANSACTION', 'products');
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 

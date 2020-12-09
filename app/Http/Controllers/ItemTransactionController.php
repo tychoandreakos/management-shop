@@ -39,6 +39,12 @@ class ItemTransactionController extends Controller
     public function store(Request $request)
     {
         try {
+            $flashMsg = [
+                'success' => true,
+                'title' => 'Successfully created',
+                'message' => 'Congratulation your item has been created!'
+            ];
+
             $item = Item::find($request->get('id_items'));
             $brand = Brand::find($request->get('id_brands'));
 
@@ -60,7 +66,7 @@ class ItemTransactionController extends Controller
                     ]);
                 }
             }
-            return response()->json(['success' => true]);
+            return redirect()->route('products.home')->with($flashMsg);
         } catch (\ErrorException $e) {
             return response()->json(['success' => false, 'message' => $e]);
         }
@@ -90,7 +96,7 @@ class ItemTransactionController extends Controller
             $itemTransaction->delete();
             $specificationItem->delete();
 
-            return redirect()->route('item.home')->with($flashMsg);
+            return redirect()->route('products.home')->with($flashMsg);
         } catch (ModelNotFoundException $e) {
         }
     }

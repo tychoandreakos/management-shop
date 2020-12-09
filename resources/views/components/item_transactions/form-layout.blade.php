@@ -6,7 +6,7 @@
                 <h4 class="m-b-0 text-white">{{ $title  }}</h4>
             </div>
             <div class="card-body">
-                <form action="{{ route('item.store')  }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('products.store')  }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-body">
                         @include('components.item_transactions.form')
