@@ -107,4 +107,10 @@ class CustomerController extends Controller
         return redirect()->route('customers.home');
     }
 
+    public function autocomplete(Request $request)
+    {
+        $data = Customer::all();
+        return response()->json($data);
+    }
+
 }

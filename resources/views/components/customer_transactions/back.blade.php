@@ -1,4 +1,4 @@
-<input type="text" id="_backLink" hidden value="{{ route('brands.home')  }}" readonly>
+<input type="text" id="_backLink" hidden value="{{ route('orderings.home')  }}" readonly>
 
 @push('scripts')
     <script>

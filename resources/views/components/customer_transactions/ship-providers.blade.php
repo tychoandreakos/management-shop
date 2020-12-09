@@ -1,11 +1,11 @@
 <div class="row">
-    <div class="col-md-12">
-        <div class="form-group @if($errors->has('name')) has-danger @endif">
+    <div class="col-md-12 ">
+        <div class="form-group @if($errors->has('cname')) has-danger @endif">
             <label>Name*</label>
-            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->name : old('name')  }}" name="name"
+            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->name : old('cname')  }}" name="cname"
                    type="text"
-                   class="nm typeahead form-control">
-            @if($errors->has('name'))
+                   class="cnm typeahead form-control">
+            @if($errors->has('cname'))
                 <small class="form-control-feedback"> This field has error. </small>
             @endif
         </div>
@@ -27,8 +27,7 @@
     <div class="col-md-4">
         <div class="form-group @if($errors->has('price')) has-danger @endif">
             <label>Price*</label>
-            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->price : old('price')  }}"
-                   name="price"
+            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->price : old('price')  }}" name="price"
                    type="text" class="price form-control">
             @if($errors->has('price'))
                 <small class="form-control-feedback"> This field has error. </small>
@@ -39,8 +38,7 @@
     <div class="col-md-4">
         <div class="form-group @if($errors->has('sold')) has-danger @endif">
             <label>Sold*</label>
-            <input name="sold"
-                   value="{{ isset($itemTransaction) ? $itemTransaction->item->sold : old('sold')  }}"
+            <input name="sold" value="{{ isset($itemTransaction) ? $itemTransaction->item->sold : old('sold')  }}"
                    type="text" class="sold form-control">
             @if($errors->has('sold'))
                 <small class="form-control-feedback"> This field has error. </small>
@@ -64,7 +62,7 @@
     </div>
 </div>
 
-<input type="text" name="id_items" hidden class="id_items"
+<input type="text" name="item_id" hidden class="id_items"
        value="{{isset($itemTransaction) ? $itemTransaction->item->id : old('id_items')}}">
 
 
@@ -112,7 +110,7 @@
                 };
             };
 
-            $('input.nm').typeahead({
+            $('input.cnm').typeahead({
                     hint: true,
                     highlight: true,
                     minLength: 1
@@ -122,7 +120,7 @@
                     source: substringMatcher(nameCt)
                 });
 
-            $('input.nm').blur(function () {
+            $('input.cnm').blur(function () {
                 if ($(this).val() === "") {
                     $('.id_items').val("")
                 }

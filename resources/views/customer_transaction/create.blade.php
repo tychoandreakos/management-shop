@@ -4,6 +4,6 @@
     @include('components.customers.breadcrumbs')
     <div class="container-fluid">
         @include('components.items.error')
-        @include('components.brands.form-layout')
+        @include('components.customer_transactions.form-layout')
     </div>
 @endsection

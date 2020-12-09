@@ -1,7 +1,7 @@
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 ">
         <div class="form-group @if($errors->has('name')) has-danger @endif">
-            <label>Name*</label>
+            <label>Customer Name*</label>
             <input value="{{ isset($itemTransaction) ? $itemTransaction->item->name : old('name')  }}" name="name"
                    type="text"
                    class="nm typeahead form-control">
@@ -12,37 +12,24 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-4">
-        <div class="form-group @if($errors->has('quantity')) has-danger @endif">
-            <label>Quantity*</label>
-            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->quantity : old('quantity') }}"
-                   name="quantity" type="text"
-                   class="qty form-control">
-            @if($errors->has('quantity'))
+    <div class="col-md-6">
+        <div class="form-group @if($errors->has('email')) has-danger @endif">
+            <label>Email*</label>
+            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->quantity : old('email') }}"
+                   name="email" type="email"
+                   class="email form-control">
+            @if($errors->has('email'))
                 <small class="form-control-feedback"> This field has error. </small>
             @endif
         </div>
     </div>
     <!--/span-->
-    <div class="col-md-4">
-        <div class="form-group @if($errors->has('price')) has-danger @endif">
-            <label>Price*</label>
-            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->price : old('price')  }}"
-                   name="price"
-                   type="text" class="price form-control">
-            @if($errors->has('price'))
-                <small class="form-control-feedback"> This field has error. </small>
-            @endif
-        </div>
-    </div>
-    <!--/span-->
-    <div class="col-md-4">
-        <div class="form-group @if($errors->has('sold')) has-danger @endif">
-            <label>Sold*</label>
-            <input name="sold"
-                   value="{{ isset($itemTransaction) ? $itemTransaction->item->sold : old('sold')  }}"
-                   type="text" class="sold form-control">
-            @if($errors->has('sold'))
+    <div class="col-md-6">
+        <div class="form-group @if($errors->has('phone')) has-danger @endif">
+            <label>Phone Number*</label>
+            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->price : old('phone')  }}" name="num_telp"
+                   type="text" class="num_telp form-control">
+            @if($errors->has('phone'))
                 <small class="form-control-feedback"> This field has error. </small>
             @endif
         </div>
@@ -53,25 +40,25 @@
 <div class="row">
     <!--/span-->
     <div class="col-md-12">
-        <div class="form-group @if($errors->has('description')) has-danger @endif">
-            <label>Description Item</label>
-            <textarea name="description" class="description form-control" id="exampleFormControlTextarea1"
+        <div class="form-group @if($errors->has('suggestion')) has-danger @endif">
+            <label>Suggestion</label>
+            <textarea name="suggestion" class="suggestion form-control" id="exampleFormControlTextarea1"
                       rows="3">{{ isset($itemTransaction) ? $itemTransaction->item->description : old('description')  }}</textarea>
-            @if($errors->has('description'))
+            @if($errors->has('suggestion'))
                 <small class="form-control-feedback"> This field has error. </small>
             @endif
         </div>
     </div>
 </div>
 
-<input type="text" name="id_items" hidden class="id_items"
+<input type="text" name="customer_id" hidden class="id_customer"
        value="{{isset($itemTransaction) ? $itemTransaction->item->id : old('id_items')}}">
 
 
 @push('scripts')
     <script>
         (async function () {
-            const path = "{{ route('items.autocomplete') }}";
+            const path = "{{ route('customers.autocomplete') }}";
             const asyncExample = async () => {
                 let data;
                 try {
@@ -83,7 +70,7 @@
             };
 
             const globalData = await asyncExample();
-            const nameCt = globalData.map(item => `${item.name}.${item.id}.${item.quantity}.${item.price}.${item.sold}`)
+            const nameCt = globalData.map(item => `${item.name}.${item.id}.${item.email}.${item.num_telp}.${item.suggestion}`)
 
             const substringMatcher = function (strs) {
                 return function findMatches(q, cb) {
@@ -103,11 +90,11 @@
                         }
                     });
 
-                    const [name, id, qty, price, sold] = matches[0].split('.');
-                    $('.qty').val(qty)
-                    $('.price').val(price)
-                    $('.sold').val(sold)
-                    $('.id_items').val(id)
+                    const [name, id, email, num_telp, suggestion] = matches[0].split('.');
+                    $('.email').val(email)
+                    $('.num_telp').val(num_telp)
+                    $('.suggestion').val(suggestion)
+                    $('.id_customer').val(id)
                     cb([name]);
                 };
             };
@@ -124,7 +111,7 @@
 
             $('input.nm').blur(function () {
                 if ($(this).val() === "") {
-                    $('.id_items').val("")
+                    $('.id_customer').val("")
                 }
             })
         })()

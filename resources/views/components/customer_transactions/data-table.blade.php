@@ -2,14 +2,19 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
-                <table id="example23" class="display nowrap table table-hover table-striped table-bordered"
+                <table id="example23" class="display nowrap table table-hover align-middle table-striped table-bordered"
                        cellspacing="0" width="100%">
                     <thead>
                     <tr>
                         <th>No</th>
                         <th>Name</th>
-                        <th>Location</th>
-                        <th>Founded</th>
+                        <th>Email</th>
+                        <th>Number Telephone</th>
+                        <th>Qty Buy</th>
+                        <th>Item Name</th>
+                        <th>Ordering Number</th>
+                        <th>Ship Provider</th>
+                        <th>Type of Service</th>
                         <th class="text-nowrap">Action</th>
                     </tr>
                     </thead>
@@ -17,24 +22,38 @@
                     <tr>
                         <th>No</th>
                         <th>Name</th>
-                        <th>Location</th>
-                        <th>Founded</th>
+                        <th>Email</th>
+                        <th>Number Telephone</th>
+                        <th>Qty Buy</th>
+                        <th>Item Name</th>
+                        <th>Ordering Number</th>
+                        <th>Ship Provider</th>
+                        <th>Type of Service</th>
                         <th class="text-nowrap">Action</th>
                     </tr>
                     </tfoot>
                     <tbody>
-                    @foreach($brands as $brand)
+                    @foreach($itemTransactions as $itemTransaction)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{ $brand->name  }}</td>
-                            <td>{{$brand->location}}</td>
-                            <td>{{$brand->founded}}</td>
+                            <td>{{ $itemTransaction->item->name  }}</td>
+                            <td>{{ $itemTransaction->brand->name  }}</td>
+                            <td>
+                                <ul>
+                                    @foreach($itemTransaction->spesificationItem->categoryTransaction as $ct)
+                                        <li>{{ $ct->category->name  }}</li>
+                                    @endforeach
+                                </ul>
+                            </td>
+                            <td>{{ $itemTransaction->item->quantity}}</td>
+                            <td>{{ $itemTransaction->item->sold}}</td>
+                            <td>{{ $itemTransaction->item->price}}</td>
                             <td class="text-nowrap align-items-center">
-                                <form action="{{route('brands.delete', $brand->id)}}"
+                                <form action="{{route('products.delete', $itemTransaction->id)}}"
                                       class="d-flex justify-content-center" method="post">
                                     @csrf
                                     @method('delete')
-                                    <a class="justify-content-center" href="{{ route('brands.edit', $brand->id)  }}"
+                                    <a class="justify-content-center" href="{{ route('products.edit', $itemTransaction->id)  }}"
                                        data-toggle="tooltip"
                                        data-original-title="Edit"> <i
                                             class="fa fa-pencil text-inverse m-r-10"></i> </a>

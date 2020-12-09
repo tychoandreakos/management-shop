@@ -17,9 +17,10 @@ class CustomerTransactionController extends Controller
         $data = [
             'breadCrumbs' => 'Ordering Lists',
             'title' => 'Ordering Lists',
-            'CustomerTransaction' => CustomerTransaction::with('customer', 'item')->get(),
+            'customerTransaction' => CustomerTransaction::with('customer', 'item')->get(),
         ];
 
+        return response()->json($data);
         return view('customer_transaction.home')->with($data);
     }
 
@@ -50,7 +51,8 @@ class CustomerTransactionController extends Controller
             if (!is_null($customer) && !is_null($item) && !is_null($shipProvider)) {
                 CustomerTransaction::create([
                     'customer_id' => $request->get("customer_id"),
-                    'item_id' => $request->get("item_id")
+                    'item_id' => $request->get("item_id"),
+                    'qty_buy' => $request->get('qty_buy')
                 ]);
 
                 ShipProviderTransaction::create([
@@ -58,6 +60,7 @@ class CustomerTransactionController extends Controller
                     'item_id' => $request->get('item_id'),
                     'customer_id' => $request->get("customer_id"),
                     'ordering_number' => $ordering_number,
+                    'service_type' => $request->get('service_type'),
                     'sending_status' => $request->get("sending_status")
                 ]);
             }

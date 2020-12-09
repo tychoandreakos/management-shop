@@ -1,11 +1,22 @@
 <div class="row">
-    <div class="col-md-12">
-        <div class="form-group @if($errors->has('name')) has-danger @endif">
+    <div class="col-md-9">
+        <div class="form-group @if($errors->has('cname')) has-danger @endif">
             <label>Name*</label>
-            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->name : old('name')  }}" name="name"
+            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->name : old('cname')  }}" name="cname"
                    type="text"
-                   class="nm typeahead form-control">
-            @if($errors->has('name'))
+                   class="cnm typeahead form-control">
+            @if($errors->has('cname'))
+                <small class="form-control-feedback"> This field has error. </small>
+            @endif
+        </div>
+    </div>
+    <div class="col-md-3 ">
+        <div class="form-group @if($errors->has('qty_buy')) has-danger @endif">
+            <label>Quantity Buy*</label>
+            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->name : old('qty_buy')  }}" name="qty_buy"
+                   type="text"
+                   class="qty_buy typeahead form-control">
+            @if($errors->has('qty_buy'))
                 <small class="form-control-feedback"> This field has error. </small>
             @endif
         </div>
@@ -15,7 +26,7 @@
     <div class="col-md-4">
         <div class="form-group @if($errors->has('quantity')) has-danger @endif">
             <label>Quantity*</label>
-            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->quantity : old('quantity') }}"
+            <input disabled value="{{ isset($itemTransaction) ? $itemTransaction->item->quantity : old('quantity') }}"
                    name="quantity" type="text"
                    class="qty form-control">
             @if($errors->has('quantity'))
@@ -27,7 +38,7 @@
     <div class="col-md-4">
         <div class="form-group @if($errors->has('price')) has-danger @endif">
             <label>Price*</label>
-            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->price : old('price')  }}"
+            <input disabled value="{{ isset($itemTransaction) ? $itemTransaction->item->price : old('price')  }}"
                    name="price"
                    type="text" class="price form-control">
             @if($errors->has('price'))
@@ -39,7 +50,7 @@
     <div class="col-md-4">
         <div class="form-group @if($errors->has('sold')) has-danger @endif">
             <label>Sold*</label>
-            <input name="sold"
+            <input disabled name="sold"
                    value="{{ isset($itemTransaction) ? $itemTransaction->item->sold : old('sold')  }}"
                    type="text" class="sold form-control">
             @if($errors->has('sold'))
@@ -64,7 +75,7 @@
     </div>
 </div>
 
-<input type="text" name="id_items" hidden class="id_items"
+<input type="text" name="item_id" hidden class="id_items"
        value="{{isset($itemTransaction) ? $itemTransaction->item->id : old('id_items')}}">
 
 
@@ -112,7 +123,7 @@
                 };
             };
 
-            $('input.nm').typeahead({
+            $('input.cnm').typeahead({
                     hint: true,
                     highlight: true,
                     minLength: 1
@@ -122,7 +133,7 @@
                     source: substringMatcher(nameCt)
                 });
 
-            $('input.nm').blur(function () {
+            $('input.cnm').blur(function () {
                 if ($(this).val() === "") {
                     $('.id_items').val("")
                 }

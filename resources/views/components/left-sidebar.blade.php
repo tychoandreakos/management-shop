@@ -49,6 +49,9 @@
                 <li><a class="" href="{{route('products.home')}}" aria-expanded="false"><i
                             class="mdi mdi-food-apple"></i><span class="hide-menu">Products </span></a>
                 </li>
+                <li><a class="" href="{{route('orderings.home')}}" aria-expanded="false"><i
+                            class="mdi mdi-cart"></i><span class="hide-menu">Orders </span></a>
+                </li>
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
                             class="mdi mdi-folder-multiple"></i><span class="hide-menu">Master Management</span></a>
                     <ul aria-expanded="false" class="collapse">

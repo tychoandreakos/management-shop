@@ -1,6 +1,6 @@
 <div class="pull-right">
-    <button type="button" id="_link" class="btn btn-primary mr-1"><i class="fa fa-check"></i> Add Brands</button>
-    <input type="text" readonly id="_create" hidden value="{{ route('brands.create') }}">
+    <button type="button" id="_link" class="btn btn-primary mr-1"><i class="fa fa-check"></i> Add Orders</button>
+    <input type="text" readonly id="_create" hidden value="{{ route('orderings.create') }}">
 </div>
 
 @push('scripts')

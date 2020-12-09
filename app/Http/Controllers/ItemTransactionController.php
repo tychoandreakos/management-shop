@@ -92,6 +92,8 @@ class ItemTransactionController extends Controller
                     ]);
                 }
             }
+
+
             return redirect()->route('products.home')->with($flashMsg);
         } catch (ModelNotFoundException $e) {
             return response()->json(['success' => false, 'message' => $e]);

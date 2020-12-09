@@ -4,6 +4,6 @@
     @include('components.customers.breadcrumbs')
     @include('components.succes-message')
     <div class="container-fluid">
-        @include('components.brands.list')
+        @include('components.customer_transactions.list')
     </div>
 @endsection

@@ -1,3 +1,4 @@
+
 <div class="col-12">
     <div class="card">
         <div class="card-body">
@@ -36,9 +37,9 @@
                             <td>{{ $itemTransaction->brand->name  }}</td>
                             <td>
                                 <ul>
-                                @foreach($itemTransaction->spesificationItem->categoryTransaction as $ct)
-                                   <li>{{ $ct->category->name  }}</li>
-                                @endforeach
+                                    @foreach($itemTransaction->spesificationItem->categoryTransaction as $ct)
+                                        <li>{{ $ct->category->name  }}</li>
+                                    @endforeach
                                 </ul>
                             </td>
                             <td>{{ $itemTransaction->item->quantity}}</td>
