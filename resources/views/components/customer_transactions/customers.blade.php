@@ -15,7 +15,7 @@
     <div class="col-md-6">
         <div class="form-group @if($errors->has('email')) has-danger @endif">
             <label>Email*</label>
-            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->quantity : old('email') }}"
+            <input disabled value="{{ isset($itemTransaction) ? $itemTransaction->item->quantity : old('email') }}"
                    name="email" type="email"
                    class="email form-control">
             @if($errors->has('email'))
@@ -27,7 +27,7 @@
     <div class="col-md-6">
         <div class="form-group @if($errors->has('phone')) has-danger @endif">
             <label>Phone Number*</label>
-            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->price : old('phone')  }}" name="num_telp"
+            <input disabled value="{{ isset($itemTransaction) ? $itemTransaction->item->price : old('phone')  }}" name="num_telp"
                    type="text" class="num_telp form-control">
             @if($errors->has('phone'))
                 <small class="form-control-feedback"> This field has error. </small>
@@ -70,7 +70,7 @@
             };
 
             const globalData = await asyncExample();
-            const nameCt = globalData.map(item => `${item.name}.${item.id}.${item.email}.${item.num_telp}.${item.suggestion}`)
+            const nameCt = globalData.map(item => `${item.name}__${item.id}__${item.email}__${item.num_telp}`)
 
             const substringMatcher = function (strs) {
                 return function findMatches(q, cb) {
@@ -90,10 +90,9 @@
                         }
                     });
 
-                    const [name, id, email, num_telp, suggestion] = matches[0].split('.');
+                    const [name, id, email, num_telp] = matches[0].split('__');
                     $('.email').val(email)
                     $('.num_telp').val(num_telp)
-                    $('.suggestion').val(suggestion)
                     $('.id_customer').val(id)
                     cb([name]);
                 };

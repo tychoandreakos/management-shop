@@ -42,7 +42,7 @@
 
 @push('scripts')
     <script>
-        $('document').ready(function () {
+        $(document).ready(function () {
             const customersEl = document.getElementById('form-customers');
             const button = document.getElementById('submit');
             const customersInput = customersEl.querySelectorAll('.form-control');
@@ -70,7 +70,7 @@
                 });
                 return response.json(); // parses JSON response into native JavaScript objects
             }
-            
+
             function elementRender() {
                 return `The ${message[0]} field is required.`
             }

@@ -64,6 +64,8 @@ class Customer extends Model
         $transform_value = explode(" ", $value);
         if (isset($transform_value[1])) {
             $this->attributes['num_telp'] = $transform_value[1];
+        } else {
+            $this->attributes['num_telp'] = $value;
         }
     }
 

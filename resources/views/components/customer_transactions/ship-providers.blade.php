@@ -15,28 +15,17 @@
 </div>
 
 <div class="row">
-        <div class="col-md-6">
+    <div class="col-md-6">
         <div class="form-group @if($errors->has('ordering_number')) has-danger @endif">
             <label>Ordering Number*</label>
-            <input class="form-control" type="text" name="ordering_number" required value="{{ old('ordering_number')  }}">
+            <input class="ord form-control" type="text" name="ordering_number" required
+                   value="{{ old('ordering_number')  }}">
             @if($errors->has('ordering_number'))
                 <small class="form-control-feedback"> This field has error. </small>
             @endif
         </div>
     </div>
     <div class="col-md-6">
-        <div class="form-group @if($errors->has('service_type')) has-danger @endif">
-            <label>Service Type*</label>
-            <input class="form-control" class="form-control" type="text" name="service_type" required value="{{ old('service_type')  }}">
-            @if($errors->has('service_type'))
-                <small class="form-control-feedback"> This field has error. </small>
-            @endif
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
         <div class="form-group @if($errors->has('sending_status')) has-danger @endif">
             <label>Sending Status*</label>
 
@@ -59,9 +48,9 @@
         $(document).ready(function () {
             const data = [];
             @if(isset($shipProvider))
-{{--            @foreach($shipProvider->spesificationItem->categoryTransaction as $ct)--}}
-{{--            data.push({{$ct->category_id}})--}}
-{{--            @endforEach--}}
+            {{--            @foreach($shipProvider->spesificationItem->categoryTransaction as $ct)--}}
+            {{--            data.push({{$ct->category_id}})--}}
+            {{--            @endforEach--}}
             $('select').val(data);
             $('select').selectpicker('refresh');
             @else
