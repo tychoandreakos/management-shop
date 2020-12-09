@@ -3,4 +3,4 @@
 @include('components.item_transactions.ahead')
 @include('components.customer_transactions.customers')
 @include('components.customer_transactions.items')
-@include('components.customer_transactions.ship-providers')
+{{--@include('components.customer_transactions.ship-providers')--}}

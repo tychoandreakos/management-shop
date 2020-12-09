@@ -1,16 +1,16 @@
 <div class="row">
-    <div class="col-md-9">
-        <div class="form-group @if($errors->has('cname')) has-danger @endif">
-            <label>Name*</label>
-            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->name : old('cname')  }}" name="cname"
+    <div class="col-md-10">
+        <div class="form-group @if($errors->has('iname')) has-danger @endif">
+            <label>Item Name*</label>
+            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->name : old('iname')  }}" name="iname"
                    type="text"
-                   class="cnm typeahead form-control">
-            @if($errors->has('cname'))
+                   class="iname typeahead form-control">
+            @if($errors->has('iname'))
                 <small class="form-control-feedback"> This field has error. </small>
             @endif
         </div>
     </div>
-    <div class="col-md-3 ">
+    <div class="col-md-2">
         <div class="form-group @if($errors->has('qty_buy')) has-danger @endif">
             <label>Quantity Buy*</label>
             <input value="{{ isset($itemTransaction) ? $itemTransaction->item->name : old('qty_buy')  }}" name="qty_buy"
@@ -75,8 +75,8 @@
     </div>
 </div>
 
-<input type="text" name="item_id" hidden class="id_items"
-       value="{{isset($itemTransaction) ? $itemTransaction->item->id : old('id_items')}}">
+<input type="text" name="item_id" hidden class="item_id"
+       value="{{isset($itemTransaction) ? $itemTransaction->item->id : old('item_id')}}">
 
 
 @push('scripts')
@@ -118,12 +118,12 @@
                     $('.qty').val(qty)
                     $('.price').val(price)
                     $('.sold').val(sold)
-                    $('.id_items').val(id)
+                    $('.item_id').val(id)
                     cb([name]);
                 };
             };
 
-            $('input.cnm').typeahead({
+            $('input.iname').typeahead({
                     hint: true,
                     highlight: true,
                     minLength: 1
@@ -133,9 +133,9 @@
                     source: substringMatcher(nameCt)
                 });
 
-            $('input.cnm').blur(function () {
+            $('input.iname').blur(function () {
                 if ($(this).val() === "") {
-                    $('.id_items').val("")
+                    $('.item_id').val("")
                 }
             })
         })()

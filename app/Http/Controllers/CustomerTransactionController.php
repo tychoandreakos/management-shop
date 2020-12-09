@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Customer;
 use App\Models\CustomerTransaction;
 use App\Models\Item;
@@ -30,6 +31,7 @@ class CustomerTransactionController extends Controller
             'breadCrumbs' => 'Create Ordering',
             'title' => 'Please fill the input form below',
             'titleSecond' => "Ordering Info",
+            'categories' => Category::all(),
         ];
         return view('customer_transaction.create')->with($data);
     }

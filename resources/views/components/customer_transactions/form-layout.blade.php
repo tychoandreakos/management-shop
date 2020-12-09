@@ -9,8 +9,8 @@
                 <form action="{{ route('products.store')  }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-body">
-                        @include('components.item_transactions.form')
-                        @include('components.item_transactions.form-action')
+                        @include('components.customer_transactions.form')
+                        @include('components.customer_transactions.form-action')
                     </div>
                 </form>
             </div>
