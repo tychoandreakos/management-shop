@@ -124,9 +124,9 @@ Route::prefix(ITEMTRANSACTION)->group(function () {
         Route::get('/', [ItemTransactionController::class, 'index'])->name('.home');
         Route::get('/create', [ItemTransactionController::class, 'create'])->name('.create');
         Route::post('/save', [ItemTransactionController::class, 'store'])->name('.store');
-        Route::delete('/delete/{id}', [BrandController::class, 'destroy'])->name('.delete');
-        Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('.edit');
-        Route::patch('/update/{id}', [BrandController::class, 'update'])->name('.update');
+        Route::delete('/delete/{id}', [ItemTransactionController::class, 'destroy'])->name('.delete');
+        Route::get('/edit/{id}', [ItemTransactionController::class, 'edit'])->name('.edit');
+        Route::patch('/update/{id}', [ItemTransactionController::class, 'update'])->name('.update');
     });
 });
 

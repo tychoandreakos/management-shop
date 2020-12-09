@@ -8,6 +8,7 @@ use App\Models\CategoryTransaction;
 use App\Models\Item;
 use App\Models\ItemTransaction;
 use App\Models\SpesificationItem;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class ItemTransactionController extends Controller
@@ -75,7 +76,22 @@ class ItemTransactionController extends Controller
 
     }
 
-    public function destroy()
+    public function destroy($id)
     {
+        try {
+            $flashMsg = [
+                'success' => true,
+                'title' => 'Successfully deleted!',
+                'message' => 'Congratulation your item has been deleted!'
+            ];
+            $itemTransaction = ItemTransaction::find($id);
+            $specificationItem = SpesificationItem::find($itemTransaction->spesification_item_id);
+
+            $itemTransaction->delete();
+            $specificationItem->delete();
+
+            return redirect()->route('item.home')->with($flashMsg);
+        } catch (ModelNotFoundException $e) {
+        }
     }
 }
