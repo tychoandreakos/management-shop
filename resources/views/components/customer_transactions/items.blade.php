@@ -66,7 +66,7 @@
     <div class="col-md-12">
         <div class="form-group @if($errors->has('description')) has-danger @endif">
             <label>Description Item</label>
-            <textarea name="description" class="description form-control" id="exampleFormControlTextarea1"
+            <textarea disabled name="description" class="description form-control" id="exampleFormControlTextarea1"
                       rows="3">{{ isset($itemTransaction) ? $itemTransaction->item->description : old('description')  }}</textarea>
             @if($errors->has('description'))
                 <small class="form-control-feedback"> This field has error. </small>
@@ -94,7 +94,7 @@
             };
 
             const globalData = await asyncExample();
-            const nameCt = globalData.map(item => `${item.name}.${item.id}.${item.quantity}.${item.price}.${item.sold}`)
+            const nameCt = globalData.map(item => `${item.name}__${item.id}__${item.quantity}__${item.price}__${item.sold}__${item.description}`)
 
             const substringMatcher = function (strs) {
                 return function findMatches(q, cb) {
@@ -114,10 +114,11 @@
                         }
                     });
 
-                    const [name, id, qty, price, sold] = matches[0].split('.');
+                    const [name, id, qty, price, sold, description] = matches[0].split('__');
                     $('.qty').val(qty)
                     $('.price').val(price)
                     $('.sold').val(sold)
+                    $('.description').val(description)
                     $('.item_id').val(id)
                     cb([name]);
                 };

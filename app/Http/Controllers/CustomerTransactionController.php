@@ -62,8 +62,8 @@ class CustomerTransactionController extends Controller
                     'item_id' => $request->get('item_id'),
                     'customer_id' => $request->get("customer_id"),
                     'ordering_number' => $ordering_number,
-                    'service_type' => $request->get('service_type'),
-                    'sending_status' => $request->get("sending_status")
+                    'service_type' => "EXPRESS",
+                    'sending_status' => "SEND!"
                 ]);
             }
 

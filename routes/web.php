@@ -60,6 +60,7 @@ Route::prefix(MASTER)->group(function () {
             Route::get('/edit/{id}', [ItemController::class, 'edit'])->name('.edit');
             Route::patch('/update/{id}', [ItemController::class, 'update'])->name('.update');
             Route::get('/autocomplete', [ItemController::class, 'autocomplete'])->name('.autocomplete');
+            Route::get('/autocomplete-with-specification', [ItemController::class, 'autocompleteWithSpesification'])->name('.autocompleteWSpec');
         });
     });
 

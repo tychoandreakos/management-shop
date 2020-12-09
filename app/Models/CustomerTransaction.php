@@ -11,11 +11,13 @@ class CustomerTransaction extends Model
     use HasFactory;
     use UsesUUID;
 
+    protected $guarded = ['id'];
+
     public function customer() {
         return $this->belongsTo(Customer::class);
     }
 
     public function item() {
-        return $this->belongsTo(Item::class)->with('shipProviderTransaction');
+        return $this->belongsTo(Item::class)->with(['shipProviderTransaction']);
     }
 }

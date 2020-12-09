@@ -120,4 +120,10 @@ class ItemController extends Controller
         $data = Item::all();
         return response()->json($data);
     }
+
+    public function autocompleteWithSpesification(Request $request)
+    {
+        $data = Item::with('itemTransaction.spesificationItem')->get();
+        return response()->json($data);
+    }
 }
