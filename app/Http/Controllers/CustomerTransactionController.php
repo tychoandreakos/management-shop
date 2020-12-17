@@ -21,7 +21,7 @@ class CustomerTransactionController extends Controller
             'customerTransactions' => CustomerTransaction::with('customer', 'item')->get(),
         ];
 
-//        return response()->json($data);
+        return response()->json($data);
         return view('customer_transaction.home')->with($data);
     }
 
