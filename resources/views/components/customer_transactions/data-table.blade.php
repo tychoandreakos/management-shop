@@ -37,7 +37,7 @@
                             <td>{{ $customerTransaction->customer->name  }}</td>
                             <td>{{ $customerTransaction->item->name }}</td>
                             <td>{{ $customerTransaction->item->price  }}</td>
-                            <td>{{ $key = array_search("", $customerTransaction->customer->customerTransaction->qty_buy) }} (Pcs)</td>
+                            <td>{{ $customerTransaction->qty_buy }} (Pcs)</td>
                             <td>{{ $customerTransaction->ordering_number  }}</td>
                             <td>{{$customerTransaction->shipProvider->name}}</td>
                             <td>{{$customerTransaction->sending_status}}</td>

@@ -15,6 +15,7 @@ class CreateTypeServiceToShipProviderTransactions extends Migration
     {
         Schema::table('ship_provider_transactions', function (Blueprint $table) {
             $table->string('service_type')->after('ordering_number');
+            $table->string('qty_buy')->after('service_type');
         });
     }
 

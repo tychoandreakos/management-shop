@@ -19,8 +19,7 @@ class CustomerTransactionController extends Controller
             'title' => 'Ordering Lists',
             'customerTransactions' => ShipProviderTransaction::with('item', 'customer', 'shipProvider')->latest()->get(),
         ];
-
-        return response()->json($data);
+        
         return view('customer_transaction.home')->with($data);
     }
 
@@ -53,7 +52,6 @@ class CustomerTransactionController extends Controller
                 CustomerTransaction::create([
                     'customer_id' => $request->get("customer_id"),
                     'item_id' => $request->get("item_id"),
-                    'qty_buy' => $request->get('qty_buy')
                 ]);
 
                 ShipProviderTransaction::create([
@@ -62,6 +60,7 @@ class CustomerTransactionController extends Controller
                     'customer_id' => $request->get("customer_id"),
                     'ordering_number' => $ordering_number,
                     'service_type' => "EXPRESS",
+                    'qty_buy' => $request->get('qty_buy'),
                     'sending_status' => "SEND!"
                 ]);
             }
