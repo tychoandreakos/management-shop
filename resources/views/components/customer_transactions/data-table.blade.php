@@ -7,11 +7,11 @@
                     <thead>
                     <tr>
                         <th>No</th>
+                        <th>Ordering Number</th>
                         <th>Customer</th>
                         <th>Item Name</th>
                         <th>Price</th>
                         <th>Quantity Buy</th>
-                        <th>Ordering Number</th>
                         <th>Shipping Provider</th>
                         <th>Sending Status</th>
                         <th class="text-nowrap">Action</th>
@@ -20,11 +20,11 @@
                     <tfoot>
                     <tr>
                         <th>No</th>
+                        <th>Ordering Number</th>
                         <th>Customer</th>
                         <th>Item Name</th>
                         <th>Price</th>
                         <th>Quantity Buy</th>
-                        <th>Ordering Number</th>
                         <th>Shipping Provider</th>
                         <th>Sending Status</th>
                         <th class="text-nowrap">Action</th>
@@ -34,11 +34,11 @@
                     @foreach($customerTransactions as $customerTransaction)
                         <tr>
                             <td>{{$loop->iteration}}</td>
+                            <td>{{ $customerTransaction->ordering_number  }}</td>
                             <td>{{ $customerTransaction->customer->name  }}</td>
                             <td>{{ $customerTransaction->item->name }}</td>
                             <td>{{ $customerTransaction->item->price  }}</td>
                             <td>{{ $customerTransaction->qty_buy }} (Pcs)</td>
-                            <td>{{ $customerTransaction->ordering_number  }}</td>
                             <td>{{$customerTransaction->shipProvider->name}}</td>
                             <td>{{$customerTransaction->sending_status}}</td>
                             <td class="text-nowrap align-items-center">

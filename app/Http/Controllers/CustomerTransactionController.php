@@ -19,7 +19,7 @@ class CustomerTransactionController extends Controller
             'title' => 'Ordering Lists',
             'customerTransactions' => ShipProviderTransaction::with('item', 'customer', 'shipProvider')->latest()->get(),
         ];
-        
+
         return view('customer_transaction.home')->with($data);
     }
 
