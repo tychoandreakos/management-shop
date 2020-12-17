@@ -1,4 +1,3 @@
-
 <div class="col-12">
     <div class="card">
         <div class="card-body">
@@ -36,12 +35,19 @@
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{ $customerTransaction->customer->name  }}</td>
+                            <td>{{ $customerTransaction->item->name }}</td>
+                            <td>{{ $customerTransaction->item->price  }}</td>
+                            <td>{{ $key = array_search("", $customerTransaction->customer->customerTransaction->qty_buy) }} (Pcs)</td>
+                            <td>{{ $customerTransaction->ordering_number  }}</td>
+                            <td>{{$customerTransaction->shipProvider->name}}</td>
+                            <td>{{$customerTransaction->sending_status}}</td>
                             <td class="text-nowrap align-items-center">
                                 <form action="{{route('orderings.delete', $customerTransaction->id)}}"
                                       class="d-flex justify-content-center" method="post">
                                     @csrf
                                     @method('delete')
-                                    <a class="justify-content-center" href="{{ route('products.edit', $customerTransaction->id)  }}"
+                                    <a class="justify-content-center"
+                                       href="{{ route('products.edit', $customerTransaction->id)  }}"
                                        data-toggle="tooltip"
                                        data-original-title="Edit"> <i
                                             class="fa fa-pencil text-inverse m-r-10"></i> </a>

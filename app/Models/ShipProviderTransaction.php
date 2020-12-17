@@ -20,7 +20,7 @@ class ShipProviderTransaction extends Model
 
     public function customer()
     {
-        return $this->belongsTo(Customer::cllass);
+        return $this->belongsTo(Customer::class)->with('customerTransaction');
     }
 
     public function item()

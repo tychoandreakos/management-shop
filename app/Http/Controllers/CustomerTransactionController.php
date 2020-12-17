@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Customer;
 use App\Models\CustomerTransaction;
 use App\Models\Item;
@@ -18,7 +17,7 @@ class CustomerTransactionController extends Controller
         $data = [
             'breadCrumbs' => 'Ordering Lists',
             'title' => 'Ordering Lists',
-            'customerTransactions' => CustomerTransaction::with('customer', 'item')->get(),
+            'customerTransactions' => ShipProviderTransaction::with('item', 'customer', 'shipProvider')->latest()->get(),
         ];
 
         return response()->json($data);

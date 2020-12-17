@@ -18,7 +18,7 @@ class Customer extends Model
     /**
      * @return HasMany
      */
-    public function customerTransaction(): HasMany
+    public function customerTransaction()
     {
         return $this->hasMany(CustomerTransaction::class);
     }
