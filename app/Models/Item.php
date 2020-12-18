@@ -14,11 +14,11 @@ class Item extends Model
     protected $guarded = ['id'];
 
     public function itemTransaction() {
-        return $this->hasMany(ItemTransaction::class);
+        return $this->hasOne(ItemTransaction::class);
     }
 
     public function itemImage() {
-        return $this->hasMany(ItemImage::class);
+        return $this->hasOne(ItemImage::class);
     }
 
     public function customerTransaction() {
