@@ -23,7 +23,6 @@ class CustomerController extends Controller
             "allCustomers" => $customers->get()->count()
         ];
         return view('customer.home', $data);
-//        return response()->json($data['customerLabels']);
     }
 
     public function store(Request $request): JsonResponse
