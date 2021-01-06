@@ -3,12 +3,7 @@
     // Make rupiah currency
     // Source: https://codepen.io/firmanJS/pen/BmwxBY
 
-    $(function () {
-        $("#uang").keyup(function (e) {
-            $(this).val(format($(this).val()));
-        });
-    });
-    var format = function (num) {
+    const format = function (num) {
         var str = num.toString().replace("", ""), parts = false, output = [], i = 1, formatted = null;
         if (str.indexOf(".") > 0) {
             parts = str.split(".");
@@ -27,4 +22,10 @@
         formatted = output.reverse().join("");
         return ("" + formatted + ((parts) ? "." + parts[1].substr(0, 2) : ""));
     };
+
+    $(function () {
+        $("#uang").keyup(function (e) {
+            $(this).val(format($(this).val()));
+        });
+    });
 </script>

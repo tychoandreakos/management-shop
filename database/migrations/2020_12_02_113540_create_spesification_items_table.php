@@ -16,7 +16,7 @@ class CreateSpesificationItemsTable extends Migration
     {
         Schema::create('spesification_items', function (Blueprint $table) {
             $table->id();
-            $table->string('property');
+            $table->text('property');
 
             $table->timestamps();
         });

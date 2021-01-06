@@ -17,4 +17,8 @@
     .sidebar-nav > ul > li > a.active {
         background: #fff;
     }
+
+    #cke_1_bottom {
+        display: none;
+    }
 </style>

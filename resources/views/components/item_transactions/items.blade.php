@@ -74,8 +74,12 @@
 <input type="text" name="id_items" hidden class="id_items"
        value="{{isset($itemTransaction) ? $itemTransaction->item->id : old('id_items')}}">
 
+@push('css')
+
+@endpush
 
 @push('scripts')
+    @include('components.elements.input-currency')
     <script>
         (async function () {
             const path = "{{ route('items.autocomplete') }}";
@@ -112,7 +116,7 @@
 
                     const [name, id, qty, price, sold, description] = matches[0].split('.');
                     $('.qty').val(qty)
-                    $('.price').val(price)
+                    $('.price').val(format(price))
                     $('.sold').val(sold)
                     $('.description').val(description)
                     $('.id_items').val(id)
@@ -137,6 +141,4 @@
             })
         })()
     </script>
-
-    @include('components.elements.input-currency')
 @endpush
