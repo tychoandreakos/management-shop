@@ -90,7 +90,7 @@
             };
 
             const globalData = await asyncExample();
-            const nameCt = globalData.map(item => `${item.name}.${item.id}.${item.quantity}.${item.price}.${item.sold}`)
+            const nameCt = globalData.map(item => `${item.name}.${item.id}.${item.quantity}.${item.price}.${item.sold}.${item.description}`)
 
             const substringMatcher = function (strs) {
                 return function findMatches(q, cb) {
@@ -110,10 +110,11 @@
                         }
                     });
 
-                    const [name, id, qty, price, sold] = matches[0].split('.');
+                    const [name, id, qty, price, sold, description] = matches[0].split('.');
                     $('.qty').val(qty)
                     $('.price').val(price)
                     $('.sold').val(sold)
+                    $('.description').val(description)
                     $('.id_items').val(id)
                     cb([name]);
                 };
