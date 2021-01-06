@@ -29,7 +29,7 @@ class CreateProductsTable extends Migration
 
             $table->string('product_image')->nullable();
 
-            $table->text('dectiprion');
+            $table->text('description');
             $table->timestamps();
         });
     }

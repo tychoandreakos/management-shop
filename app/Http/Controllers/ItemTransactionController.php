@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\CategoryTransaction;
 use App\Models\Item;
 use App\Models\ItemTransaction;
+use App\Models\Product;
 use App\Models\SpesificationItem;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -91,6 +92,22 @@ class ItemTransactionController extends Controller
                         'spesification_item_id' => $sp->id
                     ]);
                 }
+
+                Product::create([
+                    'product_name' => $item->name,
+                    'quantity' => $item->quantity,
+                    'price' => $item->price,
+                    'sold' => $item->sold,
+
+                    'brand_name' => $brand->name,
+                    'location' => $brand->location,
+                    'founded' => $brand->founded,
+
+                    'category' => Category::whereIn('id', $request->get('category'))->pluck('name')->toJson(),
+                    'specification_item' => $sp->property,
+                    'product_image' => '',
+                    'description' => $item->description
+                ]);
             }
 
 
