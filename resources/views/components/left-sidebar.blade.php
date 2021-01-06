@@ -43,8 +43,7 @@
                 <li class="nav-devider"></li>
                 <li class="nav-small-cap">PERSONAL</li>
                 <li><a class="" href="{{route('dashboard')}}" aria-expanded="false"><i
-                            class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard <span
-                                class="label label-rouded label-themecolor pull-right">4</span></span></a>
+                            class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
                 </li>
                 <li><a class="" href="{{route('products.home')}}" aria-expanded="false"><i
                             class="mdi mdi-food-apple"></i><span class="hide-menu">Products </span></a>
@@ -58,7 +57,6 @@
                         <li><a href="{{route('customers.home')}}">Customers</a></li>
                         <li><a href="{{ route('items.home')  }}">Items</a></li>
                         <li><a href="{{ route('brands.home')  }}">Brands</a></li>
-                        <li><a href="{{ route('specifications.home')  }}">Specification Items</a></li>
                         <li><a href="{{ route('categories.home')  }}">Categories</a></li>
                         <li><a href="{{ route('shipping-providers.home')  }}">Shipping Providers</a></li>
                         <li><a href="{{ route('customer-labels.home')  }}">Customer Labels</a></li>
