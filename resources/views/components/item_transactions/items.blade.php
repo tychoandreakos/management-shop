@@ -27,12 +27,19 @@
     <div class="col-md-4">
         <div class="form-group @if($errors->has('price')) has-danger @endif">
             <label>Price*</label>
-            <input value="{{ isset($itemTransaction) ? $itemTransaction->item->price : old('price')  }}"
-                   name="price"
-                   type="text" class="price form-control">
-            @if($errors->has('price'))
-                <small class="form-control-feedback"> This field has error. </small>
-            @endif
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                       Rp.
+                    </span>
+                </div>
+                <input id="uang" value="{{ isset($itemTransaction) ? $itemTransaction->item->price : old('price')  }}"
+                       name="price"
+                       type="text" class="price form-control">
+                @if($errors->has('price'))
+                    <small class="form-control-feedback"> This field has error. </small>
+                @endif
+            </div>
         </div>
     </div>
     <!--/span-->
@@ -129,4 +136,6 @@
             })
         })()
     </script>
+
+    @include('components.elements.input-currency')
 @endpush

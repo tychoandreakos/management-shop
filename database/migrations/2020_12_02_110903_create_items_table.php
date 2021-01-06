@@ -20,7 +20,7 @@ class CreateItemsTable extends Migration
             $table->integer('quantity');
             $table->string('price');
             $table->text('description')->nullable();
-            $table->integer('sold');
+            $table->integer('sold')->default(0);
             $table->timestamps();
         });
     }
