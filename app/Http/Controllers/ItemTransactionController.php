@@ -75,14 +75,37 @@ class ItemTransactionController extends Controller
             $item = Item::find($request->get('id_items'));
             $brand = Brand::find($request->get('id_brands'));
 
+            if (is_null($item)) {
+                $item = Item::create([
+                    'name' => $request->get('name'),
+                    'quantity' => $request->get('quantity'),
+                    'price' => $request->get('price'),
+                    'description' => $request->get('description'),
+                    'sold' => $request->get("sold")
+                ]);
+            }
+
+            if (is_null($brand)) {
+                $brand = Brand::create([
+                    'name' => $request->get("bname"),
+                    'location' => $request->get('location'),
+                    'founded' => $request->get('founded')
+                ]);
+            }
+
             if (!is_null($item) && !is_null($brand)) {
+
+//                 InsertOrEdit Item
+                $this->insertOrEdit($item, $request, ['name', 'quantity', 'price', 'sold', 'description']);
+                $this->insertOrEdit($brand, $request, ['bname', 'location', 'founded']);
+
                 $sp = SpesificationItem::create([
                     'property' => $request->get('spec')
                 ]);
 
                 ItemTransaction::create([
-                    'item_id' => $request->get('id_items'),
-                    'brand_id' => $request->get('id_brands'),
+                    'item_id' => $request->get('id_items') ?? $item->id,
+                    'brand_id' => $request->get('id_brands') ?? $brand->id,
                     'spesification_item_id' => $sp->id
                 ]);
 
@@ -103,7 +126,8 @@ class ItemTransactionController extends Controller
                     'location' => $brand->location,
                     'founded' => $brand->founded,
 
-                    'category' => Category::whereIn('id', $request->get('category'))->pluck('name')->toJson(),
+                    'category' => Category::whereIn('id', $request->get('category')
+                    )->pluck('name')->toJson(),
                     'specification_item' => $sp->property,
                     'product_image' => '',
                     'description' => $item->description
@@ -114,6 +138,23 @@ class ItemTransactionController extends Controller
             return redirect()->route('products.home')->with($flashMsg);
         } catch (ModelNotFoundException $e) {
             return response()->json(['success' => false, 'message' => $e]);
+        }
+    }
+
+    private function insertOrEdit($db, $request, $fields)
+    {
+        $count = 0;
+
+        foreach ($fields as $field) {
+            if ($db[$field] != $request[$field]) {
+                $db[in_array("bname", $fields) ? "name" : $field] = $request[$field];
+
+                if ($count == 0) $count++;
+            }
+        }
+
+        if ($count > 0) {
+            $db->save();
         }
     }
 

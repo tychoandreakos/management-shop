@@ -47,7 +47,7 @@
         <div class="form-group @if($errors->has('sold')) has-danger @endif">
             <label>Sold*</label>
             <input name="sold"
-                   value="{{ isset($itemTransaction) ? $itemTransaction->item->sold : old('sold')  }}"
+                   value="{{ isset($itemTransaction) ? $itemTransaction->item->sold : 0  }}"
                    type="text" class="sold form-control">
             @if($errors->has('sold'))
                 <small class="form-control-feedback"> This field has error. </small>
@@ -83,6 +83,7 @@
     <script>
         (async function () {
             const path = "{{ route('items.autocomplete') }}";
+            const elData = [];
             const asyncExample = async () => {
                 let data;
                 try {
@@ -115,11 +116,12 @@
                     });
 
                     const [name, id, qty, price, sold, description] = matches[0].split('.');
-                    $('.qty').val(qty)
-                    $('.price').val(format(price))
-                    $('.sold').val(sold)
-                    $('.description').val(description)
-                    $('.id_items').val(id)
+                    elData.push(qty);
+                    elData.push(format(price));
+                    elData.push(sold);
+                    elData.push(description);
+                    elData.push(id);
+
                     cb([name]);
                 };
             };
@@ -131,14 +133,24 @@
                 },
                 {
                     name: 'states',
-                    source: substringMatcher(nameCt)
-                });
+                    source: substringMatcher(nameCt),
+                }).bind('typeahead:select', () => {
 
-            $('input.nm').blur(function () {
-                if ($(this).val() === "") {
-                    $('.id_items').val("")
-                }
-            })
+                const [qty, price, sold, description, id] = elData;
+
+                $('.qty').val(qty)
+                $('.price').val(price)
+                $('.sold').val(sold)
+                $('.description').val(description)
+                $('.id_items').val(id)
+            });
         })()
+
+        $('input.nm').on('input', function () {
+            // Still Bug!
+            if ($(this).val().length < 1) {
+                $('.id_items').val("")
+            }
+        })
     </script>
 @endpush
