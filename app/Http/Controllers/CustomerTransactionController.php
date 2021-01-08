@@ -33,6 +33,7 @@ class CustomerTransactionController extends Controller
             'titleSecond' => "Ordering Info",
             "shipProviders" => ShipProvider::all()
         ];
+
         return view('customer_transaction.create')->with($data);
     }
 
@@ -72,6 +73,17 @@ class CustomerTransactionController extends Controller
                 ]);
             }
 
+            // update the stock / quantity item && sold
+            $resultQuantity = $item->quantity - $request->get('qty_buy');
+            $result = $resultQuantity < 0 ? 0 : $resultQuantity;
+
+            $soldQuantity = $item->sold + $request->get('qty_buy');
+            $soldQty = $soldQuantity < 0 ? 0 : $soldQuantity;
+
+            $item->quantity = $result;
+            $item->sold = $soldQty;
+            $item->save();
+
             Ordering::create([
                 // customers
                 'customer_name' => $customer->name,
@@ -83,6 +95,7 @@ class CustomerTransactionController extends Controller
                 'item_name' => $item->name,
                 'price' => $item->price,
                 'description' => $item->description,
+                'quantity' => $result,
                 // 'image' => '',
 
                 // brand & specificationItem & Categories
@@ -121,8 +134,11 @@ class CustomerTransactionController extends Controller
                 'message' => 'Congratulation your item has been deleted!'
             ];
 
-            $customerTransaction = CustomerTransaction::find($id);
+            $shipProvider = ShipProviderTransaction::find($id);
+            $customerTransaction = CustomerTransaction::find($shipProvider->customer->customerTransaction->id);
+
             $customerTransaction->delete();
+            $shipProvider->delete();
 
             return redirect()->route('orderings.home')->with($flashMsg);
         } catch (ModelNotFoundException $e) {

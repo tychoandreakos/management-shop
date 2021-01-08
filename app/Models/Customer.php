@@ -20,7 +20,7 @@ class Customer extends Model
      */
     public function customerTransaction()
     {
-        return $this->hasMany(CustomerTransaction::class);
+        return $this->hasOne(CustomerTransaction::class);
     }
 
     public function customerLabelTransaction()
