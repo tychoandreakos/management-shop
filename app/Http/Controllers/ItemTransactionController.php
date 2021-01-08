@@ -174,6 +174,24 @@ class ItemTransactionController extends Controller
             $sp = SpesificationItem::find($request->get('id_specs'));
             $sp_id = "";
 
+            if (is_null($item)) {
+                $item = Item::create([
+                    'name' => $request->get('name'),
+                    'quantity' => $request->get('quantity'),
+                    'price' => $request->get('price'),
+                    'description' => $request->get('description'),
+                    'sold' => $request->get("sold")
+                ]);
+            }
+
+            if (is_null($brand)) {
+                $brand = Brand::create([
+                    'name' => $request->get("bname"),
+                    'location' => $request->get('location'),
+                    'founded' => $request->get('founded')
+                ]);
+            }
+
             if (!is_null($item) && !is_null($brand)) {
                 if (is_null($sp)) {
                     $sp_id = SpesificationItem::create([
@@ -193,6 +211,11 @@ class ItemTransactionController extends Controller
                     'spesification_item_id' => $sp_checker_id,
                 ]);
 
+
+                // Edit constraint data
+                $this->insertOrEdit($item, $request, ['name', 'quantity', 'price', 'sold', 'description']);
+                $this->insertOrEdit($brand, $request, ['bname', 'location', 'founded']);
+                $this->insertOrEdit($itemTransaction, $request, ['property']);
 
                 //first delete all category transacion
                 $sp->categoryTransaction()->delete();
@@ -221,7 +244,6 @@ class ItemTransactionController extends Controller
                 'itemTransaction' => ItemTransaction::with(['item', 'brand', 'spesificationItem'])->where('id', '=', $id)->get()[0],
                 'categories' => Category::all()
             ];
-//            return response()->json($data['itemTransaction']);
             return view('item_transaction.edit')->with($data);
         } catch (ModelNotFoundException $e) {
 

@@ -2,7 +2,8 @@
     <div class="col-md-12 ">
         <div class="form-group @if($errors->has('bname')) has-danger @endif">
             <label>Brand Name*</label>
-            <input value="{{ isset($itemTransaction) ? $itemTransaction->brand->name : old('bname')  }}" name="bname" type="text" class="nmb form-control">
+            <input value="{{ isset($itemTransaction) ? $itemTransaction->brand->name : old('bname')  }}" name="bname"
+                   type="text" class="nmb form-control">
             @if($errors->has('bname'))
                 <small class="form-control-feedback"> This field has error. </small>
             @endif
@@ -13,7 +14,8 @@
     <div class="col-md-6">
         <div class="form-group @if($errors->has('location')) has-danger @endif">
             <label>Brand Location</label>
-            <input value="{{ isset($itemTransaction) ? $itemTransaction->brand->location : old('location') }}" name="location" type="text"
+            <input value="{{ isset($itemTransaction) ? $itemTransaction->brand->location : old('location') }}"
+                   name="location" type="text"
                    class="lc form-control">
             @if($errors->has('location'))
                 <small class="form-control-feedback"> This field has error. </small>
@@ -24,7 +26,8 @@
     <div class="col-md-6">
         <div class="form-group @if($errors->has('founded')) has-danger @endif">
             <label>Brand Founded</label>
-            <input value="{{ isset($itemTransaction) ? $itemTransaction->brand->founded :  old('founded')  }}" name="founded" type="text"
+            <input value="{{ isset($itemTransaction) ? $itemTransaction->brand->founded :  old('founded')  }}"
+                   name="founded" type="text"
                    class="fd form-control">
             @if($errors->has('founded'))
                 <small class="form-control-feedback"> This field has error. </small>
@@ -33,12 +36,15 @@
     </div>
 </div>
 
-<input type="text" name="id_brands" hidden class="id_brands" value="{{isset($itemTransaction) ? $itemTransaction->brand->id :  old('id_brands')}}">
+<input type="text" name="id_brands" hidden  class="id_brands"
+       value="{{isset($itemTransaction) ? $itemTransaction->brand->id :  old('id_brands')}}">
 
 @push('scripts')
     <script>
         (async function () {
             const path = "{{ route('brands.autocomplete') }}";
+            const elData = [];
+
             const asyncExample = async () => {
                 let data;
                 try {
@@ -71,9 +77,9 @@
                     });
 
                     const [name, id, location, founded] = matches[0].split('.');
-                    $('.fd').val(founded)
-                    $('.lc').val(location)
-                    $('.id_brands').val(id)
+                    elData.push(founded)
+                    elData.push(location)
+                    elData.push(id);
                     cb([name]);
                 };
             };
@@ -86,10 +92,17 @@
                 {
                     name: 'states',
                     source: substringMatcher(nameCt)
-                });
+                }).bind('typeahead:select', function () {
 
-            $('input.nmb').blur(function () {
-                if ($(this).val() === "") {
+                const [founded, location, id] = elData;
+                $('.fd').val(founded)
+                $('.lc').val(location)
+                $('.id_brands').val(id)
+            });
+
+            $('input.nmb').on('input', function () {
+                // Still Bug!
+                if ($(this).val().length < 1) {
                     $('.id_brands').val("")
                 }
             })
