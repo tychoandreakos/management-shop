@@ -27,7 +27,8 @@
     <div class="col-md-6">
         <div class="form-group @if($errors->has('phone')) has-danger @endif">
             <label>Phone Number*</label>
-            <input disabled value="{{ isset($itemTransaction) ? $itemTransaction->item->price : old('phone')  }}" name="num_telp"
+            <input disabled value="{{ isset($itemTransaction) ? $itemTransaction->item->price : old('phone')  }}"
+                   name="num_telp"
                    type="text" class="num_telp form-control">
             @if($errors->has('phone'))
                 <small class="form-control-feedback"> This field has error. </small>
@@ -59,6 +60,8 @@
     <script>
         (async function () {
             const path = "{{ route('customers.autocomplete') }}";
+            const elData = [];
+
             const asyncExample = async () => {
                 let data;
                 try {
@@ -91,9 +94,9 @@
                     });
 
                     const [name, id, email, num_telp] = matches[0].split('__');
-                    $('.email').val(email)
-                    $('.num_telp').val(num_telp)
-                    $('.id_customer').val(id)
+                    elData.push(email)
+                    elData.push(num_telp)
+                    elData.push(id)
                     cb([name]);
                 };
             };
@@ -106,9 +109,14 @@
                 {
                     name: 'states',
                     source: substringMatcher(nameCt)
-                });
+                }).bind('typeahead:select', function () {
+                const [email, num_telp, id] = elData;
+                $('.email').val(email)
+                $('.num_telp').val(num_telp)
+                $('.id_customer').val(id)
+            });
 
-            $('input.nm').blur(function () {
+            $('input.nm').on('input', function () {
                 if ($(this).val() === "") {
                     $('.id_customer').val("")
                 }

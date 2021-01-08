@@ -80,9 +80,11 @@
 
 
 @push('scripts')
+    @include('components.elements.input-currency')
     <script>
         (async function () {
             const path = "{{ route('items.autocomplete') }}";
+            const elData = [];
             const asyncExample = async () => {
                 let data;
                 try {
@@ -115,11 +117,11 @@
                     });
 
                     const [name, id, qty, price, sold, description] = matches[0].split('__');
-                    $('.qty').val(qty)
-                    $('.price').val(price)
-                    $('.sold').val(sold)
-                    $('.description').val(description)
-                    $('.item_id').val(id)
+                    elData.push(qty);
+                    elData.push(format(price));
+                    elData.push(sold);
+                    elData.push(description);
+                    elData.push(id);
                     cb([name]);
                 };
             };
@@ -132,9 +134,18 @@
                 {
                     name: 'states',
                     source: substringMatcher(nameCt)
-                });
+                }).bind('typeahead:select', function () {
 
-            $('input.iname').blur(function () {
+                const [qty, price, sold, description, id] = elData;
+
+                $('.qty').val(qty)
+                $('.price').val(price)
+                $('.sold').val(sold)
+                $('.description').val(description)
+                $('.item_id').val(id)
+            });
+
+            $('input.iname').on('input', function () {
                 if ($(this).val() === "") {
                     $('.item_id').val("")
                 }
