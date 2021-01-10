@@ -14,4 +14,12 @@ class CustomerLabel extends Model
     public function customerLabelTransaction() {
         return $this->hasOne(CustomerLabelTransaction::class);
     }
+
+    public function setNameAttribute($value) {
+        $this->attributes['name'] = strtolower($value);
+    }
+
+    public function getNameAttribute($value) {
+        return ucfirst($value);
+    }
 }
