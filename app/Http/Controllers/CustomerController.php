@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\CustomerLabel;
-use App\Models\CustomerTransaction;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 
 class CustomerController extends Controller
 {
@@ -93,7 +91,8 @@ class CustomerController extends Controller
     {
         $data = [
             'customer' => Customer::find($id),
-            'breadCrumbs' => 'Customer Detail'
+            'breadCrumbs' => 'Customer Detail',
+            'labels' => CustomerLabel::all()
         ];
         return view('customer.detail', $data);
     }

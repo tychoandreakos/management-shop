@@ -2,7 +2,7 @@
     <div class="col-md-12 ">
         <div class="form-group @if($errors->has('ship_provider_id')) has-danger @endif">
             <label>Shipping Providers</label>
-            <select class=" selectpicker" multiple data-live-search="true" name="ship_provider_id" []">
+            <select class=" selectpicker" multiple data-live-search="true" name="ship_provider_id[]">
             @foreach($shipProviders as $shipProvider)
                 <option value="{{ $shipProvider->id  }}">{{ $shipProvider->name }}</option>
                 @endforeach
