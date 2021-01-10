@@ -6,8 +6,13 @@
                                                 class="img-circle"
                                                 width="100">
                 <h4 class="card-title mt-2">{{ $customer->name  }}</h4>
-                <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod tempor incididunt </p>
+                @if(isset($customer->suggestion))
+                    <p class="text-white">{{ $customer->suggestion  }}</p>
+                @else
+                    <p class="tex-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.
+                        Praesent
+                        libero. Sed cursus ante dapibus diam. </p>
+                @endif
             </div>
         </div>
     </div>
