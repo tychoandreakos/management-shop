@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="card">
-        <div class="card-body"><small class="text-muted">Email address </small>
+        <div class="card-body"><small class="text-muted">Full Name</small>
             <h6>{{ $customer->name }}</h6> <small class="text-muted p-t-30 db">Phone</small>
             <h6>{{ $customer->num_telp  }}</h6>
         </div>
