@@ -5,6 +5,4 @@
     <li class="nav-item m-l-10"><a
             class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark"
             href="javascript:void(0)"><i class="ti-menu"></i></a></li>
-
-    @include('components.topbars.panel')
 </ul>
