@@ -90,10 +90,11 @@ class CustomerController extends Controller
     public function detail($id)
     {
         $data = [
-            'customer' => Customer::find($id),
+            'customer' => Customer::with('customerLabelTransaction')->where('id', $id)->first(),
             'breadCrumbs' => 'Customer Detail',
             'labels' => CustomerLabel::all()
         ];
+
         return view('customer.detail', $data);
     }
 

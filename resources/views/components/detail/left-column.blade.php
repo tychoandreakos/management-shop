@@ -17,9 +17,19 @@
         </div>
     </div>
     <div class="card">
-        <div class="card-body"><small class="text-muted">Full Name</small>
-            <h6>{{ $customer->name }}</h6> <small class="text-muted p-t-30 db">Phone</small>
+        <div class="card-body">
+            <small class="text-muted">Full Name</small>
+            <h6>{{ $customer->name }}</h6>
+
+            <small class="text-muted p-t-30 db">Phone</small>
             <h6>{{ $customer->num_telp  }}</h6>
+
+            <small class="text-muted p-t-30 db">Customer Label</small>
+            @if(isset($customer->customerLabelTransaction))
+                <h6>{{ $customer->customerLabelTransaction->name }}</h6>
+            @else
+                <h6>Not assigned any customer labels</h6>
+            @endif
         </div>
     </div>
 </div>

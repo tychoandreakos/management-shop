@@ -25,7 +25,7 @@ class Customer extends Model
 
     public function customerLabelTransaction()
     {
-        return $this->hasOne(CustomerLabel::class);
+        return $this->hasOne(CustomerLabelTransaction::class);
     }
 
     public function shipProviderTransaction()
