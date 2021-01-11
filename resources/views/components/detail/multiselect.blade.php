@@ -1,6 +1,6 @@
 <div class="form-group pl-2 pr-2 @if($errors->has('lname')) has-danger @endif">
     <label>Customer Labels*</label>
-    <select class=" selectpicker" multiple data-live-search="true" name="label[]">
+    <select class=" selectpicker" multiple data-live-search="true" name="labels[]">
         @foreach($labels as $label)
             <option value="{{ $label->id  }}">{{ $label->name }}</option>
         @endforeach

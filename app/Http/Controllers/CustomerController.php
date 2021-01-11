@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\CustomerLabel;
+use App\Models\CustomerLabelTransaction;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -50,8 +51,23 @@ class CustomerController extends Controller
     {
         try {
             $this->validateResponse($request);
+
+            $customerLabel = CustomerLabelTransaction::where('customer_id', $id);
+
+            if (isset($customerLabel)) {
+                $customerLabel->delete();
+            }
+
+            foreach ($request->get("labels") as $label) {
+                CustomerLabelTransaction::create([
+                    'customer_id' => $id,
+                    'customer_label_id' => $label
+                ]);
+            }
+
             $customer = Customer::find($id);
             $customer->update($request->all());
+
             return redirect()->route('customers.home');
         } catch (ModelNotFoundException $e) {
 
