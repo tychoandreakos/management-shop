@@ -14,7 +14,7 @@ class AddingImageToTableCustomers extends Migration
     public function up()
     {
         Schema::table('customers', function (Blueprint $table) {
-            //
+            $table->string('image')->nullable()->after('suggestion');
         });
     }
 
