@@ -25,7 +25,7 @@
             <h6>{{ $customer->num_telp  }}</h6>
 
             <small class="text-muted p-t-30 db mb-1">Customer Label</small>
-            @if(isset($customer->customerLabelTransaction))
+            @if(!$customer->customerLabelTransaction->isEmpty())
                 <ul>
                     @foreach($customer->customerLabelTransaction as $label)
                         <li>
