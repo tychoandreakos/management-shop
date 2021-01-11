@@ -24,12 +24,19 @@
             <small class="text-muted p-t-30 db">Phone</small>
             <h6>{{ $customer->num_telp  }}</h6>
 
-            <small class="text-muted p-t-30 db">Customer Label</small>
+            <small class="text-muted p-t-30 db mb-1">Customer Label</small>
             @if(isset($customer->customerLabelTransaction))
-                <h6>{{ $customer->customerLabelTransaction->name }}</h6>
+                <ul>
+                    @foreach($customer->customerLabelTransaction as $label)
+                        <li>
+                            <h6>{{ $label->customerLabel->name }}</h6>
+                        </li>
+                    @endforeach
+                </ul>
             @else
-                <h6>Not assigned any customer labels</h6>
+                <h6>This customer don't assigned to any customer label</h6>
             @endif
+
         </div>
     </div>
 </div>

@@ -106,11 +106,12 @@ class CustomerController extends Controller
     public function detail($id)
     {
         $data = [
-            'customer' => Customer::with('customerLabelTransaction')->where('id', $id)->first(),
+            'customer' => Customer::with('customerLabelTransaction.customerLabel')->where('id', $id)->first(),
             'breadCrumbs' => 'Customer Detail',
             'labels' => CustomerLabel::all()
         ];
 
+//        return response()->json($data);
         return view('customer.detail', $data);
     }
 
