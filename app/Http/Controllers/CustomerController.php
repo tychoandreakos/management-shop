@@ -9,9 +9,13 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Melihovv\Base64ImageDecoder\Base64ImageDecoder;
 
 class CustomerController extends Controller
 {
+
+    private $allowedFormat = ['jpeg', 'png', 'jpg'];
 
     public function index(Customer $customers, CustomerLabel $customerLabel)
     {
@@ -24,10 +28,27 @@ class CustomerController extends Controller
         return view('customer.home', $data);
     }
 
+    private function saveImage($image)
+    {
+        $imageName = "";
+        try {
+            $decoder = new Base64ImageDecoder($image, $this->allowedFormat);
+            $imageName = uniqid() . "." . $decoder->getFormat();
+            Storage::disk('admin_customers')->put($imageName, $decoder->getDecodedContent());
+        } catch (\ErrorException $e) {
+
+        }
+
+        return $imageName;
+    }
+
     public function store(Request $request): JsonResponse
     {
         try {
             $this->validateResponse($request);
+            $imageName = $this->saveImage($request->get('image'));
+
+            $request['image'] = $imageName;
             Customer::create($request->all());
         } catch (ModelNotFoundException $e) {
             $error = [
