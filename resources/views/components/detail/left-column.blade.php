@@ -1,10 +1,18 @@
 <div class="col-lg-4 col-xlg-3 col-md-5">
-    <div class="card"><img class="card-img" src="{{ asset('assets/images/background/socialbg.jpg')  }}"
-                           alt="Card image">
+    <div class="card">
+        <img class="card-img" src="{{ asset('assets/images/background/socialbg.jpg')  }}"
+             alt="customer-img">
         <div class="card-img-overlay card-inverse social-profile d-flex ">
-            <div class="align-self-center"><img src="{{ asset('assets/images/users/1.jpg')  }}"
-                                                class="img-circle"
-                                                width="100">
+            <div class="align-self-center">
+                @if(strlen($customer->image) > 0)
+                    <img src="{{ $customer->image  }}"
+                         class="img-circle thumb-post"
+                         width="100" height="100">
+                @else
+                    <img src="{{ asset('assets/images/users/1.jpg')  }}"
+                         class="img-circle"
+                         width="100">
+                @endif
                 <h4 class="card-title mt-2">{{ explode(" ", $customer->name)[0]  }}</h4>
                 @if(isset($customer->suggestion))
                     <p class="text-white">{{ $customer->suggestion  }}</p>
@@ -40,3 +48,12 @@
         </div>
     </div>
 </div>
+
+@push('css')
+    <style>
+        .thumb-post {
+            object-fit: cover; /* Do not scale the image */
+            object-position: center; /* Center the image within the element */
+        }
+    </style>
+@endpush

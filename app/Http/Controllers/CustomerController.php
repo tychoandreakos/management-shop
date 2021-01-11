@@ -132,7 +132,9 @@ class CustomerController extends Controller
             'labels' => CustomerLabel::all()
         ];
 
-//        return response()->json($data);
+        if (isset($data['customer']['image']))
+            $data['customer']['image'] = Storage::disk('admin_customers')->url($data['customer']['image']);
+
         return view('customer.detail', $data);
     }
 
