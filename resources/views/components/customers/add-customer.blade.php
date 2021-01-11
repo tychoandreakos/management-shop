@@ -22,6 +22,7 @@
                         <div class="col-md-12 m-b-20">
                             <input type="text" required name="num_telp" class="form-control"
                                    placeholder="Phone"></div>
+                        @include('components.customers.file-upload')
                     </div>
                 </from>
             </div>
@@ -52,6 +53,18 @@
             const error = []
             const rule = [3, 5, 11]
             const message = ["name", "email", "phone"]
+            let metaImage;
+
+            $('#input-file-now').on('change', function (el) {
+                const image = el.target.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function () {
+                    metaImage = reader.result;
+                }
+
+                reader.readAsDataURL(image);
+            })
 
             async function postData(url = '', data = {}) {
                 // Default options are marked with *
@@ -87,27 +100,27 @@
             }
 
             button.addEventListener('click', () => {
-                let data = {};
-                for (let i = 0; i < customersInput.length; i++) {
-                    const item = customersInput[i];
-                    const value = item.value;
-
-                    data = {
-                        ...data,
-                        [item.getAttribute('name')]: value
-                    }
-
-                }
-
-                if (error.length < 1) {
-                    postData(url, data).then(data => {
-                        if (data.next) {
-                            window.location.href = back
-                        }
-                    })
-                } else {
-                    toastr()
-                }
+                // let data = {};
+                // for (let i = 0; i < customersInput.length; i++) {
+                //     const item = customersInput[i];
+                //     const value = item.value;
+                //
+                //     data = {
+                //         ...data,
+                //         [item.getAttribute('name')]: value
+                //     }
+                //
+                // }
+                //
+                // if (error.length < 1) {
+                //     postData(url, data).then(data => {
+                //         if (data.next) {
+                //             window.location.href = back
+                //         }
+                //     })
+                // } else {
+                //     toastr()
+                // }
             })
         })
     </script>
