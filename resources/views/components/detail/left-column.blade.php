@@ -5,7 +5,7 @@
             <div class="align-self-center"><img src="{{ asset('assets/images/users/1.jpg')  }}"
                                                 class="img-circle"
                                                 width="100">
-                <h4 class="card-title mt-2">{{ $customer->name  }}</h4>
+                <h4 class="card-title mt-2">{{ explode(" ", $customer->name)[0]  }}</h4>
                 @if(isset($customer->suggestion))
                     <p class="text-white">{{ $customer->suggestion  }}</p>
                 @else
