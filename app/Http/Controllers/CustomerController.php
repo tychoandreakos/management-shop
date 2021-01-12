@@ -47,9 +47,11 @@ class CustomerController extends Controller
     {
         try {
             $this->validateResponse($request);
-            $imageName = $this->saveImage($request->get('image'));
-
-            $request['image'] = $imageName;
+            $tempChecker = $request->get("image");
+            if (isset($tempChecker)) {
+                $imageName = $this->saveImage($request->get('image'));
+                $request['image'] = $imageName;
+            }
             Customer::create($request->all());
         } catch (ModelNotFoundException $e) {
             $error = [
@@ -144,7 +146,7 @@ class CustomerController extends Controller
     {
         try {
             $customer = Customer::with(['customerLabelTransaction', 'customerTransaction'])->where('id', $id)->first();
-            
+
             // delete customer file image in the local disk
             if (isset($customer->image)) {
                 $imgFile = Storage::disk('admin_customers');
