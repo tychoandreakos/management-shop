@@ -141,9 +141,21 @@ class CustomerController extends Controller
 
     public function destroy($id): RedirectResponse
     {
-        $customer = Customer::find($id);
-        $customer->delete();
-        return redirect()->route('customers.home');
+        try {
+            $customer = Customer::find($id);
+
+            // delete customer file image in the local disk
+            if (isset($customer->image)) {
+                $imgFile = Storage::disk('admin_customers');
+                if ($imgFile->exists($customer->image)) {
+                    $imgFile->delete($customer->image);
+                }
+            }
+            $customer->delete();
+            return redirect()->route('customers.home');
+        } catch (\ErrorException $e) {
+
+        }
     }
 
     public function autocomplete(Request $request)
