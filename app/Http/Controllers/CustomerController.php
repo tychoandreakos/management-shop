@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\CustomerLabel;
 use App\Models\CustomerLabelTransaction;
+use App\Models\CustomerTransaction;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -139,11 +140,11 @@ class CustomerController extends Controller
     }
 
 
-    public function destroy($id): RedirectResponse
+    public function destroy($id)
     {
         try {
-            $customer = Customer::find($id);
-
+            $customer = Customer::with(['customerLabelTransaction', 'customerTransaction'])->where('id', $id)->first();
+            
             // delete customer file image in the local disk
             if (isset($customer->image)) {
                 $imgFile = Storage::disk('admin_customers');
@@ -151,9 +152,15 @@ class CustomerController extends Controller
                     $imgFile->delete($customer->image);
                 }
             }
+            if (isset($customer->customerLabelTransaction))
+                CustomerLabelTransaction::where('customer_id', $id)->delete();
+
+            if (isset($customer->customerTransaction))
+                CustomerTransaction::where('customer_id', $id)->delete();
+
             $customer->delete();
             return redirect()->route('customers.home');
-        } catch (\ErrorException $e) {
+        } catch (\Exception $e) {
 
         }
     }

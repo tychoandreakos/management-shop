@@ -98,7 +98,7 @@
                     $.post(url, {
                         _token: meta,
                         ...data
-                    }).success(() => window.location.href = home).fail(err => console.log(err));
+                    }).done(() => window.location.href = home).fail(err => console.log(err));
                 } else {
                     toastr()
                 }
