@@ -133,10 +133,21 @@ class ItemController extends Controller
             'message' => 'Congratulation your item has been deleted!'
         ];
         try {
-            $item = Item::find($id);
+            $item = Item::with('itemImage')->where('id', $id)->first();
+
+            // remove image on folder
+            if (isset($item->itemImage)) {
+                $image = ItemImage::where('item_id', $id)->first();
+                $imgFile = Storage::disk('admin_items');
+                if ($imgFile->exists($image->image)) {
+                    $imgFile->delete($image->image);
+                }
+                $image->delete();
+            }
+
             $item->delete();
             return redirect()->route('items.home')->with($flashMsg);
-        } catch (ModelNotFoundException $e) {
+        } catch (\Exception $e) {
 
         }
     }
