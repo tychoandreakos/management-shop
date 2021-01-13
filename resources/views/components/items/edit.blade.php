@@ -68,6 +68,7 @@
                                         <small class="form-control-feedback"> This field has error. </small>
                                     @endif
                                 </div>
+                                @include('components.items.dropify')
                                 <div class="form-actions">
                                     <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Save
                                     </button>

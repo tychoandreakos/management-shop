@@ -5,7 +5,8 @@
             <label for="input-file-now">
                 <small class="text-right">*Max image upload: 5MB</small>
             </label>
-            <input type="file" data-max-file-size="5M" id="input-file-now" name="image" data-allowed-file-extensions='["jpg","png", "jpeg"]' class="dropify"/>
+            <input type="file" data-max-file-size="5M" id="input-file-now" name="image"
+                   data-allowed-file-extensions='["jpg","png", "jpeg"]' class="dropify"/>
         </div>
     </div>
 </div>
@@ -21,6 +22,13 @@
     <script src="{{ asset('assets/plugins/dropify/dist/js/dropify.min.js')  }}"></script>
     <script>
         $(document).ready(function () {
+
+
+            // check if image is ready
+            @if(isset($item->itemImage))
+            $('.dropify').attr('data-default-file', '{{ asset("assets/admin/items/{$item->itemImage->image}")  }}')
+            @endif
+
             // Basic
             $(' .dropify').dropify();
 

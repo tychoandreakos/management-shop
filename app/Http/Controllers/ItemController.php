@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use App\Models\ItemImage;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -61,7 +62,7 @@ class ItemController extends Controller
         if ($request->hasFile('image')) {
             if ($request->file('image')->isValid()) {
                 $extension = $request->image->extension();
-                $name = uniqid() . "." . $extension;
+                $name = $request->get('name') . "-" . Carbon::now()->toDateString() . "." . $extension;
                 $request->image->storeAs('/public/admin/items', $name);
 
                 return $name;
@@ -98,8 +99,9 @@ class ItemController extends Controller
                 'breadCrumbs' => 'Update item',
                 'title' => 'Please fill the input form below',
                 'titleSecond' => "Item Info",
-                'item' => Item::find($id)
+                'item' => Item::with('itemImage')->where('id', $id)->first()
             ];
+//            return response()->json($data);
             return view('item.edit')->with($data);
         } catch (ModelNotFoundException $e) {
 
