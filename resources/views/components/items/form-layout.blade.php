@@ -37,7 +37,8 @@
                             <div class="col-md-4">
                                 <div class="form-group @if($errors->has('price')) has-danger @endif">
                                     <label>Price</label>
-                                    <input value="{{ old('price')  }}" name="price" type="text" class="form-control">
+                                    <input value="{{ old('price')  }}" id="uang" name="price" type="text"
+                                           class="form-control">
                                     @if($errors->has('price'))
                                         <small class="form-control-feedback"> This field has error. </small>
                                     @endif
@@ -47,7 +48,7 @@
                             <div class="col-md-4">
                                 <div class="form-group @if($errors->has('sold')) has-danger @endif">
                                     <label>Sold</label>
-                                    <input name="sold" value="{{ old('sold')  }}" type="text" class="form-control">
+                                    <input name="sold" value="{{ old('sold') ?? 0  }}" type="text" class="form-control">
                                     @if($errors->has('sold'))
                                         <small class="form-control-feedback"> This field has error. </small>
                                     @endif
@@ -88,3 +89,6 @@
 
 
 @include('components.items.back')
+@push('scripts')
+    @include('components.elements.input-currency')
+@endpush

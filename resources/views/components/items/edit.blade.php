@@ -48,7 +48,7 @@
                             <div class="col-md-4">
                                 <div class="form-group @if($errors->has('sold')) has-danger @endif">
                                     <label>Sold</label>
-                                    <input name="sold" value="{{ $item->sold }}" type="text" class="form-control">
+                                    <input  name="sold" value="{{ $item->sold ? $item->sold : 0 }}" type="text" class="form-control">
                                     @if($errors->has('sold'))
                                         <small class="form-control-feedback"> This field has error. </small>
                                     @endif
