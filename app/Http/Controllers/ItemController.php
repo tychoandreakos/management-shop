@@ -57,7 +57,7 @@ class ItemController extends Controller
      *
      * Reference: https://medium.com/@mactavish10101/how-to-upload-images-in-laravel-7-7a7f9982ebba
      */
-    private function imageProsess($request)
+    private function imageProcess($request)
     {
         if ($request->hasFile('image')) {
             if ($request->file('image')->isValid()) {
@@ -85,7 +85,7 @@ class ItemController extends Controller
             $item = Item::create($request->all());
             ItemImage::create([
                 'item_id' => $item->id,
-                'image' => $this->imageProsess($request)
+                'image' => $this->imageProcess($request)
             ]);
             return redirect()->route('items.home')->with($flashMsg);
         } catch (ModelNotFoundException $e) {
