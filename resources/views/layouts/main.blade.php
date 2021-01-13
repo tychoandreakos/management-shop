@@ -12,9 +12,5 @@
 <!-- ============================================================== -->
 <!-- End Wrapper -->
 @include('assets/javascript')
-<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-<script>
-    CKEDITOR.replace('summary-ckeditor');
-</script>
 </body>
 </html>

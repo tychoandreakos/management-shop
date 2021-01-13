@@ -1,18 +1,21 @@
-<div class="col-md-12">
-    <div class="card">
-        <div class="card-body">
-            <h6>Upload Items Image</h6>
-            <label for="input-file-now">
-                <small class="text-right">*Max image upload: 5MB</small>
-            </label>
-            <input type="file" data-max-file-size="5M" id="input-file-now" name="image"
-                   data-allowed-file-extensions='["jpg","png", "jpeg"]' class="dropify"/>
-        </div>
-    </div>
+<div class="form-group">
+    <h6>Upload Items Image</h6>
+    <label for="input-file-now">
+        <small class="text-right">*Max image upload: 5MB</small>
+    </label>
+    <input type="file" data-max-file-size="5M" id="input-file-now" name="image"
+           data-allowed-file-extensions='["jpg","png", "jpeg"]' class="dropify"/>
 </div>
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('assets/plugins/dropify/dist/css/dropify.min.css')  }}">
+
+    <style>
+        .dropify-message p {
+            text-align: center !important;
+        }
+
+    </style>
 @endpush
 @push('scripts')
     <!-- ============================================================== -->
