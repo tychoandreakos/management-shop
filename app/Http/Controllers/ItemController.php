@@ -81,9 +81,9 @@ class ItemController extends Controller
 
 
             $item = Item::create($request->all());
-            $image = $this->imageProsess($request);
             ItemImage::create([
-                
+                'item_id' => $item->id,
+                'image' => $this->imageProsess($request)
             ]);
             return redirect()->route('items.home')->with($flashMsg);
         } catch (ModelNotFoundException $e) {
