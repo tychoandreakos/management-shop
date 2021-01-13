@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
-use App\Models\ShipProvider;
-use Dotenv\Exception\ValidationException;
+use App\Models\ItemImage;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
 {
@@ -51,6 +51,24 @@ class ItemController extends Controller
     }
 
 
+    /**
+     * @param $request
+     *
+     * Reference: https://medium.com/@mactavish10101/how-to-upload-images-in-laravel-7-7a7f9982ebba
+     */
+    private function imageProsess($request)
+    {
+        if ($request->hasFile('image')) {
+            if ($request->file('image')->isValid()) {
+                $extension = $request->image->extension();
+                $name = uniqid() . "." . $extension;
+                $request->image->storeAs('/public/admin/items', $name);
+
+                return $name;
+            }
+        }
+    }
+
     public function store(Request $request)
     {
         try {
@@ -60,7 +78,13 @@ class ItemController extends Controller
                 'message' => 'Congratulation your item has been created!'
             ];
             $this->validateHandler($request);
-            Item::create($request->all());
+
+
+            $item = Item::create($request->all());
+            $image = $this->imageProsess($request);
+            ItemImage::create([
+                
+            ]);
             return redirect()->route('items.home')->with($flashMsg);
         } catch (ModelNotFoundException $e) {
 

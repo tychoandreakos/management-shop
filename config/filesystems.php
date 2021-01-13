@@ -43,7 +43,7 @@ return [
         ],
 
         'admin_items' => [
-            'drive' => 'local',
+            'driver' => 'local',
             'root' => storage_path('app/public/admin/items'),
             'url' => env('APP_URL') . '/assets/admin/items',
             'visibility' => 'public'
