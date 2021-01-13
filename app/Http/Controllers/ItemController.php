@@ -62,7 +62,8 @@ class ItemController extends Controller
         if ($request->hasFile('image')) {
             if ($request->file('image')->isValid()) {
                 $extension = $request->image->extension();
-                $name = $request->get('name') . "-" . Carbon::now()->toDateString() . "." . $extension;
+                $fileName = join("-", explode(" ", $request->get('name'))) ?? $request->get("name");
+                $name = $fileName . "-" . Carbon::now()->toDateString() . "." . $extension;
                 $request->image->storeAs('/public/admin/items', $name);
 
                 return $name;
