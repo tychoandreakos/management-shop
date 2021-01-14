@@ -11,8 +11,19 @@ class Brand extends Model
 
     protected $guarded = ['id'];
 
-    public function itemTransaction() {
+    public function itemTransaction()
+    {
         return $this->hasMany(ItemTransaction::class);
+    }
+
+    public function getNameAttribute($value)
+    {
+        return ucwords($value);
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = strtolower($value);
     }
 
 }

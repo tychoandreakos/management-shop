@@ -11,7 +11,19 @@ class Category extends Model
 
     protected $guarded = ['id'];
 
-    public function categoryTransaction() {
+    public function categoryTransaction()
+    {
         return $this->hasMany(CategoryTransaction::class);
     }
+
+    public function getNameAttribute($value)
+    {
+        return ucwords($value);
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = strtolower($value);
+    }
+
 }
