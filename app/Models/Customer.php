@@ -45,6 +45,16 @@ class Customer extends Model
 
     /**
      * @param $value
+     * @return string
+     */
+    public function getEmailAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
+
+    /**
+     * @param $value
      */
     protected function setNameAttribute($value)
     {
