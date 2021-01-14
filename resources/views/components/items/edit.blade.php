@@ -38,7 +38,8 @@
                             <div class="col-md-4">
                                 <div class="form-group @if($errors->has('price')) has-danger @endif">
                                     <label>Price</label>
-                                    <input value="{{ $item->price  }}" name="price" type="text" class="form-control">
+                                    <input id="uang" value="{{ $item->price  }}" name="price" type="text"
+                                           class="form-control">
                                     @if($errors->has('price'))
                                         <small class="form-control-feedback"> This field has error. </small>
                                     @endif
@@ -88,3 +89,7 @@
 <!-- Row -->
 
 @include('components.items.back')
+
+@push('scripts')
+    @include('components.elements.input-currency')
+@endpush

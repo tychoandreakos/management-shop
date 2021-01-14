@@ -16,8 +16,9 @@ class ItemController extends Controller
         $data = [
             'breadCrumbs' => 'Item Lists',
             'title' => 'Items Gallery',
-            'items' => $item->latest()->paginate(20),
+            'items' => $item->with('itemImage')->latest()->paginate(20),
         ];
+
         return view('item.home')->with($data);
     }
 

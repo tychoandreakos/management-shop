@@ -14,8 +14,10 @@
             </div>
         </div>
     </div>
-
     @foreach($items as $item)
+        @php
+            $image = \Illuminate\Support\Facades\Storage::disk('admin_items')->url($item->itemImage->image)
+        @endphp
         @include('components.items.item')
     @endforeach
 </div>
