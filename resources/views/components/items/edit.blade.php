@@ -6,7 +6,7 @@
                 <h4 class="m-b-0 text-white">{{ $title  }}</h4>
             </div>
             <div class="card-body">
-                <form action="{{ route('items.update', $item->id)  }}" method="post">
+                <form action="{{ route('items.update', $item->id)  }}" enctype="multipart/form-data" method="post">
                     @csrf
                     @method('patch')
                     <div class="form-body">
@@ -48,7 +48,8 @@
                             <div class="col-md-4">
                                 <div class="form-group @if($errors->has('sold')) has-danger @endif">
                                     <label>Sold</label>
-                                    <input  name="sold" value="{{ $item->sold ? $item->sold : 0 }}" type="text" class="form-control">
+                                    <input name="sold" value="{{ $item->sold ? $item->sold : 0 }}" type="text"
+                                           class="form-control">
                                     @if($errors->has('sold'))
                                         <small class="form-control-feedback"> This field has error. </small>
                                     @endif

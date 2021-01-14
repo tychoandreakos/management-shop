@@ -60,10 +60,11 @@ class ItemController extends Controller
     private function imageProcess($request)
     {
         if ($request->hasFile('image')) {
+            // store image
             if ($request->file('image')->isValid()) {
                 $extension = $request->image->extension();
-                $fileName = join("-", explode(" ", $request->get('name'))) ?? $request->get("name");
-                $name = $fileName . "-" . Carbon::now()->toDateString() . "." . $extension;
+                $fileName = join("-", explode(" ", strtolower($request->get('name')))) ?? strtolower($request->get("name"));
+                $name = $fileName . "-" . Carbon::now()->toISOString() . "." . $extension;
                 $request->image->storeAs('/public/admin/items', $name);
 
                 return $name;
@@ -118,11 +119,30 @@ class ItemController extends Controller
                 'message' => 'Congratulation your item has been created!'
             ];
             $this->validateHandler($request);
-            $item = Item::find($id);
+            $item = Item::with('itemImage')->where('id', $id)->first();
+
+            // image processing
+            if ($request->hasFile('image')) {
+                $img = $item->itemImage->image;
+                // delete image
+                $fileStorage = Storage::disk('admin_items');
+                if ($fileStorage->exists($img)) {
+                    $fileStorage->delete($img);
+                }
+
+                $filenameImg = $this->imageProcess($request);
+                $image = ItemImage::where('item_id', $id)->first();
+                $image->update([
+                    'image' => $filenameImg
+                ]);
+
+            }
+
+            unset($request['image']);
             $item->update($request->all());
             return redirect()->route('items.home')->with($flashMsg);
-        } catch (ModelNotFoundException $e) {
-
+        } catch (\Exception $e) {
+            dd($e);
         }
     }
 
