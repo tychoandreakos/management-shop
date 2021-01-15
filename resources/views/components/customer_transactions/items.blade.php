@@ -84,7 +84,7 @@
     <script>
         (async function () {
             const path = "{{ route('items.autocomplete') }}";
-            const elData = [];
+            let elData = [];
             const asyncExample = async () => {
                 let data;
                 try {
@@ -148,6 +148,10 @@
             $('input.iname').on('input', function () {
                 if ($(this).val() === "") {
                     $('.item_id').val("")
+                    $('.qty').val("")
+                    $('.price').val("")
+                    $('.sold').val("")
+                    $('.description').val("")
                 }
             })
         })()

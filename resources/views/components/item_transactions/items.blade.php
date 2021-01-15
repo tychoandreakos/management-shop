@@ -83,7 +83,7 @@
     <script>
         (async function () {
             const path = "{{ route('items.autocomplete') }}";
-            const elData = [];
+            let elData = [];
             const asyncExample = async () => {
                 let data;
                 try {
@@ -116,6 +116,7 @@
                     });
 
                     const [name, id, qty, price, sold, description] = matches[0].split('.');
+                    elData = [];
                     elData.push(qty);
                     elData.push(format(price));
                     elData.push(sold);

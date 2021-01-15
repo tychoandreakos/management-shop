@@ -36,14 +36,14 @@
     </div>
 </div>
 
-<input type="text" name="id_brands" hidden  class="id_brands"
+<input type="text" name="id_brands" hidden class="id_brands"
        value="{{isset($itemTransaction) ? $itemTransaction->brand->id :  old('id_brands')}}">
 
 @push('scripts')
     <script>
         (async function () {
             const path = "{{ route('brands.autocomplete') }}";
-            const elData = [];
+            let elData = [];
 
             const asyncExample = async () => {
                 let data;
@@ -77,6 +77,7 @@
                     });
 
                     const [name, id, location, founded] = matches[0].split('.');
+                    data = []
                     elData.push(founded)
                     elData.push(location)
                     elData.push(id);
