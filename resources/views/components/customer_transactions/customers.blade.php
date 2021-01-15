@@ -60,7 +60,7 @@
     <script>
         (async function () {
             const path = "{{ route('customers.autocomplete') }}";
-            const elData = [];
+            let elData = [];
 
             const asyncExample = async () => {
                 let data;
@@ -94,6 +94,7 @@
                     });
 
                     const [name, id, email, num_telp] = matches[0].split('__');
+                    elData = [];
                     elData.push(email)
                     elData.push(num_telp)
                     elData.push(id)
@@ -119,6 +120,8 @@
             $('input.nm').on('input', function () {
                 if ($(this).val() === "") {
                     $('.id_customer').val("")
+                    $('.email').val("")
+                    $('.num_telp').val("")
                 }
             })
         })()
