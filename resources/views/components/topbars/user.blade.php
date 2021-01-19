@@ -10,18 +10,11 @@
             <ul class="dropdown-user">
                 <li>
                     <div class="dw-user-box">
-                        <div class="u-img"><img src="{{ asset('assets/images/users/1.jpg')  }}" alt="user"></div>
                         <div class="u-text">
-                            <h4>Steave Jobs</h4>
-                            <p class="text-muted">varun@gmail.com</p>
-                            <a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm mt-2">View
-                                Profile</a></div>
+                            <h4>{{ ucfirst(Auth::user()->name) ?? "Admin" }}</h4>
+                            <p class="text-muted">{{ ucfirst(Auth::user()->email) ?? "Admin" }}</p>
                     </div>
                 </li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
             </ul>

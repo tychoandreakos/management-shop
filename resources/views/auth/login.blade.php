@@ -13,7 +13,7 @@
                         <div class="form-group ">
                             <div class="col-xs-12">
                                 <input class="form-control @error('email') is-invalid @enderror"
-                                       value="{{ old('email') }}" autofocus type="text" required="" placeholder="Email">
+                                       value="{{ old('email') }}" autofocus type="text" required="" name="email" placeholder="Email">
                             </div>
                             @error('email')
                             <span class="invalid-feedback" role="alert">
