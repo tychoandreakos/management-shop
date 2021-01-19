@@ -38,9 +38,15 @@ define('CUSTOMERTRANSACTION', 'orderings');
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
+Route::get('/re', function() {
+    return view('auth.register');
+});
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/', function () {
+        return redirect()->route('dashboard');
+    });
+    Route::get('/home', [DashboardController::class, 'index'])->name('dashboard');
     Route::prefix(MASTER)->group(function () {
         Route::prefix(CUSTOMERS)->group(function () {
             Route::name(CUSTOMERS)->group(function () {
