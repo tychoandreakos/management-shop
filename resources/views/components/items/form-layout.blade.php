@@ -6,7 +6,9 @@
                 <h4 class="m-b-0 text-white">{{ $title  }}</h4>
             </div>
             <div class="card-body">
-                <form action="{{ route('items.store')  }}" method="post" enctype="multipart/form-data">
+
+                <form action="{{ route('items.store')  }}" method="post"
+                      enctype="multipart/form-data">
                     @csrf
                     <div class="form-body">
                         <h3 class="card-title">{{ $titleSecond }}</h3>
@@ -69,7 +71,8 @@
                                     @endif
                                 </div>
 
-                                @include('components.items.dropify')
+                                {{--                                @include('components.items.dropify')--}}
+                                @include('components.elements.dropzone.main')
 
                                 <div class="form-actions">
                                     <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Save
