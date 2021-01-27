@@ -15,10 +15,9 @@ class CreateItemImagesTable extends Migration
     {
         Schema::create('item_images', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('item_id');
             $table->string('image');
+            $table->enum('validation', ['true', 'false'])->default('false');
 
-            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -71,6 +71,7 @@ Route::middleware('auth')->group(function () {
                 Route::patch('/update/{id}', [ItemController::class, 'update'])->name('.update');
                 Route::get('/autocomplete', [ItemController::class, 'autocomplete'])->name('.autocomplete');
                 Route::get('/autocomplete-with-specification', [ItemController::class, 'autocompleteWithSpesification'])->name('.autocompleteWSpec');
+                Route::post('/post-image', [ItemController::class, 'storeImage'])->name('.store_image');
             });
         });
 

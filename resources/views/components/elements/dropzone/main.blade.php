@@ -18,10 +18,11 @@
         Dropzone.autoDiscover = false;
         $(document).ready(function () {
             $('#dropzone').dropzone({
-                url: 'upload.php',
+                url: '{{ route('items.store_image')  }}',
                 maxFilesize: 12,
                 acceptedFiles: ".jpeg,.jpg,.png,.gif",
                 addRemoveLinks: true,
+                headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') },
                 timeout: 5000,
                 success: function (file, response) {
                     console.log(response);

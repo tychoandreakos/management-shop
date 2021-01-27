@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use App\Models\ItemImage;
+use App\Models\ItemImageTransaction;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -44,6 +45,8 @@ class ItemController extends Controller
             'title' => 'Please fill the input form below',
             'titleSecond' => "Item Info",
         ];
+
+        $this->destroyImage();
         return view('item.create')->with($data);
     }
 
@@ -86,18 +89,17 @@ class ItemController extends Controller
      */
     private function imageProcess($request)
     {
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('file')) {
             // store image
-            $image = $request->file('image');
+            $image = $request->file('file');
             $path = "/public/admin/items";
 
             if ($image->isValid()) {
-                $extension = $request->image->extension();
-                $fileName = join("-", explode(" ", strtolower($request->get('name')))) ?? strtolower($request->get("name"));
-                $name = $fileName . "-" . Carbon::now()->toISOString() . "." . $extension;
+                $extension = $request->file->extension();
+                $name = uniqid() . "-" . Carbon::now()->toISOString() . "." . $extension;
                 $this->imageResize($image, $name, $this->size_latest, 'admin_item_thumbnail_latest');
                 $this->imageResize($image, $name, $this->size_orderings, 'admin_item_thumbnail_ordering');
-                $request->image->storeAs($path, $name);
+                $request->file->storeAs($path, $name);
 
                 return $name;
             }
@@ -116,13 +118,36 @@ class ItemController extends Controller
 
 
             $item = Item::create($request->all());
-            ItemImage::create([
-                'item_id' => $item->id,
-                'image' => $this->imageProcess($request)
-            ]);
+            $itemImages = ItemImage::whereIn('validation', "false")->get();
+            foreach ($itemImages as $itemImage) { // processing image with validation = false
+                ItemImageTransaction::create([
+                    'item_id' => $item->id,
+                    'item_image_id' => $itemImage->id
+                ]);
+
+                $itemImage->validation = true;
+                $itemImage->update();
+            }
+
             return redirect()->route('items.home')->with($flashMsg);
         } catch (ModelNotFoundException | \Exception $e) {
             dd($e);
+        }
+    }
+
+    public function storeImage(Request $request)
+    {
+        try {
+            ItemImage::create([
+                'image' => $this->imageProcess($request)
+            ]);
+
+            return response()->json([
+                'success' => 200,
+                'message' => 'Image has been created!'
+            ]);
+        } catch (\ErrorException $e) {
+
         }
     }
 
@@ -158,7 +183,7 @@ class ItemController extends Controller
                 $img = $item->itemImage->image;
                 // delete image
                 $fileStorage = Storage::disk('admin_items');
-                $fileStorageThumbnailOrderings = Storage::disk('admin_item_thumbnail_orderings');
+                $fileStorageThumbnailOrderings = Storage::disk('admin_item_thumbnail_ordering');
                 $fileStorageThumbnailLatest = Storage::disk('admin_item_thumbnail_latest');
 
                 if ($fileStorage->exists($img)) {
@@ -180,6 +205,26 @@ class ItemController extends Controller
             return redirect()->route('items.home')->with($flashMsg);
         } catch (\Exception $e) {
 
+        }
+    }
+
+    private function destroyImage()
+    {
+        $images = ItemImage::where('validation', 'false')->get();
+        if (isset($images)) {
+            foreach ($images as $img) {
+                $fileStorage = Storage::disk('admin_items');
+                $fileStorageThumbnailOrderings = Storage::disk('admin_item_thumbnail_ordering');
+                $fileStorageThumbnailLatest = Storage::disk('admin_item_thumbnail_latest');
+
+                if ($fileStorage->exists($img->image)) {
+                    $fileStorage->delete($img->image);
+                    $fileStorageThumbnailLatest->delete($img->image);
+                    $fileStorageThumbnailOrderings->delete($img->image);
+                }
+
+                $img->delete();
+            }
         }
     }
 
