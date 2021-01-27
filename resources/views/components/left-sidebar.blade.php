@@ -8,7 +8,7 @@
         <!-- User profile -->
         <div class="user-profile">
             <!-- User profile image -->
-            <div class="profile-img"><img src="{{ asset('assets/images/users/profile.png')  }}" alt="user"/>
+            <div class="profile-img"><img src="{{ asset('assets/images/users/admin.png')  }}" alt="user"/>
                 <!-- this is blinking heartbit-->
                 <div class="notify setpos"><span class="heartbit"></span> <span class="point"></span></div>
             </div>
