@@ -12,15 +12,15 @@ class DashboardController extends Controller
     {
         $data = [
             'breadCrumbs' => "Dashboard",
-            'product_overview' => $this->product_overview()
+            'productOverviews' => $this->product_overview()
         ];
 
-        return response()->json($data);
+//        return response()->json($data);
         return view('dashboard.home')->with($data);
     }
 
     private function product_overview()
     {
-        return CustomerTransaction::with('item')->latest()->limit(5)->get();
+        return CustomerTransaction::with('item.itemImage', 'customer')->latest()->limit(4)->get();
     }
 }

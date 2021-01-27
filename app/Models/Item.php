@@ -30,7 +30,7 @@ class Item extends Model
 
     public function shipProviderTransaction()
     {
-        return $this->hasMany(ShipProviderTransaction::class);
+        return $this->hasOne(ShipProviderTransaction::class);
     }
 
     public function getNameAttribute($value)

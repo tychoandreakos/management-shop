@@ -1,4 +1,3 @@
-
 <div class="card-body p-0 collapse show text-center">
     <div id="myCarousel2" class="carousel slide" data-ride="carousel">
         <!-- Carousel items -->
