@@ -83,7 +83,7 @@
     @include('components.elements.input-currency')
     <script>
         (async function () {
-            const path = "{{ route('items.autocomplete') }}";
+            const path = "{{ route('products.autocomplete') }}";
             let elData = [];
             const asyncExample = async () => {
                 let data;
@@ -96,7 +96,7 @@
             };
 
             const globalData = await asyncExample();
-            const nameCt = globalData.map(item => `${item.name}__${item.id}__${item.quantity}__${item.price}__${item.sold}__${item.description}`)
+            const nameCt = globalData.map(item => `${item.item.name}__${item.item.id}__${item.item.quantity}__${item.item.price}__${item.item.sold}__${item.item.description}`)
 
             const substringMatcher = function (strs) {
                 return function findMatches(q, cb) {

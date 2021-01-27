@@ -38,7 +38,7 @@ define('CUSTOMERTRANSACTION', 'orderings');
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
-Route::get('/re', function() {
+Route::get('/re', function () {
     return view('auth.register');
 });
 
@@ -140,6 +140,7 @@ Route::middleware('auth')->group(function () {
             Route::delete('/delete/{id}', [ItemTransactionController::class, 'destroy'])->name('.delete');
             Route::get('/edit/{id}', [ItemTransactionController::class, 'edit'])->name('.edit');
             Route::patch('/update/{id}', [ItemTransactionController::class, 'update'])->name('.update');
+            Route::get('/autocomplete', [ItemTransactionController::class, 'autocomplete'])->name('.autocomplete');
         });
     });
     Route::prefix(CUSTOMERTRANSACTION)->group(function () {

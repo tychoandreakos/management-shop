@@ -46,9 +46,9 @@ class CustomerTransactionController extends Controller
                 'message' => 'Congratulation your item has been created!'
             ];
 
-            $customer = Customer::find($request->get("customer_id"));
+            $customer = Customer::find($request->get("customer_id"))->first();
             $item = Item::with(['itemTransaction.brand', 'itemTransaction.spesificationItem'])->where('id', $request->get('item_id'))->first();
-            $shipProvider = ShipProvider::find($request->get("ship_provider_id"));
+            $shipProvider = ShipProvider::find($request->get("ship_provider_id"))->first();
             $ordering_number = $request->get("ordering_number"); // need automate the ordering number if it's empty
             $brand = $item->itemTransaction->brand;
             $specification = $item->itemTransaction->spesificationItem;
@@ -58,14 +58,14 @@ class CustomerTransactionController extends Controller
 
             if (!is_null($customer) && !is_null($item) && !is_null($shipProvider)) {
                 CustomerTransaction::create([
-                    'customer_id' => $request->get("customer_id"),
-                    'item_id' => $request->get("item_id"),
+                    'customer_id' => $customer->id,
+                    'item_id' => $item->id,
                 ]);
 
                 ShipProviderTransaction::create([
-                    'ship_provider_id' => $request->get('ship_provider_id'),
-                    'item_id' => $request->get('item_id'),
-                    'customer_id' => $request->get("customer_id"),
+                    'ship_provider_id' => $shipProvider->id,
+                    'item_id' => $item->id,
+                    'customer_id' => $customer->id,
                     'ordering_number' => $ordering_number,
                     'service_type' => "EXPRESS",
                     'qty_buy' => $request->get('qty_buy'),

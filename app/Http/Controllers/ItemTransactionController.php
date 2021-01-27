@@ -268,4 +268,10 @@ class ItemTransactionController extends Controller
         } catch (ModelNotFoundException $e) {
         }
     }
+
+    public function autocomplete(Request $request)
+    {
+        $data = ItemTransaction::with('item')->latest()->get();
+        return response()->json($data);
+    }
 }
