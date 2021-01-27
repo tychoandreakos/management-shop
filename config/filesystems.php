@@ -49,6 +49,13 @@ return [
             'visibility' => 'public'
         ],
 
+        'admin_item_thumbnails' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/admin/items/thumbnail'),
+            'url' => env('APP)URL') . '/assets/admin/items/thumbnail',
+            'visibility' => 'public'
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

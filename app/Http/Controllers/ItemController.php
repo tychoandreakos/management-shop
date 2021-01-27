@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class ItemController extends Controller
 {
@@ -52,21 +53,50 @@ class ItemController extends Controller
         ]);
     }
 
+    /**
+     * @param $image
+     * @param $path
+     * @param $name
+     * @param $size
+     *
+     * Reference: https://appdividend.com/2018/04/13/laravel-image-intervention-tutorial-with-example/
+     * @throws \Exception
+     */
+    private function imageResize($image, $name, $size)
+    {
+        try {
+            $path = Storage::disk('admin_item_thumbnails')->path($name);
+            $thumbnailImage = Image::make($image)->resize($size["width"], $size["height"]);
+            $thumbnailImage->save($path);
+        } catch (\ErrorException $e) {
+            throw new \Exception($e);
+        }
+    }
+
 
     /**
      * @param $request
      *
      * Reference: https://medium.com/@mactavish10101/how-to-upload-images-in-laravel-7-7a7f9982ebba
+     * @throws \Exception
      */
     private function imageProcess($request)
     {
         if ($request->hasFile('image')) {
             // store image
-            if ($request->file('image')->isValid()) {
+            $image = $request->file('image');
+            $path = "/public/admin/items";
+            $size = [
+                "width" => 150,
+                "height" => 150
+            ];
+
+            if ($image->isValid()) {
                 $extension = $request->image->extension();
                 $fileName = join("-", explode(" ", strtolower($request->get('name')))) ?? strtolower($request->get("name"));
                 $name = $fileName . "-" . Carbon::now()->toISOString() . "." . $extension;
-                $request->image->storeAs('/public/admin/items', $name);
+                $this->imageResize($image, $name, $size);
+                $request->image->storeAs($path, $name);
 
                 return $name;
             }
@@ -90,8 +120,8 @@ class ItemController extends Controller
                 'image' => $this->imageProcess($request)
             ]);
             return redirect()->route('items.home')->with($flashMsg);
-        } catch (ModelNotFoundException $e) {
-
+        } catch (ModelNotFoundException | \Exception $e) {
+            dd($e);
         }
     }
 
@@ -143,7 +173,7 @@ class ItemController extends Controller
             $item->update($request->all());
             return redirect()->route('items.home')->with($flashMsg);
         } catch (\Exception $e) {
-            dd($e);
+
         }
     }
 
