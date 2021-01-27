@@ -15,7 +15,6 @@ class DashboardController extends Controller
             'productOverviews' => $this->product_overview()
         ];
 
-//        return response()->json($data);
         return view('dashboard.home')->with($data);
     }
 
