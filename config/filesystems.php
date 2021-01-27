@@ -49,10 +49,17 @@ return [
             'visibility' => 'public'
         ],
 
-        'admin_item_thumbnails' => [
+        'admin_item_thumbnail_latest' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/admin/items/thumbnail'),
-            'url' => env('APP)URL') . '/assets/admin/items/thumbnail',
+            'root' => storage_path('app/public/admin/items/thumbnail/latest'),
+            'url' => env('APP)URL') . '/assets/admin/items/thumbnail/latest',
+            'visibility' => 'public'
+        ],
+
+        'admin_item_thumbnail_ordering' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/admin/items/thumbnail/ordering'),
+            'url' => env('APP)URL') . '/assets/admin/items/thumbnail/ordering',
             'visibility' => 'public'
         ],
 

@@ -15,8 +15,12 @@
                 <h4 class="m-b-30">Brand New Chair</h4>
             </div>
             <div class="carousel-item flex-column carousel-item-next carousel-item-left">
-                <img src="../assets/images/gallery/chair4.jpg" alt="user">
-                <h4 class="m-b-30">Brand New Chair</h4>
+                @isset($latestProduct->itemImage->image)
+                <img
+                    src="{{ \Illuminate\Support\Facades\Storage::disk('admin_item_thumbnail_latest')->url($latestProduct->itemImage->image)  }}"
+                    alt="user">
+                <h4 class="m-b-30 p-4">{{ $latestProduct->name  }}</h4>
+                @endisset
             </div>
         </div>
 

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\CustomerTransaction;
-use App\Models\ItemTransaction;
-use Illuminate\Http\Request;
+use App\Models\Item;
+
 
 class DashboardController extends Controller
 {
@@ -12,9 +12,11 @@ class DashboardController extends Controller
     {
         $data = [
             'breadCrumbs' => "Dashboard",
-            'productOverviews' => $this->product_overview()
+            'productOverviews' => $this->product_overview(),
+            'latestProduct' => Item::with('itemImage')->latest()->first()
         ];
 
+//        return response()->json($data);
         return view('dashboard.home')->with($data);
     }
 

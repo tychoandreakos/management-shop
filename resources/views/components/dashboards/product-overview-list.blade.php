@@ -25,10 +25,18 @@
                     <tr>
                         <td>{{ $productOverview->customer->name  }}</td>
                         <td>
-                            <img src="{{ asset('assets/images/gallery/chair.jpg')  }}" alt="iMac" width="80">
+                            @if(isset($productOverview->item->itemImage->image))
+                                <img
+                                    src="{{ \Illuminate\Support\Facades\Storage::disk('admin_item_thumbnail_ordering')->url($productOverview->item->itemImage->image)  }}"
+                                    alt="iMac" width="80">
+                            @else
+                                <img
+                                    src=""
+                                    alt="iMac" width="80">
+                            @endif
                         </td>
                         <td>{{ $productOverview->item->shipProviderTransaction->qty_buy  }}</td>
-                        <td>10-7-2017</td>
+                        <td>{{ \Carbon\Carbon::parse($productOverview->created_at)->diffForHumans()  }}</td>
                         <td>
                             <span
                                 class="label label-success font-weight-100">{{ $productOverview->item->shipProviderTransaction->sending_status  }}</span>

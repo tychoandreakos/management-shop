@@ -12,6 +12,10 @@ use Intervention\Image\Facades\Image;
 
 class ItemController extends Controller
 {
+
+    private $size_latest = ["width" => 285, "height" => 355];
+    private $size_orderings = ["width" => 150, "height" => 150,];
+
     public function index(Item $item)
     {
         $data = [
@@ -62,10 +66,10 @@ class ItemController extends Controller
      * Reference: https://appdividend.com/2018/04/13/laravel-image-intervention-tutorial-with-example/
      * @throws \Exception
      */
-    private function imageResize($image, $name, $size)
+    private function imageResize($image, $name, $size, $path)
     {
         try {
-            $path = Storage::disk('admin_item_thumbnails')->path($name);
+            $path = Storage::disk($path)->path($name);
             $thumbnailImage = Image::make($image)->resize($size["width"], $size["height"]);
             $thumbnailImage->save($path);
         } catch (\ErrorException $e) {
@@ -86,16 +90,13 @@ class ItemController extends Controller
             // store image
             $image = $request->file('image');
             $path = "/public/admin/items";
-            $size = [
-                "width" => 150,
-                "height" => 150
-            ];
 
             if ($image->isValid()) {
                 $extension = $request->image->extension();
                 $fileName = join("-", explode(" ", strtolower($request->get('name')))) ?? strtolower($request->get("name"));
                 $name = $fileName . "-" . Carbon::now()->toISOString() . "." . $extension;
-                $this->imageResize($image, $name, $size);
+                $this->imageResize($image, $name, $this->size_latest, 'admin_item_thumbnail_latest');
+                $this->imageResize($image, $name, $this->size_orderings, 'admin_item_thumbnail_ordering');
                 $request->image->storeAs($path, $name);
 
                 return $name;
@@ -157,8 +158,13 @@ class ItemController extends Controller
                 $img = $item->itemImage->image;
                 // delete image
                 $fileStorage = Storage::disk('admin_items');
+                $fileStorageThumbnailOrderings = Storage::disk('admin_item_thumbnail_orderings');
+                $fileStorageThumbnailLatest = Storage::disk('admin_item_thumbnail_latest');
+
                 if ($fileStorage->exists($img)) {
                     $fileStorage->delete($img);
+                    $fileStorageThumbnailLatest->delete($img);
+                    $fileStorageThumbnailOrderings->delete($img);
                 }
 
                 $filenameImg = $this->imageProcess($request);
@@ -191,8 +197,13 @@ class ItemController extends Controller
             if (isset($item->itemImage)) {
                 $image = ItemImage::where('item_id', $id)->first();
                 $imgFile = Storage::disk('admin_items');
+                $fileStorageThumbnailOrderings = Storage::disk('admin_item_thumbnail_orderings');
+                $fileStorageThumbnailLatest = Storage::disk('admin_item_thumbnail_latest');
+
                 if ($imgFile->exists($image->image)) {
                     $imgFile->delete($image->image);
+                    $fileStorageThumbnailOrderings->delete($image->image);
+                    $fileStorageThumbnailLatest->delete($image->image);
                 }
                 $image->delete();
             }
