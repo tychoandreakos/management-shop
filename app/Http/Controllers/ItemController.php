@@ -261,22 +261,29 @@ class ItemController extends Controller
             'message' => 'Congratulation your item has been deleted!'
         ];
         try {
-            $item = Item::with('itemImage')->where('id', $id)->first();
+            $item = Item::find($id);
 
             // remove image on folder
-            if (isset($item->itemImage)) {
-                $image = ItemImage::where('item_id', $id)->first();
-                $imgFile = Storage::disk('admin_items');
-                $fileStorageThumbnailOrderings = Storage::disk('admin_item_thumbnail_ordering');
-                $fileStorageThumbnailLatest = Storage::disk('admin_item_thumbnail_latest');
 
-                if ($imgFile->exists($image->image)) {
-                    $imgFile->delete($image->image);
-                    $fileStorageThumbnailOrderings->delete($image->image);
-                    $fileStorageThumbnailLatest->delete($image->image);
+            $imageModel = ItemImageTransaction::where('item_id', $id)->get();
+            if (isset($imageModel)) {
+                foreach ($imageModel as $imageL) {
+                    $image = $imageL->itemImage;
+                    $imgFile = Storage::disk('admin_items');
+                    $fileStorageThumbnailOrderings = Storage::disk('admin_item_thumbnail_ordering');
+                    $fileStorageThumbnailLatest = Storage::disk('admin_item_thumbnail_latest');
+
+                    if ($imgFile->exists($image->image)) {
+                        $imgFile->delete($image->image);
+                        $fileStorageThumbnailOrderings->delete($image->image);
+                        $fileStorageThumbnailLatest->delete($image->image);
+                    }
+
+                    ItemImage::find($imageL->item_image_id)->delete();
+                    $image->delete();
                 }
-                $image->delete();
             }
+
 
             $item->delete();
             return redirect()->route('items.home')->with($flashMsg);
