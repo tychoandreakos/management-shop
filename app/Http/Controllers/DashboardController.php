@@ -13,7 +13,7 @@ class DashboardController extends Controller
         $data = [
             'breadCrumbs' => "Dashboard",
             'productOverviews' => $this->product_overview(),
-            'latestProduct' => Item::with('itemImage')->latest()->first()
+            'latestProduct' => Item::with('itemImageTransaction.itemImage')->latest()->first()
         ];
 
 //        return response()->json($data);
