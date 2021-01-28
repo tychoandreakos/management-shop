@@ -23,6 +23,11 @@ class Item extends Model
         return $this->hasOne(ItemImage::class);
     }
 
+    public function itemImageTransaction()
+    {
+        return $this->hasMany(ItemImageTransaction::class);
+    }
+
     public function customerTransaction()
     {
         return $this->hasMany(CustomerTransaction::class);

@@ -22,9 +22,10 @@ class ItemController extends Controller
         $data = [
             'breadCrumbs' => 'Item Lists',
             'title' => 'Items Gallery',
-            'items' => $item->with('itemImage')->latest()->paginate(20),
+            'items' => $item->with('itemImageTransaction.itemImage')->latest()->paginate(20),
         ];
 
+        return response()->json($data);
         return view('item.home')->with($data);
     }
 
@@ -118,7 +119,7 @@ class ItemController extends Controller
 
 
             $item = Item::create($request->all());
-            $itemImages = ItemImage::whereIn('validation', "false")->get();
+            $itemImages = ItemImage::where('validation', "false")->get();
             foreach ($itemImages as $itemImage) { // processing image with validation = false
                 ItemImageTransaction::create([
                     'item_id' => $item->id,
@@ -131,7 +132,7 @@ class ItemController extends Controller
 
             return redirect()->route('items.home')->with($flashMsg);
         } catch (ModelNotFoundException | \Exception $e) {
-            dd($e);
+
         }
     }
 

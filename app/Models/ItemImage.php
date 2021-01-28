@@ -18,4 +18,9 @@ class ItemImage extends Model
         return $this->belongsTo(Item::class);
     }
 
+    public function itemImageTransaction()
+    {
+        return $this->hasMany(ItemImageTransaction::class);
+    }
+
 }
