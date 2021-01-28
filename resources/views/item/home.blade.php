@@ -3,11 +3,8 @@
 @section('main')
     @include('components.customers.breadcrumbs')
     @include('components.succes-message')
-    <div class="container-fluid">
-        @if(session('list'))
-            @include('components.items.list-page')
-        @else
-            @include('components.items.gallery-page')
-        @endif
+    <div class="container-fluid" id="item">
+        @include('components.items.gallery-page')
+{{--        @include('components.items.list-page')--}}
     </div>
 @endsection
