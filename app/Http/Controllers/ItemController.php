@@ -133,25 +133,28 @@ class ItemController extends Controller
                 'message' => 'Congratulation your item has been created!'
             ];
             $this->validateHandler($request);
-
-
             $item = Item::create($request->all());
-            $itemImages = ItemImage::where('validation', "false")->get();
-            if (isset($itemImages)) {
-                foreach ($itemImages as $itemImage) { // processing image with validation = false
-                    ItemImageTransaction::create([
-                        'item_id' => $item->id,
-                        'item_image_id' => $itemImage->id
-                    ]);
-
-                    $itemImage->validation = true;
-                    $itemImage->update();
-                }
-            }
+            $this->imageCheckerAndUpdate($item->id);
 
             return redirect()->route('items.home')->with($flashMsg);
         } catch (ModelNotFoundException | \Exception $e) {
 
+        }
+    }
+
+    private function imageCheckerAndUpdate($id)
+    {
+        $itemImages = ItemImage::where('validation', "false")->get();
+        if (isset($itemImages)) {
+            foreach ($itemImages as $itemImage) { // processing image with validation = false
+                ItemImageTransaction::create([
+                    'item_id' => $id,
+                    'item_image_id' => $itemImage->id
+                ]);
+
+                $itemImage->validation = true;
+                $itemImage->update();
+            }
         }
     }
 
@@ -180,7 +183,8 @@ class ItemController extends Controller
                 'titleSecond' => "Item Info",
                 'item' => Item::with('itemImageTransaction.itemImage')->where('id', $id)->first()
             ];
-//            return response()->json($data);
+
+            $this->destroyImage();
             return view('item.edit')->with($data);
         } catch (ModelNotFoundException $e) {
 
@@ -196,31 +200,9 @@ class ItemController extends Controller
                 'message' => 'Congratulation your item has been created!'
             ];
             $this->validateHandler($request);
-            $item = Item::with('itemImage')->where('id', $id)->first();
+            $item = Item::find($id);
+            $this->imageCheckerAndUpdate($id);
 
-            // image processing
-            if ($request->hasFile('image')) {
-                $img = $item->itemImage->image;
-                // delete image
-                $fileStorage = Storage::disk('admin_items');
-                $fileStorageThumbnailOrderings = Storage::disk('admin_item_thumbnail_ordering');
-                $fileStorageThumbnailLatest = Storage::disk('admin_item_thumbnail_latest');
-
-                if ($fileStorage->exists($img)) {
-                    $fileStorage->delete($img);
-                    $fileStorageThumbnailLatest->delete($img);
-                    $fileStorageThumbnailOrderings->delete($img);
-                }
-
-                $filenameImg = $this->imageProcess($request);
-                $image = ItemImage::where('item_id', $id)->first();
-                $image->update([
-                    'image' => $filenameImg
-                ]);
-
-            }
-
-            unset($request['image']);
             $item->update($request->all());
             return redirect()->route('items.home')->with($flashMsg);
         } catch (\Exception $e) {
@@ -263,7 +245,8 @@ class ItemController extends Controller
                     $fileStorageThumbnailLatest->delete($image->image);
                 }
 
-                ItemImageTransaction::where('item_image_id', $image->id)->delete();
+                $itemImageTransaction = ItemImageTransaction::where('item_image_id', $image->id)->first();
+                if (isset($itemImageTransaction)) $itemImageTransaction->delete();
                 $image->delete();
             }
         } catch (\ErrorException $e) {
