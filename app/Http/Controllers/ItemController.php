@@ -178,7 +178,7 @@ class ItemController extends Controller
                 'breadCrumbs' => 'Update item',
                 'title' => 'Please fill the input form below',
                 'titleSecond' => "Item Info",
-                'item' => Item::with('itemImage')->where('id', $id)->first()
+                'item' => Item::with('itemImageTransaction.itemImage')->where('id', $id)->first()
             ];
 //            return response()->json($data);
             return view('item.edit')->with($data);
@@ -248,6 +248,28 @@ class ItemController extends Controller
         }
     }
 
+    public function destroyImageWithName(Request $request)
+    {
+        try {
+            $image = ItemImage::where('image', $request->name)->first();
+            if (isset($image)) {
+                $imgFile = Storage::disk('admin_items');
+                $fileStorageThumbnailOrderings = Storage::disk('admin_item_thumbnail_ordering');
+                $fileStorageThumbnailLatest = Storage::disk('admin_item_thumbnail_latest');
+
+                if ($imgFile->exists($image->image)) {
+                    $imgFile->delete($image->image);
+                    $fileStorageThumbnailOrderings->delete($image->image);
+                    $fileStorageThumbnailLatest->delete($image->image);
+                }
+
+                ItemImageTransaction::where('item_image_id', $image->id)->delete();
+                $image->delete();
+            }
+        } catch (\ErrorException $e) {
+        }
+    }
+
     public function destroy($id)
     {
         $flashMsg = [
@@ -262,7 +284,7 @@ class ItemController extends Controller
             if (isset($item->itemImage)) {
                 $image = ItemImage::where('item_id', $id)->first();
                 $imgFile = Storage::disk('admin_items');
-                $fileStorageThumbnailOrderings = Storage::disk('admin_item_thumbnail_orderings');
+                $fileStorageThumbnailOrderings = Storage::disk('admin_item_thumbnail_ordering');
                 $fileStorageThumbnailLatest = Storage::disk('admin_item_thumbnail_latest');
 
                 if ($imgFile->exists($image->image)) {

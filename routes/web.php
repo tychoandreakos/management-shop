@@ -74,6 +74,7 @@ Route::middleware('auth')->group(function () {
                 Route::post('/post-image', [ItemController::class, 'storeImage'])->name('.store_image');
                 Route::get('/list', [ItemController::class, 'list'])->name('.list');
                 Route::get('/grid', [ItemController::class, 'grid'])->name('.grid');
+                Route::post('/remove-image', [ItemController::class, 'destroyImageWithName'])->name('.destroyImage');
             });
         });
 

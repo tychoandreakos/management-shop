@@ -22,8 +22,34 @@
                 maxFilesize: 12,
                 acceptedFiles: ".jpeg,.jpg,.png,.gif",
                 addRemoveLinks: true,
-                headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') },
+                headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
                 timeout: 5000,
+                removedFile: function () {
+                    console.log('sau')
+                },
+                init: function () {
+                    @if(isset($item))
+                    @foreach($item->itemImageTransaction as $imageTransaction)
+                    @php
+                        $image = $imageTransaction->itemImage->image;
+                        $extension = explode(".", $image);
+                        $imagePath = \Illuminate\Support\Facades\Storage::disk('admin_items');
+                        $sizeFile = $imagePath->size($image);
+                    @endphp
+                    var mockFile = {
+                        name: `{{$image}}`,
+                        size: `{{ $sizeFile  }}`,
+                        type: `image/{{ $extension[count($extension) - 1] }}`
+                    }
+
+
+                    this.files.push(mockFile)
+                    this.emit("addedfile", mockFile);
+                    this.emit("thumbnail", mockFile, `{{ $imagePath->url($image)  }}`);
+                    this.emit("complete", mockFile);
+                    @endforeach
+                    @endif
+                },
                 success: function (file, response) {
                     console.log(response);
                 },
@@ -31,6 +57,28 @@
                     return false;
                 }
             });
+            $('.dz-remove').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const name = $(this).parent().find(".dz-filename > span").text();
+                $.ajax({
+                    url: `{{ route('items.destroyImage')  }}`,
+                    data: {
+                        name,
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    },
+                    type: 'POST',
+                    success: function () {
+                        console.log('success!')
+                    },
+                    error: function () {
+                        console.error('failed!');
+                    }
+                })
+            })
         })
     </script>
 @endpush
