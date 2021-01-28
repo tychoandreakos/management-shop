@@ -9,17 +9,17 @@
 @push('scripts')
     <script>
         $(document).ready(function () {
-            const gridLink = function () {
-            };
-
-            const listLink = function () {
-
-            }
-
-
             $('#add-item').click(function () {
                 window.location.href = `{{ route('items.create')  }}`
             });
+
+            $('#_grid').click(function () {
+                window.location.href = `{{ route('items.grid')  }}`
+            })
+
+            $('#_list').click(function () {
+                window.location.href = `{{ route("items.list")  }}`
+            })
         })
 
     </script>

@@ -72,6 +72,8 @@ Route::middleware('auth')->group(function () {
                 Route::get('/autocomplete', [ItemController::class, 'autocomplete'])->name('.autocomplete');
                 Route::get('/autocomplete-with-specification', [ItemController::class, 'autocompleteWithSpesification'])->name('.autocompleteWSpec');
                 Route::post('/post-image', [ItemController::class, 'storeImage'])->name('.store_image');
+                Route::get('/list', [ItemController::class, 'list'])->name('.list');
+                Route::get('/grid', [ItemController::class, 'grid'])->name('.grid');
             });
         });
 

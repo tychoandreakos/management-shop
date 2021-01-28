@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\ItemImage;
 use App\Models\ItemImageTransaction;
+use App\Models\Settings;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -19,24 +20,19 @@ class ItemController extends Controller
 
     public function index(Item $item)
     {
+        $setting = Settings::first();
+        if (!isset($setting)) {
+            Settings::create([]);
+        }
+
         $data = [
             'breadCrumbs' => 'Item Lists',
             'title' => 'Items Gallery',
             'items' => $item->with('itemImageTransaction.itemImage')->latest()->paginate(20),
+            'list_type' => $setting->list_type ?? 'grid'
         ];
 
-//        return response()->json($data);
         return view('item.home')->with($data);
-    }
-
-    public function indexList(Item $item)
-    {
-        $data = [
-            'breadCrumbs' => 'Item Lists',
-            'titleList' => 'Items List',
-            'list' => true
-        ];
-        return redirect()->route('items.home')->with($data);
     }
 
     public function create()
@@ -49,6 +45,27 @@ class ItemController extends Controller
 
         $this->destroyImage();
         return view('item.create')->with($data);
+    }
+
+    public function list()
+    {
+        $setting = Settings::first();
+        $setting->update([
+            'list_type' => 'list'
+        ]);
+
+
+        return redirect()->route('items.home')->with(['list_type' => $setting->list_type]);
+    }
+
+    public function grid()
+    {
+        $setting = Settings::first();
+        $setting->update([
+            'list_type' => 'grid'
+        ]);
+
+        return redirect()->route('items.home')->with(['list_type' => $setting->list_type]);
     }
 
     protected function validateHandler($request)
