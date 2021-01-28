@@ -25,7 +25,7 @@ class ItemController extends Controller
             'items' => $item->with('itemImageTransaction.itemImage')->latest()->paginate(20),
         ];
 
-        return response()->json($data);
+//        return response()->json($data);
         return view('item.home')->with($data);
     }
 
@@ -120,14 +120,16 @@ class ItemController extends Controller
 
             $item = Item::create($request->all());
             $itemImages = ItemImage::where('validation', "false")->get();
-            foreach ($itemImages as $itemImage) { // processing image with validation = false
-                ItemImageTransaction::create([
-                    'item_id' => $item->id,
-                    'item_image_id' => $itemImage->id
-                ]);
+            if (isset($itemImages)) {
+                foreach ($itemImages as $itemImage) { // processing image with validation = false
+                    ItemImageTransaction::create([
+                        'item_id' => $item->id,
+                        'item_image_id' => $itemImage->id
+                    ]);
 
-                $itemImage->validation = true;
-                $itemImage->update();
+                    $itemImage->validation = true;
+                    $itemImage->update();
+                }
             }
 
             return redirect()->route('items.home')->with($flashMsg);

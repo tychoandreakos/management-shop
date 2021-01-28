@@ -15,9 +15,15 @@
         </div>
     </div>
     @foreach($items as $item)
-        @php
-            $image = \Illuminate\Support\Facades\Storage::disk('admin_items')->url($item->itemImage->image)
-        @endphp
+        @if(isset($item->itemImageTransaction[0]))
+            @php
+                $image = \Illuminate\Support\Facades\Storage::disk('admin_items')->url($item->itemImageTransaction[0]->itemImage->image)
+            @endphp
+        @else
+            @php
+                $image = asset('assets/images/big/img1.jpg')
+            @endphp
+        @endif
         @include('components.items.item')
     @endforeach
 </div>

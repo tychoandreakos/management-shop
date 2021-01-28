@@ -2,14 +2,10 @@
     <div class="card">
         <div class="el-card-item">
             <div class="el-card-avatar el-overlay-1">
-                @if(isset($item->itemImage))
-                    <img
-                        class="img"
-                        src="{{ $image }}"
-                        alt="user"/>
-                @else
-                    <img src="{{asset('assets/images/big/img1.jpg')}}" alt="user"/>
-                @endif
+                <img
+                    class="img"
+                    src="{{ $image }}"
+                    alt="user"/>
                 <div class="el-overlay">
                     <ul class="el-info">
                         <li><a class="btn default btn-outline image-popup-vertical-fit"
