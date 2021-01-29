@@ -28,8 +28,18 @@
                     console.log('sau')
                 },
                 init: function () {
-                    @if(isset($item))
-                    @foreach($item->itemImageTransaction as $imageTransaction)
+                    @if(isset($item) || isset($itemTransaction))
+                    @php
+                        $itemImageTransaction = [];
+                        if(isset($item)) {
+                            $itemImageTransaction = $item->itemImageTransaction;
+                        }
+
+                        if(isset($itemTransaction)) {
+                            $itemImageTransaction = $itemTransaction->item->itemImageTransaction;
+                        }
+                    @endphp
+                    @foreach($itemImageTransaction as $imageTransaction)
                     @php
                         $image = $imageTransaction->itemImage->image;
                         $extension = explode(".", $image);

@@ -56,6 +56,8 @@ class ItemTransactionController extends Controller
             'titleSecond' => "Product Info",
             'categories' => Category::all(),
         ];
+
+        $this->destroyImage();
         return view('item_transaction.create')->with($data);
     }
 
@@ -86,6 +88,8 @@ class ItemTransactionController extends Controller
                     'description' => $request->get('description'),
                     'sold' => $request->get("sold")
                 ]);
+
+                $this->imageCheckerAndUpdate($item->id);
             }
 
             if (is_null($brand)) {
@@ -185,6 +189,8 @@ class ItemTransactionController extends Controller
                     'description' => $request->get('description'),
                     'sold' => $request->get("sold")
                 ]);
+
+                $this->imageCheckerAndUpdate($item->id);
             }
 
             if (is_null($brand)) {
@@ -220,6 +226,9 @@ class ItemTransactionController extends Controller
                 $this->insertOrEdit($brand, $request, ['bname', 'location', 'founded']);
                 $this->insertOrEdit($itemTransaction, $request, ['property']);
 
+                // Image edit / update
+                $this->imageCheckerAndUpdate($item->id);
+
                 //first delete all category transacion
                 $sp->categoryTransaction()->delete();
 
@@ -244,9 +253,12 @@ class ItemTransactionController extends Controller
                 'breadCrumbs' => 'Update Product',
                 'title' => 'Please fill the input form below',
                 'titleSecond' => "Product Info",
-                'itemTransaction' => ItemTransaction::with(['item', 'brand', 'spesificationItem'])->where('id', '=', $id)->get()[0],
+                'itemTransaction' => ItemTransaction::with(['item.itemImageTransaction.itemImage', 'brand', 'spesificationItem'])->where('id', '=', $id)->get()[0],
                 'categories' => Category::all()
             ];
+
+            $this->destroyImage();
+            
             return view('item_transaction.edit')->with($data);
         } catch (ModelNotFoundException $e) {
 
@@ -264,6 +276,7 @@ class ItemTransactionController extends Controller
             $itemTransaction = ItemTransaction::find($id);
             $specificationItem = SpesificationItem::find($itemTransaction->spesification_item_id);
 
+            $this->removeImageStorage($id);
             $itemTransaction->delete();
             $specificationItem->delete();
 

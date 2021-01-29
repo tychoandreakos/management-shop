@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
-trait ItemImage {
+trait ItemImage
+{
     private $size_latest = ["width" => 285, "height" => 355];
     private $size_orderings = ["width" => 150, "height" => 150,];
 
@@ -29,6 +30,42 @@ trait ItemImage {
             $thumbnailImage->save($path);
         } catch (\ErrorException $e) {
             throw new \Exception($e);
+        }
+    }
+
+    public function storeImage(Request $request)
+    {
+        try {
+            \App\Models\ItemImage::create([
+                'image' => $this->imageProcess($request)
+            ]);
+
+            return response()->json([
+                'success' => 200,
+                'message' => 'Image has been created!'
+            ]);
+        } catch (\ErrorException | \Exception $e) {
+
+        }
+    }
+
+    private function destroyImage()
+    {
+        $images = \App\Models\ItemImage::where('validation', 'false')->get();
+        if (isset($images)) {
+            foreach ($images as $img) {
+                $fileStorage = Storage::disk('admin_items');
+                $fileStorageThumbnailOrderings = Storage::disk('admin_item_thumbnail_ordering');
+                $fileStorageThumbnailLatest = Storage::disk('admin_item_thumbnail_latest');
+
+                if ($fileStorage->exists($img->image)) {
+                    $fileStorage->delete($img->image);
+                    $fileStorageThumbnailLatest->delete($img->image);
+                    $fileStorageThumbnailOrderings->delete($img->image);
+                }
+
+                $img->delete();
+            }
         }
     }
 
@@ -57,6 +94,34 @@ trait ItemImage {
             }
         }
     }
+
+    /**
+     * @param $id
+     *
+     * Remove storage image and delete image on the DB (itemImage)
+     */
+    private function removeImageStorage($id) {
+        // remove image on folder
+        $imageModel = ItemImageTransaction::where('item_id', $id)->get();
+        if (isset($imageModel)) {
+            foreach ($imageModel as $imageL) {
+                $image = $imageL->itemImage;
+                $imgFile = Storage::disk('admin_items');
+                $fileStorageThumbnailOrderings = Storage::disk('admin_item_thumbnail_ordering');
+                $fileStorageThumbnailLatest = Storage::disk('admin_item_thumbnail_latest');
+
+                if ($imgFile->exists($image->image)) {
+                    $imgFile->delete($image->image);
+                    $fileStorageThumbnailOrderings->delete($image->image);
+                    $fileStorageThumbnailLatest->delete($image->image);
+                }
+
+                \App\Models\ItemImage::find($imageL->item_image_id)->delete();
+                $image->delete();
+            }
+        }
+    }
+
 
     private function imageCheckerAndUpdate($id)
     {

@@ -5,3 +5,4 @@
 @include('components.item_transactions.brands')
 @include('components.item_transactions.multiselect')
 @include('components.item_transactions.spec')
+@include('components.elements.dropzone.main')

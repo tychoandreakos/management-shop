@@ -95,22 +95,6 @@ class ItemController extends Controller
         }
     }
 
-    public function storeImage(Request $request)
-    {
-        try {
-            ItemImage::create([
-                'image' => $this->imageProcess($request)
-            ]);
-
-            return response()->json([
-                'success' => 200,
-                'message' => 'Image has been created!'
-            ]);
-        } catch (\ErrorException | \Exception $e) {
-
-        }
-    }
-
     public function edit($id)
     {
         try {
@@ -147,26 +131,6 @@ class ItemController extends Controller
         }
     }
 
-    private function destroyImage()
-    {
-        $images = ItemImage::where('validation', 'false')->get();
-        if (isset($images)) {
-            foreach ($images as $img) {
-                $fileStorage = Storage::disk('admin_items');
-                $fileStorageThumbnailOrderings = Storage::disk('admin_item_thumbnail_ordering');
-                $fileStorageThumbnailLatest = Storage::disk('admin_item_thumbnail_latest');
-
-                if ($fileStorage->exists($img->image)) {
-                    $fileStorage->delete($img->image);
-                    $fileStorageThumbnailLatest->delete($img->image);
-                    $fileStorageThumbnailOrderings->delete($img->image);
-                }
-
-                $img->delete();
-            }
-        }
-    }
-
 
     public function destroy($id)
     {
@@ -178,28 +142,7 @@ class ItemController extends Controller
         try {
             $item = Item::find($id);
 
-            // remove image on folder
-
-            $imageModel = ItemImageTransaction::where('item_id', $id)->get();
-            if (isset($imageModel)) {
-                foreach ($imageModel as $imageL) {
-                    $image = $imageL->itemImage;
-                    $imgFile = Storage::disk('admin_items');
-                    $fileStorageThumbnailOrderings = Storage::disk('admin_item_thumbnail_ordering');
-                    $fileStorageThumbnailLatest = Storage::disk('admin_item_thumbnail_latest');
-
-                    if ($imgFile->exists($image->image)) {
-                        $imgFile->delete($image->image);
-                        $fileStorageThumbnailOrderings->delete($image->image);
-                        $fileStorageThumbnailLatest->delete($image->image);
-                    }
-
-                    ItemImage::find($imageL->item_image_id)->delete();
-                    $image->delete();
-                }
-            }
-
-
+            $this->removeImageStorage($id);
             $item->delete();
             return redirect()->route('items.home')->with($flashMsg);
         } catch (\Exception $e) {
