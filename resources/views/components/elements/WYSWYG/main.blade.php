@@ -2,7 +2,7 @@
     <div class="col-md-12 ">
         <div class="form-group @if($errors->has('spec')) has-danger @endif">
             <label>Specification Item*</label>
-            <textarea class="form-control" id="summary-ckeditor" rows="3"
+            <textarea class="textarea_editor form-control" rows="15"
                       name="spec">{{ isset($itemTransaction) ? $itemTransaction->spesificationItem->property : old('spec')  }}</textarea>
             @if($errors->has('spec'))
                 <small class="form-control-feedback"> This field has error. </small>
@@ -11,19 +11,18 @@
     </div>
 </div>
 
-@isset($itemTransaction)
-    <input type="text" name="id_specs" hidden value="{{$itemTransaction->spesificationItem->id}}">
-@endisset
+@push('css')
+    <link rel="stylesheet" href="{{asset('assets/plugins/html5-editor/bootstrap-wysihtml5.css')}}"/>
+@endpush
 
 
 @push('scripts')
+    <!-- wysuhtml5 Plugin JavaScript -->
+    <script src="{{asset('assets/plugins/html5-editor/wysihtml5-0.3.0.js')}}"></script>
+    <script src="{{ asset("assets/plugins/html5-editor/bootstrap-wysihtml5.js")  }}"></script>
     <script>
-        $('form input').on('keypress', function (e) {
-            return e.which !== 13;
+        $(document).ready(function () {
+            $('.textarea_editor').wysihtml5();
         });
-    </script>
-    <script src="{{ asset('assets/')  }}"></script>
-    <script>
-        CKEDITOR.replace('summary-ckeditor');
     </script>
 @endpush

@@ -258,7 +258,6 @@ class ItemTransactionController extends Controller
             ];
 
             $this->destroyImage();
-            
             return view('item_transaction.edit')->with($data);
         } catch (ModelNotFoundException $e) {
 
