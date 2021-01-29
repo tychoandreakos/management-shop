@@ -11,9 +11,12 @@ use App\Models\Product;
 use App\Models\SpesificationItem;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use App\Http\Traits\ItemImage as ItemImageTrait;
 
 class ItemTransactionController extends Controller
 {
+
+    use ItemImageTrait;
 
     private $item_rule = [
         'name' => 'required',
