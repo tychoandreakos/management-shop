@@ -12,9 +12,7 @@
     <!-- Container fluid  -->
     <!-- ============================================================== -->
     <div class="container-fluid">
-
-    @include('components.dashboards.page-content')
-    <!-- Row -->
+        <!-- Row -->
         <div class="row">
             @include('components.dashboards.graphic')
             <div class="col-lg-4 col-md-5">
