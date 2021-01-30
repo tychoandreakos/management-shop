@@ -27,7 +27,7 @@
         @include('components.items.item')
     @empty
         <div class="w-100">
-            <p class="text-center pb-2">No Data Available</p>
+            <p class="text-center pt-2">No Data Available</p>
         </div>
     @endforelse
 </div>

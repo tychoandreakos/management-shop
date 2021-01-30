@@ -67,9 +67,8 @@ class CustomerTransactionController extends Controller
                     'item_id' => $item->id,
                     'customer_id' => $customer->id,
                     'ordering_number' => $ordering_number,
-                    'service_type' => "EXPRESS",
                     'qty_buy' => $request->get('qty_buy'),
-                    'sending_status' => "SEND!"
+                    'sending_status' => $request->get('sending_status')
                 ]);
             }
 

@@ -3,13 +3,13 @@
         <div class="form-group @if($errors->has('ship_provider_id')) has-danger @endif">
             <label>Shipping Providers</label>
             <select class=" selectpicker" multiple data-live-search="true" name="ship_provider_id[]">
-            @foreach($shipProviders as $shipProvider)
-                <option value="{{ $shipProvider->id  }}">{{ $shipProvider->name }}</option>
+                @foreach($shipProviders as $shipProvider)
+                    <option value="{{ $shipProvider->id  }}">{{ $shipProvider->name }}</option>
                 @endforeach
-                </select>
-                @if($errors->has('ship_provider_id'))
-                    <small class="form-control-feedback"> This field has error. </small>
-                @endif
+            </select>
+            @if($errors->has('ship_provider_id'))
+                <small class="form-control-feedback"> This field has error. </small>
+            @endif
         </div>
     </div>
 </div>
@@ -28,7 +28,10 @@
     <div class="col-md-6">
         <div class="form-group @if($errors->has('sending_status')) has-danger @endif">
             <label>Sending Status*</label>
-
+            <select name="sending_status" class="form-control custom-select">
+                <option value="send">Send</option>
+                <option value="pending">Pending</option>
+            </select>
             @if($errors->has('sending_status'))
                 <small class="form-control-feedback"> This field has error. </small>
             @endif
