@@ -11,6 +11,7 @@
     <!-- ============================================================== -->
     <!-- Container fluid  -->
     <!-- ============================================================== -->
+
     <div class="container-fluid">
         <!-- Row -->
         <div class="row">
@@ -47,6 +48,5 @@
     <script src="{{asset('assets/plugins/morrisjs/morris.min.js')}}"></script>
     <!-- sparkline chart -->
     <script src="{{asset('assets/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
-    <script src="{{asset('assets/js/dashboard4.js')}}"></script>
 @endpush
 

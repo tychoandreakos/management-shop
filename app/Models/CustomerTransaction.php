@@ -13,11 +13,18 @@ class CustomerTransaction extends Model
 
     protected $guarded = ['id'];
 
-    public function customer() {
+    public function customer()
+    {
         return $this->belongsTo(Customer::class);
     }
 
-    public function item() {
+    public function item()
+    {
         return $this->belongsTo(Item::class)->with(['shipProviderTransaction.shipProvider']);
+    }
+
+    public function getSendingStatusAttribute($value): string
+    {
+        return ucfirst($value);
     }
 }

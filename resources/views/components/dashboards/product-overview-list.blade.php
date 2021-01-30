@@ -22,13 +22,15 @@
                     </tr>
                     </thead>
                     <tbody>
+
                     @foreach($productOverviews as $productOverview)
+
                         <tr>
                             <td>{{ $productOverview->customer->name  }}</td>
                             <td>
-                                @if(isset($productOverview->item->itemImage->image))
+                                @if(isset($productOverview->item->itemImageTransaction))
                                     <img
-                                        src="{{ \Illuminate\Support\Facades\Storage::disk('admin_item_thumbnail_ordering')->url($productOverview->item->itemImage->image)  }}"
+                                        src="{{ \Illuminate\Support\Facades\Storage::disk('admin_item_thumbnail_ordering')->url($productOverview->item->itemImageTransaction[0]->itemImage->image)  }}"
                                         alt="iMac" width="80">
                                 @else
                                     <img
@@ -39,8 +41,17 @@
                             <td>{{ $productOverview->item->shipProviderTransaction->qty_buy  }}</td>
                             <td>{{ \Carbon\Carbon::parse($productOverview->created_at)->diffForHumans()  }}</td>
                             <td>
-                            <span
-                                class="label label-success font-weight-100">{{ $productOverview->item->shipProviderTransaction->sending_status  }}</span>
+
+                                    <span
+                                        class="label
+                                        @if($productOverview->sending_status == "send")
+                                            label-success
+@else
+                                            label-warning
+                                            @endif
+                                            font-weight-100">{{ $productOverview->sending_status  }}</span>
+
+
                             </td>
                             <td><a
                                     href="javascript:void(0)" class="text-inverse" title=""
