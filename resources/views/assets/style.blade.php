@@ -1,6 +1,6 @@
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon.png')  }}">
-<title>{{ "Shop Management"  }}</title>
+<title>{{ env('APP_TITLE')  ?? "Setra App"  }}</title>
 <!-- Bootstrap Core CSS -->
 <link href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 @stack('css')
