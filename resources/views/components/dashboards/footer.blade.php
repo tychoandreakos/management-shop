@@ -1,3 +1,3 @@
-<footer class="footer">
-    © 2017 Admin Press Admin by themedesigner.in
+<footer class="footer text-center">
+    © 2021 Sentra Rajut Shop Management App By Puji Rahayu
 </footer>

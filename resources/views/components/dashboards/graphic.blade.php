@@ -18,7 +18,6 @@
                 </div>
             </div>
             <div id="morris-area-chart2" style="height: 405px;"></div>
-
         </div>
     </div>
     @include('components.dashboards.product-overview-list')
