@@ -3,10 +3,12 @@
         <li class="box-label"><a href="javascript:void(0)">All Customers <span>{{ $allCustomers  }}</span></a>
         </li>
         <li class="divider"></li>
-        @foreach($customerLabels as $customerLabel)
+        @forelse($customerLabels as $customerLabel)
             <li><a href="javascript:void(0)">{{ $customerLabel->name  }}
                     <span>{{ $customerLabel->customer_label_transaction_count  }}</span></a></li>
-        @endforeach
+        @empty
+            <p class="text-center">No Data Available</p>
+        @endforelse
 
         <li class="box-label mt-3"><a href="javascript:void(0)" data-toggle="modal"
                                       data-target="#myModal" class="btn btn-info text-white">+ Create

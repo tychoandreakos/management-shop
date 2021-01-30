@@ -23,7 +23,7 @@
             </thead>
             <tbody>
 
-            @foreach($customers as $customer)
+            @forelse($customers as $customer)
                 <tr>
                     <td>{{ $loop->iteration  }}</td>
                     <td>
@@ -43,7 +43,11 @@
                         </form>
                     </td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="5"><p class="text-center">No Data Available</p></td>
+                </tr>
+            @endforelse
 
             </tbody>
             <tfoot>

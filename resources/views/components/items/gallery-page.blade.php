@@ -14,7 +14,7 @@
             </div>
         </div>
     </div>
-    @foreach($items as $item)
+    @forelse($items as $item)
         @if(isset($item->itemImageTransaction[0]))
             @php
                 $image = \Illuminate\Support\Facades\Storage::disk('admin_items')->url($item->itemImageTransaction[0]->itemImage->image)
@@ -25,7 +25,11 @@
             @endphp
         @endif
         @include('components.items.item')
-    @endforeach
+    @empty
+        <div class="w-100">
+            <p class="text-center pb-2">No Data Available</p>
+        </div>
+    @endforelse
 </div>
 
 
