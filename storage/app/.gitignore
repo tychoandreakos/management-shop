@@ -1,3 +1,9 @@
 *
 !public/
+!public/admin
+!public/admin/customers
+!public/admin/items
+!public/admin/items/thumbnail
+!public/admin/items/thumbnail/latest
+!public/admin/items/thumbnail/ordering
 !.gitignore
