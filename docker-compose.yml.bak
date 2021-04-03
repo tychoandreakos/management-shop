@@ -14,7 +14,7 @@ services:
     volumes:
       - ./:/var/www
     networks:
-      - management_net
+      - management_shop
 
   db:
     image: mysql:5.7
@@ -30,7 +30,7 @@ services:
     volumes:
       - ./docker-compose/mysql:/var/lib/mysql
     networks:
-      - management_net 
+      - management_shop 
 
   nginx:
     image: nginx:alpine
@@ -42,21 +42,8 @@ services:
       - ./:/var/www
       - ./docker-compose/nginx:/etc/nginx/conf.d/
     networks:
-      - management_net
-
-  ngrok:
-    image: wernight/ngrok
-    container_name: management-ngrok
-    ports:
-      - 4040:4040
-    environment:
-      NGROK_AUTH: 1gi4Ag2A9DG5orkLXwWaLKx7HtQ_7g2rYn9GbWt7PZXa8gs7X
-      NGROK_REGION: ap
-      NGROK_PORT: nginx:80
-      NGROK_DEBUG: "true"
-    networks:
-      - management_net
+      - management_shop
 
 networks:
-  management_net:
+  management_shop:
     driver: bridge
