@@ -19,7 +19,7 @@
                     <img
                         src="{{ \Illuminate\Support\Facades\Storage::disk('admin_item_thumbnail_latest')->url($latestProduct->itemImageTransaction[0]->itemImage->image)  }}"
                         alt="user">
-                    <h4 class="m-b-30 p-4">{{ $latestProduct->name  }}</h4>
+                    <h5 class="m-b-30 p-2">{{ $latestProduct->name  }}</h5>
                 @else
                     <p class="align-items-center">No data available</p>
                 @endif
