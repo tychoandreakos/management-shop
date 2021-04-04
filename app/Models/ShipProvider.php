@@ -9,7 +9,7 @@ class ShipProvider extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
+    protected $guarded = ["id"];
 
     public function shipProviderTransaction()
     {
@@ -17,13 +17,18 @@ class ShipProvider extends Model
     }
 
     public function getNameAttribute($value)
-    {
-        return ucwords($value);
+		{
+				$strResult;
+        if (strlen($value) < 4) {
+            $strResult = strtoupper($value);
+        } else {
+            $strResult = ucwords($value);
+        }
+        return $strResult;
     }
 
     public function setNameAttribute($value)
     {
-        $this->attributes['name'] = strtolower($value);
+        $this->attributes["name"] = strtolower($value);
     }
-
 }
