@@ -14,7 +14,8 @@ class DashboardController extends Controller
             'breadCrumbs' => "Dashboard",
             'productOverviews' => $this->product_overview(),
             'latestProduct' => Item::with('itemImageTransaction.itemImage')->latest()->first(),
-            'orderStats' => $this->orderStats()
+            'orderStats' => $this->orderStats(),
+	    'titleHeader' => 'Dashboard'
         ];
 
         return view('dashboard.home')->with($data);

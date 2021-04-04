@@ -13,6 +13,7 @@ class CustomerLabelController extends Controller
             'breadCrumbs' => 'Customer Label Lists',
             'title' => 'Customer Label Lists',
             'customerLabels' => $customerLabel->latest()->get(),
+						'titleHeader' => 'Customer Label',
         ];
         return view('customer_label.home')->with($data);
     }
@@ -22,7 +23,8 @@ class CustomerLabelController extends Controller
         $data = [
             'breadCrumbs' => 'Create Customer Label',
             'title' => 'Please fill the input form below',
-            'titleSecond' => "Customer Label Info"
+            'titleSecond' => "Customer Label Info",
+            'titleHeader' => 'Create Customer Label',
         ];
         return view('customer_label.create')->with($data);
     }
@@ -73,7 +75,8 @@ class CustomerLabelController extends Controller
                 'breadCrumbs' => 'Update Customer Label',
                 'title' => 'Please fill the input form below',
                 'titleSecond' => "Customer Label Info",
-                'customerLabel' => CustomerLabel::find($id)
+                'customerLabel' => CustomerLabel::find($id),
+                'titleHeader' => 'Update Customer Label',
             ];
             return view('customer_label.edit')->with($data);
         } catch (ModelNotFoundException $e) {

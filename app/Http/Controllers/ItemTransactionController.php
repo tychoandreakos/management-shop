@@ -43,6 +43,7 @@ class ItemTransactionController extends Controller
             'breadCrumbs' => 'Product Lists',
             'title' => 'Product Lists',
             'itemTransactions' => ItemTransaction::with(['item', 'brand', 'spesificationItem'])->get(),
+						'titleHeader' => 'Products',
         ];
 
         return view('item_transaction.home')->with($data);
@@ -55,6 +56,7 @@ class ItemTransactionController extends Controller
             'title' => 'Please fill the input form below',
             'titleSecond' => "Product Info",
             'categories' => Category::all(),
+						'titleHeader' => 'Create Product',
         ];
 
         $this->destroyImage();

@@ -13,7 +13,6 @@ use App\Http\Traits\ItemImage as ItemImageTrait;
 
 class ItemController extends Controller
 {
-
     use ItemImageTrait;
 
     public function index(Item $item)
@@ -24,74 +23,82 @@ class ItemController extends Controller
         }
 
         $data = [
-            'breadCrumbs' => 'Item Lists',
-            'title' => 'Items Gallery',
-            'items' => $item->with('itemImageTransaction.itemImage')->latest()->paginate(20),
-            'list_type' => $setting->list_type ?? 'grid'
+            "breadCrumbs" => "Item Lists",
+            "title" => "Items Gallery",
+            "items" => $item
+                ->with("itemImageTransaction.itemImage")
+                ->latest()
+                ->paginate(20),
+            "list_type" => $setting->list_type ?? "grid",
+            "titleHeader" => "Item",
         ];
 
-        return view('item.home')->with($data);
+        return view("item.home")->with($data);
     }
 
     public function create()
     {
         $data = [
-            'breadCrumbs' => 'Create item',
-            'title' => 'Please fill the input form below',
-            'titleSecond' => "Item Info",
+            "breadCrumbs" => "Create item",
+            "title" => "Please fill the input form below",
+            "titleSecond" => "Item Info",
+            "titleHeader" => "Create Item",
         ];
 
         $this->destroyImage();
-        return view('item.create')->with($data);
+        return view("item.create")->with($data);
     }
 
     public function list()
     {
         $setting = Settings::first();
         $setting->update([
-            'list_type' => 'list'
+            "list_type" => "list",
         ]);
 
-
-        return redirect()->route('items.home')->with(['list_type' => $setting->list_type]);
+        return redirect()
+            ->route("items.home")
+            ->with(["list_type" => $setting->list_type]);
     }
 
     public function grid()
     {
         $setting = Settings::first();
         $setting->update([
-            'list_type' => 'grid'
+            "list_type" => "grid",
         ]);
 
-        return redirect()->route('items.home')->with(['list_type' => $setting->list_type]);
+        return redirect()
+            ->route("items.home")
+            ->with(["list_type" => $setting->list_type]);
     }
 
     protected function validateHandler($request)
     {
         $request->validate([
-            'name' => 'required',
-            'quantity' => 'required|numeric',
-            'price' => 'required',
-            'sold' => 'numeric'
+            "name" => "required",
+            "quantity" => "required|numeric",
+            "price" => "required",
+            "sold" => "numeric",
         ]);
     }
-
 
     public function store(Request $request)
     {
         try {
             $flashMsg = [
-                'success' => true,
-                'title' => 'Successfully saved!',
-                'message' => 'Congratulation your item has been created!'
+                "success" => true,
+                "title" => "Successfully saved!",
+                "message" => "Congratulation your item has been created!",
             ];
             $this->validateHandler($request);
             $item = Item::create($request->all());
             $this->imageCheckerAndUpdate($item->id);
 
-            return redirect()->route('items.home')->with($flashMsg);
+            return redirect()
+                ->route("items.home")
+                ->with($flashMsg);
         } catch (ModelNotFoundException | \Exception $e) {
-
         }
     }
 
@@ -99,16 +106,18 @@ class ItemController extends Controller
     {
         try {
             $data = [
-                'breadCrumbs' => 'Update item',
-                'title' => 'Please fill the input form below',
-                'titleSecond' => "Item Info",
-                'item' => Item::with('itemImageTransaction.itemImage')->where('id', $id)->first()
+                "breadCrumbs" => "Update item",
+                "title" => "Please fill the input form below",
+                "titleSecond" => "Item Info",
+                "item" => Item::with("itemImageTransaction.itemImage")
+                    ->where("id", $id)
+                    ->first(),
+                "titleHeader" => "Update Item",
             ];
 
             $this->destroyImage();
-            return view('item.edit')->with($data);
+            return view("item.edit")->with($data);
         } catch (ModelNotFoundException $e) {
-
         }
     }
 
@@ -116,37 +125,38 @@ class ItemController extends Controller
     {
         try {
             $flashMsg = [
-                'success' => true,
-                'title' => 'Successfully updated!',
-                'message' => 'Congratulation your item has been created!'
+                "success" => true,
+                "title" => "Successfully updated!",
+                "message" => "Congratulation your item has been created!",
             ];
             $this->validateHandler($request);
             $item = Item::find($id);
             $this->imageCheckerAndUpdate($id);
 
             $item->update($request->all());
-            return redirect()->route('items.home')->with($flashMsg);
+            return redirect()
+                ->route("items.home")
+                ->with($flashMsg);
         } catch (\Exception $e) {
-
         }
     }
-
 
     public function destroy($id)
     {
         $flashMsg = [
-            'success' => true,
-            'title' => 'Successfully deleted!',
-            'message' => 'Congratulation your item has been deleted!'
+            "success" => true,
+            "title" => "Successfully deleted!",
+            "message" => "Congratulation your item has been deleted!",
         ];
         try {
             $item = Item::find($id);
 
             $this->removeImageStorage($id);
             $item->delete();
-            return redirect()->route('items.home')->with($flashMsg);
+            return redirect()
+                ->route("items.home")
+                ->with($flashMsg);
         } catch (\Exception $e) {
-
         }
     }
 
@@ -158,7 +168,7 @@ class ItemController extends Controller
 
     public function autocompleteWithSpesification(Request $request)
     {
-        $data = Item::with('itemTransaction.spesificationItem')->get();
+        $data = Item::with("itemTransaction.spesificationItem")->get();
         return response()->json($data);
     }
 }

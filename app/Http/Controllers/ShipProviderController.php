@@ -14,6 +14,7 @@ class ShipProviderController extends Controller
             'breadCrumbs' => 'Shipping Provider Lists',
             'title' => 'Shipping Provider Lists',
             'shippingProviders' => $shipProvider->latest()->get(),
+						'titleHeader' => "Shipping Provider",
         ];
         return view('shipping_provider.home')->with($data);
     }
@@ -23,7 +24,8 @@ class ShipProviderController extends Controller
         $data = [
             'breadCrumbs' => 'Create Shipping Provider',
             'title' => 'Please fill the input form below',
-            'titleSecond' => "Shipping Provider Info"
+            'titleSecond' => "Shipping Provider Info",
+            'titleHeader' => 'Create Shipping Provider',
         ];
         return view('shipping_provider.create')->with($data);
     }
@@ -74,7 +76,8 @@ class ShipProviderController extends Controller
                 'breadCrumbs' => 'Update Shipping Provider',
                 'title' => 'Please fill the input form below',
                 'titleSecond' => "Shipping Provider Info",
-                'shippingProvider' => ShipProvider::find($id)
+                'shippingProvider' => ShipProvider::find($id),
+                'titleHeader' => 'Update Shipping Provider',
             ];
             return view('shipping_provider.edit')->with($data);
         } catch (ModelNotFoundException $e) {

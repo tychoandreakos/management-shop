@@ -5,3 +5,5 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <meta name="_token" content="{{ csrf_token() }}">
+
+<title>{{ $titleHeader ?? "Dashboard" }} - {{ env('APP_TITLE')  ?? "Setra Management"  }}</title>

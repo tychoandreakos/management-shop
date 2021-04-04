@@ -20,6 +20,7 @@ class CustomerTransactionController extends Controller
             'breadCrumbs' => 'Ordering Lists',
             'title' => 'Ordering Lists',
             'customerTransactions' => ShipProviderTransaction::with('item', 'customer', 'shipProvider')->latest()->get(),
+						'titleHeader' => 'Orders',
         ];
 
         return view('customer_transaction.home')->with($data);
@@ -31,7 +32,8 @@ class CustomerTransactionController extends Controller
             'breadCrumbs' => 'Create Ordering',
             'title' => 'Please fill the input form below',
             'titleSecond' => "Ordering Info",
-            "shipProviders" => ShipProvider::all()
+            "shipProviders" => ShipProvider::all(),
+						'titleHeader' => 'Create Ordering',
         ];
 
         return view('customer_transaction.create')->with($data);

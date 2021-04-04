@@ -13,6 +13,7 @@ class CategoryController extends Controller
             'breadCrumbs' => 'Category Lists',
             'title' => 'Category Lists',
             'categories' => $category->latest()->get(),
+						'titleHeader' => 'Category',
         ];
         return view('category.home')->with($data);
     }
@@ -22,7 +23,8 @@ class CategoryController extends Controller
         $data = [
             'breadCrumbs' => 'Create Category',
             'title' => 'Please fill the input form below',
-            'titleSecond' => "Category Info"
+            'titleSecond' => "Category Info",
+						'titleHeader' => 'Create Category',
         ];
         return view('category.create')->with($data);
     }
@@ -73,7 +75,8 @@ class CategoryController extends Controller
                 'breadCrumbs' => 'Update Category',
                 'title' => 'Please fill the input form below',
                 'titleSecond' => "Category Info",
-                'category' => Category::find($id)
+                'category' => Category::find($id),
+								'titleHeader' => 'Update Category',
             ];
             return view('category.edit')->with($data);
         } catch (ModelNotFoundException $e) {

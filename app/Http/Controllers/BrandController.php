@@ -13,6 +13,7 @@ class BrandController extends Controller
             'breadCrumbs' => 'Brand Lists',
             'title' => 'Brand Lists',
             'brands' => $brands->latest()->get(),
+						'titleHeader' => 'Brand',
         ];
         return view('brand.home')->with($data);
     }
@@ -22,7 +23,8 @@ class BrandController extends Controller
         $data = [
             'breadCrumbs' => 'Create Brand',
             'title' => 'Please fill the input form below',
-            'titleSecond' => "Brand Info"
+            'titleSecond' => "Brand Info",
+						'titleHeader' => 'Create Brand',
         ];
         return view('brand.create')->with($data);
     }
