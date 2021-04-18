@@ -17,9 +17,7 @@
                 @if(isset($customer->suggestion))
                     <p class="text-white">{{ $customer->suggestion  }}</p>
                 @else
-                    <p class="tex-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.
-                        Praesent
-                        libero. Sed cursus ante dapibus diam. </p>
+                    <p class="text-white">This customer don't assigned to any customer label</p>
                 @endif
             </div>
         </div>
