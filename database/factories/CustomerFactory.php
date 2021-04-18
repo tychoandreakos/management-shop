@@ -25,7 +25,8 @@ class CustomerFactory extends Factory
             'name' => $this->faker->name,
             'email' => $this->faker->email,
             'num_telp' => $this->faker->phoneNumber,
-            'suggestion' => $this->faker->text(50)
+            'suggestion' => $this->faker->text(50),
+            'created_at' => $this->faker->dateTimeBetween('+3 week', '+3 month')
         ];
     }
 }
